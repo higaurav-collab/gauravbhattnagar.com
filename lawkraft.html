@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>A Few Honest Questions | Gaurav Bhatnagar</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="robots" content="noindex, nofollow, noarchive">
+        <!-- Favicon -->
+        <link href="img/favicon.ico" rel="icon">
+        <link href="img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Lato&family=Oswald:wght@200;300;400&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="lib/animate/animate.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+
+        <style>
+            .diag-intro { max-width: 760px; margin: 0 auto 40px auto; text-align: center; }
+            .diag-intro p { color: #797979; font-size: 16px; line-height: 1.9; }
+            .diag-section-label { color: #0796fe; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; margin-bottom: 6px; }
+            .diag-section-title { color: #092a49; font-family: 'Oswald', sans-serif; font-size: 26px; margin-bottom: 25px; padding-bottom: 12px; border-bottom: 2px solid #eee; }
+            .diag-q { background: #fff; border: 1px solid #eee; border-radius: 4px; padding: 25px 30px; margin-bottom: 20px; }
+            .diag-q-text { color: #092a49; font-size: 17px; font-weight: 600; margin-bottom: 16px; line-height: 1.6; }
+            .diag-q-tag { display: inline-block; background: #1d2434; color: #fff; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px; border-radius: 3px; margin-bottom: 10px; }
+            .diag-option { display: block; position: relative; padding: 10px 10px 10px 36px; margin-bottom: 4px; border-radius: 3px; cursor: pointer; color: #555; font-size: 15px; line-height: 1.5; }
+            .diag-option:hover { background: #f7f9fb; }
+            .diag-option input { position: absolute; left: 12px; top: 13px; }
+            .diag-q.unanswered { border-color: #e2554d; box-shadow: 0 0 0 1px #e2554d inset; }
+            .diag-contact-block { background: #1d2434; border-radius: 4px; padding: 35px 30px; margin-top: 10px; }
+            .diag-contact-block label { color: #fff; font-size: 14px; margin-bottom: 6px; display: block; }
+            .diag-contact-block p { color: #b9c0cc; font-size: 14px; margin-bottom: 20px; }
+            .diag-submit-btn { background: #0796fe; color: #fff; border: none; padding: 14px 45px; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; border-radius: 3px; margin-top: 10px; }
+            .diag-submit-btn:hover { background: #067ed6; color: #fff; }
+            .diag-submit-btn:disabled { opacity: 0.6; }
+            .diag-progress { max-width: 760px; margin: 0 auto 30px auto; text-align: center; color: #999; font-size: 13px; }
+            #diagThanks { display: none; text-align: center; max-width: 600px; margin: 60px auto; }
+            #diagThanks h2 { color: #092a49; font-family: 'Oswald', sans-serif; margin-bottom: 15px; }
+            #diagThanks p { color: #797979; font-size: 16px; }
+            #diagError { display: none; color: #e2554d; text-align: center; margin-top: 15px; }
+        </style>
+    </head>
+
+    <body>
+        <!-- Nav Bar Start -->
+        <div class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <div class="container-fluid">
+                <a href="index.html" class="navbar-brand">Gaurav Bhatnagar</a>
+            </div>
+        </div>
+        <!-- Nav Bar End -->
+
+        <!-- Diagnostic Start -->
+        <div class="service mt-125">
+            <div class="container">
+
+                <div id="diagForm">
+                    <div class="diag-intro">
+                        <p class="diag-section-label" style="text-align:center;">For Will, Lawkraft Legal Network</p>
+                        <h2 style="color:#092a49; font-family:'Oswald',sans-serif; margin-bottom: 20px;">A Few Honest Questions About Lawkraft</h2>
+                        <p>
+                            Hey Will, before I put any real thinking down on paper about how I can help Lawkraft, I'd rather ask you directly than guess.
+                            There are 24 quick questions below, mostly Yes, No or pick-one, a few with a short example so the question is clear.
+                            Nothing here takes any real writing from you, it should take about 15 minutes.
+                        </p>
+                        <p>
+                            Answer them the way things actually are today, not the way you'd like them to be. The honest version is the only one
+                            that helps me see Lawkraft clearly enough to tell you something useful back.
+                        </p>
+                    </div>
+                    <div class="diag-progress"><span id="diagProgressText">0 of 24 answered</span></div>
+
+                    <form id="diagnosticForm">
+
+                        <!-- SECTION 1 -->
+                        <p class="diag-section-label">Section 1</p>
+                        <h3 class="diag-section-title">Who You're Actually Selling To</h3>
+
+                        <div class="diag-q" data-q="q1">
+                            <div class="diag-q-text">1. Is there a one-page description of your ideal client, something like "bank or NBFC, 50+ active cases, cheque-bounce or post-judgment work", that everyone on your team uses to judge if a lead is worth chasing? Or does each person go by their own instinct?</div>
+                            <label class="diag-option"><input type="radio" name="q1" value="Yes, there's a written definition everyone uses"> Yes, there's a written definition everyone uses</label>
+                            <label class="diag-option"><input type="radio" name="q1" value="No, it's mostly instinct"> No, it's mostly instinct</label>
+                            <label class="diag-option"><input type="radio" name="q1" value="Not sure / varies by person"> Not sure / varies by person</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q2">
+                            <div class="diag-q-tag">Situation</div>
+                            <div class="diag-q-text">2. A cooperative bank calls you with 200 overdue loan accounts, but they want everything handled over phone calls and physical courier, no digital uploads, no dashboard logins at all. What would you actually do?</div>
+                            <label class="diag-option"><input type="radio" name="q2" value="Take it, and adapt our process manually for them"> Take it, and adapt our process manually for them</label>
+                            <label class="diag-option"><input type="radio" name="q2" value="Take it, but insist they use our system"> Take it, but insist they use our system</label>
+                            <label class="diag-option"><input type="radio" name="q2" value="Pass, it doesn't fit how we operate"> Pass, it doesn't fit how we operate</label>
+                            <label class="diag-option"><input type="radio" name="q2" value="Honestly not sure what we'd do"> Honestly not sure what we'd do</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q3">
+                            <div class="diag-q-text">3. Have you worked out, even roughly, how big the opportunity is in cooperative banks, housing finance companies, and Asset Reconstruction Companies specifically, the kinds of lenders that still run this process on spreadsheets and local lawyers?</div>
+                            <label class="diag-option"><input type="radio" name="q3" value="Yes"> Yes</label>
+                            <label class="diag-option"><input type="radio" name="q3" value="No"> No</label>
+                            <label class="diag-option"><input type="radio" name="q3" value="Not sure"> Not sure</label>
+                        </div>
+
+                        <!-- SECTION 2 -->
+                        <p class="diag-section-label">Section 2</p>
+                        <h3 class="diag-section-title">How Clients Actually Find And Pick You</h3>
+
+                        <div class="diag-q" data-q="q4">
+                            <div class="diag-q-text">4. Thinking about your current clients honestly, how did most of them really come in the door?</div>
+                            <label class="diag-option"><input type="radio" name="q4" value="Someone on the founding team knew someone there"> Someone on the founding team knew someone there</label>
+                            <label class="diag-option"><input type="radio" name="q4" value="An existing client referred another lender"> An existing client referred another lender</label>
+                            <label class="diag-option"><input type="radio" name="q4" value="They found us with no personal connection involved"> They found us with no personal connection involved</label>
+                            <label class="diag-option"><input type="radio" name="q4" value="A genuine mix, no clear majority"> A genuine mix, no clear majority</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q5">
+                            <div class="diag-q-text">5. If I called three different people on your team and asked "why should a bank pick Lawkraft over the law firm they've used for ten years", would I get the same answer from all three?</div>
+                            <label class="diag-option"><input type="radio" name="q5" value="Yes, we'd all say roughly the same thing"> Yes, we'd all say roughly the same thing</label>
+                            <label class="diag-option"><input type="radio" name="q5" value="No, we'd probably each say something different"> No, we'd probably each say something different</label>
+                            <label class="diag-option"><input type="radio" name="q5" value="Not sure, haven't actually tested this"> Not sure, haven't actually tested this</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q6">
+                            <div class="diag-q-tag">Situation</div>
+                            <div class="diag-q-text">6. A prospect tells you, "we're also getting a quote from Credgenics for the same work." Does your team have one consistent answer for why that comparison doesn't quite hold up, since Credgenics mostly works the stage before a case ever reaches court?</div>
+                            <label class="diag-option"><input type="radio" name="q6" value="Yes, we have a clear, consistent answer"> Yes, we have a clear, consistent answer</label>
+                            <label class="diag-option"><input type="radio" name="q6" value="No, we don't really have this worked out"> No, we don't really have this worked out</label>
+                            <label class="diag-option"><input type="radio" name="q6" value="Not sure this comes up"> Not sure this comes up</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q7">
+                            <div class="diag-q-text">7. From a serious first conversation with a prospect to a signed deal, how long does it usually take?</div>
+                            <label class="diag-option"><input type="radio" name="q7" value="Under 2 weeks"> Under 2 weeks</label>
+                            <label class="diag-option"><input type="radio" name="q7" value="2 to 4 weeks"> 2 to 4 weeks</label>
+                            <label class="diag-option"><input type="radio" name="q7" value="1 to 3 months"> 1 to 3 months</label>
+                            <label class="diag-option"><input type="radio" name="q7" value="Longer than 3 months"> Longer than 3 months</label>
+                        </div>
+
+                        <!-- SECTION 3 -->
+                        <p class="diag-section-label">Section 3</p>
+                        <h3 class="diag-section-title">What A Prospect Sees Before Saying Yes</h3>
+
+                        <div class="diag-q" data-q="q8">
+                            <div class="diag-q-text">8. Beyond the two client quotes on your website, do you have even one case study with real numbers (cases closed, amount recovered, time taken) that a prospect can read on their own, without you in the room to explain it?</div>
+                            <label class="diag-option"><input type="radio" name="q8" value="Yes"> Yes</label>
+                            <label class="diag-option"><input type="radio" name="q8" value="No"> No</label>
+                            <label class="diag-option"><input type="radio" name="q8" value="Not sure / it exists somewhere but isn't easy to hand over"> Not sure / it exists somewhere but isn't easy to hand over</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q9">
+                            <div class="diag-q-text">9. If a bank's risk or compliance team asked how you handle debtor data, cheque images, and court documents, and whether your advocates follow RBI's fair-practice recovery rules, could someone on your team answer that in writing today, without scrambling?</div>
+                            <label class="diag-option"><input type="radio" name="q9" value="Yes, we could answer this right away"> Yes, we could answer this right away</label>
+                            <label class="diag-option"><input type="radio" name="q9" value="No, we'd need to put something together first"> No, we'd need to put something together first</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q10">
+                            <div class="diag-q-tag">Situation</div>
+                            <div class="diag-q-text">10. An NBFC's risk head asks for a sample of your monthly reporting before they'll sign anything. What's actually true today?</div>
+                            <label class="diag-option"><input type="radio" name="q10" value="We have one ready to send right away"> We have one ready to send right away</label>
+                            <label class="diag-option"><input type="radio" name="q10" value="We have the data but need a day or two to format it"> We have the data but need a day or two to format it</label>
+                            <label class="diag-option"><input type="radio" name="q10" value="We'd need to build this specially for them"> We'd need to build this specially for them</label>
+                            <label class="diag-option"><input type="radio" name="q10" value="Not sure"> Not sure</label>
+                        </div>
+
+                        <!-- SECTION 4 -->
+                        <p class="diag-section-label">Section 4</p>
+                        <h3 class="diag-section-title">Running The Business, And The Numbers That Matter For Growth</h3>
+
+                        <div class="diag-q" data-q="q11">
+                            <div class="diag-q-text">11. If you and your co-founders stepped away from new business development for a month, would new client conversations still be happening?</div>
+                            <label class="diag-option"><input type="radio" name="q11" value="Yes"> Yes</label>
+                            <label class="diag-option"><input type="radio" name="q11" value="No"> No</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q12">
+                            <div class="diag-q-text">12. Once a client's first batch of 50 cases is running smoothly, is there a set next step to go after the rest of their portfolio, or does that depend on whether someone remembers to ask?</div>
+                            <label class="diag-option"><input type="radio" name="q12" value="There's a set next step"> There's a set next step</label>
+                            <label class="diag-option"><input type="radio" name="q12" value="It depends on someone remembering to ask"> It depends on someone remembering to ask</label>
+                            <label class="diag-option"><input type="radio" name="q12" value="Not sure"> Not sure</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q13">
+                            <div class="diag-q-tag">Situation</div>
+                            <div class="diag-q-text">13. If you landed 3 new clients in the next 90 days, what would actually happen?</div>
+                            <label class="diag-option"><input type="radio" name="q13" value="Our current team and advocate network would handle it easily"> Our current team and advocate network would handle it easily</label>
+                            <label class="diag-option"><input type="radio" name="q13" value="We'd need to hire or add advocates fairly quickly"> We'd need to hire or add advocates fairly quickly</label>
+                            <label class="diag-option"><input type="radio" name="q13" value="We'd probably have to turn some of it away"> We'd probably have to turn some of it away</label>
+                            <label class="diag-option"><input type="radio" name="q13" value="Not sure"> Not sure</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q14">
+                            <div class="diag-q-tag">Situation</div>
+                            <div class="diag-q-text">14. A rival drops its fee by 30% to win an account you're also pitching. What would you most likely do?</div>
+                            <label class="diag-option"><input type="radio" name="q14" value="Match the price"> Match the price</label>
+                            <label class="diag-option"><input type="radio" name="q14" value="Hold our price and make the case for why it's worth it"> Hold our price and make the case for why it's worth it</label>
+                            <label class="diag-option"><input type="radio" name="q14" value="Let that account go and focus elsewhere"> Let that account go and focus elsewhere</label>
+                            <label class="diag-option"><input type="radio" name="q14" value="Depends on the account, can't say upfront"> Depends on the account, can't say upfront</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q15">
+                            <div class="diag-q-text">15. Roughly what share of your revenue today comes from your single biggest client?</div>
+                            <label class="diag-option"><input type="radio" name="q15" value="Under 20%"> Under 20%</label>
+                            <label class="diag-option"><input type="radio" name="q15" value="20 to 40%"> 20 to 40%</label>
+                            <label class="diag-option"><input type="radio" name="q15" value="40 to 60%"> 40 to 60%</label>
+                            <label class="diag-option"><input type="radio" name="q15" value="Over 60%"> Over 60%</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q16">
+                            <div class="diag-q-text">16. How do you typically charge a client today?</div>
+                            <label class="diag-option"><input type="radio" name="q16" value="A cut of what's recovered"> A cut of what's recovered</label>
+                            <label class="diag-option"><input type="radio" name="q16" value="A fixed monthly retainer"> A fixed monthly retainer</label>
+                            <label class="diag-option"><input type="radio" name="q16" value="A fee per case regardless of recovery"> A fee per case regardless of recovery</label>
+                            <label class="diag-option"><input type="radio" name="q16" value="A mix, depends on the client"> A mix, depends on the client</label>
+                            <label class="diag-option"><input type="radio" name="q16" value="Not finalized yet"> Not finalized yet</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q17">
+                            <div class="diag-q-text">17. Once a client signs, does new work keep flowing to you automatically as new cases come up, or does each new batch need a fresh conversation and approval?</div>
+                            <label class="diag-option"><input type="radio" name="q17" value="Flows automatically"> Flows automatically</label>
+                            <label class="diag-option"><input type="radio" name="q17" value="Needs a fresh approval each time"> Needs a fresh approval each time</label>
+                            <label class="diag-option"><input type="radio" name="q17" value="Depends on the client"> Depends on the client</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q18">
+                            <div class="diag-q-text">18. Where does Lawkraft stand on capital today?</div>
+                            <label class="diag-option"><input type="radio" name="q18" value="Bootstrapped, no plans to raise"> Bootstrapped, no plans to raise</label>
+                            <label class="diag-option"><input type="radio" name="q18" value="Actively raising outside capital right now"> Actively raising outside capital right now</label>
+                            <label class="diag-option"><input type="radio" name="q18" value="Planning to raise within the next year"> Planning to raise within the next year</label>
+                            <label class="diag-option"><input type="radio" name="q18" value="Undecided"> Undecided</label>
+                        </div>
+
+                        <!-- SECTION 5 -->
+                        <p class="diag-section-label">Section 5</p>
+                        <h3 class="diag-section-title">How You See The Market</h3>
+
+                        <div class="diag-q" data-q="q19">
+                            <div class="diag-q-text">19. Outside large banks and NBFCs, which part of the lending market do you believe is most underserved today by any organized legal recovery provider, not software for soft collections, the actual on-the-ground legal execution?</div>
+                            <label class="diag-option"><input type="radio" name="q19" value="Cooperative banks and credit societies"> Cooperative banks and credit societies</label>
+                            <label class="diag-option"><input type="radio" name="q19" value="Housing finance companies"> Housing finance companies</label>
+                            <label class="diag-option"><input type="radio" name="q19" value="Asset Reconstruction Companies with bulk NPA portfolios"> Asset Reconstruction Companies with bulk NPA portfolios</label>
+                            <label class="diag-option"><input type="radio" name="q19" value="BNPL and consumer-lending fintechs"> BNPL and consumer-lending fintechs</label>
+                            <label class="diag-option"><input type="radio" name="q19" value="Gold-loan NBFCs"> Gold-loan NBFCs</label>
+                            <label class="diag-option"><input type="radio" name="q19" value="None of these, banks and large NBFCs remain the real opportunity"> None of these, banks and large NBFCs remain the real opportunity</label>
+                            <label class="diag-option"><input type="radio" name="q19" value="Not sure, haven't thought about it this way"> Not sure, haven't thought about it this way</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q20">
+                            <div class="diag-q-text">20. Outside banks and NBFCs, has your team had a serious conversation with any other type of lender (a cooperative bank, an ARC, a housing finance company, a BNPL player) in the last year?</div>
+                            <label class="diag-option"><input type="radio" name="q20" value="Yes, at least one"> Yes, at least one</label>
+                            <label class="diag-option"><input type="radio" name="q20" value="No, hasn't happened"> No, hasn't happened</label>
+                            <label class="diag-option"><input type="radio" name="q20" value="Not sure"> Not sure</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q21">
+                            <div class="diag-q-text">21. If you haven't pursued lender types outside banks and NBFCs so far, what's the main reason?</div>
+                            <label class="diag-option"><input type="radio" name="q21" value="Hadn't identified a clear opportunity there"> Hadn't identified a clear opportunity there</label>
+                            <label class="diag-option"><input type="radio" name="q21" value="Identified something, just didn't have the bandwidth to chase it"> Identified something, just didn't have the bandwidth to chase it</label>
+                            <label class="diag-option"><input type="radio" name="q21" value="Tried, the economics didn't work out"> Tried, the economics didn't work out</label>
+                            <label class="diag-option"><input type="radio" name="q21" value="We've actually already pursued other segments"> We've actually already pursued other segments</label>
+                            <label class="diag-option"><input type="radio" name="q21" value="Something else"> Something else</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q22">
+                            <div class="diag-q-text">22. Outside your current clients, would someone running collections at a large Asset Reconstruction Company know that Lawkraft exists?</div>
+                            <label class="diag-option"><input type="radio" name="q22" value="Yes"> Yes</label>
+                            <label class="diag-option"><input type="radio" name="q22" value="No"> No</label>
+                            <label class="diag-option"><input type="radio" name="q22" value="Not sure"> Not sure</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q23">
+                            <div class="diag-q-tag">Situation</div>
+                            <div class="diag-q-text">23. If a platform like Credgenics offered to hand you their cases once they reach court, for a cut of what you recover, would you take that deal? Or does working with a platform like that feel more like competing against it?</div>
+                            <label class="diag-option"><input type="radio" name="q23" value="Yes, we'd take that deal"> Yes, we'd take that deal</label>
+                            <label class="diag-option"><input type="radio" name="q23" value="No, that feels like competing with us"> No, that feels like competing with us</label>
+                            <label class="diag-option"><input type="radio" name="q23" value="Not sure, hadn't thought of it that way"> Not sure, hadn't thought of it that way</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q24">
+                            <div class="diag-q-text">24. If you had to chase ONE new kind of lender hard over the next six months, which would it be?</div>
+                            <label class="diag-option"><input type="radio" name="q24" value="More banks and large NBFCs, like today"> More banks and large NBFCs, like today</label>
+                            <label class="diag-option"><input type="radio" name="q24" value="Cooperative banks and credit societies"> Cooperative banks and credit societies</label>
+                            <label class="diag-option"><input type="radio" name="q24" value="Asset Reconstruction Companies"> Asset Reconstruction Companies</label>
+                            <label class="diag-option"><input type="radio" name="q24" value="BNPL and consumer-lending fintechs"> BNPL and consumer-lending fintechs</label>
+                            <label class="diag-option"><input type="radio" name="q24" value="Genuinely not sure yet"> Genuinely not sure yet</label>
+                        </div>
+
+                        <!-- CONTACT BLOCK -->
+                        <div class="diag-contact-block">
+                            <p style="color:#fff; font-family:'Oswald',sans-serif; text-transform:uppercase; letter-spacing:1px; margin-bottom: 18px;">Last Thing</p>
+                            <label for="diagName">Your name</label>
+                            <input type="text" class="form-control" id="diagName" placeholder="Will Emmanuel" style="margin-bottom:20px;" required>
+                            <label for="diagEmail">Your official work email</label>
+                            <p>So the full write-up, once I've gone through your answers, lands somewhere you'll actually see it.</p>
+                            <input type="email" class="form-control" id="diagEmail" placeholder="will@lawkraft.in" style="margin-bottom: 10px;" required>
+                        </div>
+
+                        <div style="text-align:center; margin-top: 30px;">
+                            <button type="submit" class="diag-submit-btn" id="diagSubmitBtn">Send My Answers</button>
+                            <div id="diagError">Something didn't go through. Give it another try, or just WhatsApp me your answers.</div>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div id="diagThanks">
+                    <h2>Got it, thank you.</h2>
+                    <p>I'll go through these properly and come back to you directly, not over this page.</p>
+                </div>
+
+            </div>
+        </div>
+        <!-- Diagnostic End -->
+
+        <!-- Footer Start -->
+        <div class="footer">
+            <div class="container copyright">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>&copy; <a href="#">Gaurav Bhatnagar</a>, All Right Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+        (function () {
+            var TOTAL_Q = 24;
+            var FORM_ENDPOINT = 'https://formspree.io/f/mdekwrzq';
+
+            var SECTION_TITLES = {
+                q1: 'Who You\'re Actually Selling To', q2: 'Who You\'re Actually Selling To', q3: 'Who You\'re Actually Selling To',
+                q4: 'How Clients Find And Pick You', q5: 'How Clients Find And Pick You', q6: 'How Clients Find And Pick You', q7: 'How Clients Find And Pick You',
+                q8: 'What A Prospect Sees Before Saying Yes', q9: 'What A Prospect Sees Before Saying Yes', q10: 'What A Prospect Sees Before Saying Yes',
+                q11: 'Running The Business', q12: 'Running The Business', q13: 'Running The Business', q14: 'Running The Business',
+                q15: 'Running The Business', q16: 'Running The Business', q17: 'Running The Business', q18: 'Running The Business',
+                q19: 'How You See The Market', q20: 'How You See The Market', q21: 'How You See The Market',
+                q22: 'How You See The Market', q23: 'How You See The Market', q24: 'How You See The Market'
+            };
+
+            function updateProgress() {
+                var answered = 0;
+                for (var i = 1; i <= TOTAL_Q; i++) {
+                    if (document.querySelector('input[name="q' + i + '"]:checked')) { answered++; }
+                }
+                document.getElementById('diagProgressText').textContent = answered + ' of ' + TOTAL_Q + ' answered';
+                return answered;
+            }
+
+            document.addEventListener('change', function (e) {
+                if (e.target && e.target.type === 'radio') {
+                    var card = e.target.closest('.diag-q');
+                    if (card) { card.classList.remove('unanswered'); }
+                    updateProgress();
+                }
+            });
+
+            document.getElementById('diagnosticForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                var missing = [];
+                var lines = [];
+                for (var i = 1; i <= TOTAL_Q; i++) {
+                    var name = 'q' + i;
+                    var checked = document.querySelector('input[name="' + name + '"]:checked');
+                    var card = document.querySelector('.diag-q[data-q="' + name + '"]');
+                    if (!checked) {
+                        missing.push(name);
+                        if (card) { card.classList.add('unanswered'); }
+                    } else {
+                        var qText = card.querySelector('.diag-q-text').textContent.trim();
+                        lines.push(qText + '\nAnswer: ' + checked.value + '\n');
+                    }
+                }
+                var nameVal = document.getElementById('diagName').value.trim();
+                var emailVal = document.getElementById('diagEmail').value.trim();
+
+                if (missing.length > 0 || !nameVal || !emailVal) {
+                    if (missing.length > 0) {
+                        missing[0] && document.querySelector('.diag-q[data-q="' + missing[0] + '"]').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                    document.getElementById('diagError').style.display = 'block';
+                    document.getElementById('diagError').textContent = missing.length > 0
+                        ? 'Looks like ' + missing.length + ' question(s) are still unanswered, scrolled you to the first one.'
+                        : 'Name and email are needed before this can be sent.';
+                    return;
+                }
+                document.getElementById('diagError').style.display = 'none';
+
+                var btn = document.getElementById('diagSubmitBtn');
+                btn.textContent = 'Sending…';
+                btn.disabled = true;
+
+                var fullMessage = 'LAWKRAFT GTM DIAGNOSTIC — ' + nameVal + '\n\n' + lines.join('\n');
+
+                fetch(FORM_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify({
+                        name: nameVal,
+                        email: emailVal,
+                        _replyto: emailVal,
+                        subject: 'Lawkraft GTM Diagnostic — ' + nameVal,
+                        message: fullMessage
+                    })
+                }).then(function (res) {
+                    if (res.ok) {
+                        document.getElementById('diagForm').style.display = 'none';
+                        document.getElementById('diagThanks').style.display = 'block';
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                        throw new Error('bad response');
+                    }
+                }).catch(function () {
+                    btn.textContent = 'Send My Answers';
+                    btn.disabled = false;
+                    document.getElementById('diagError').style.display = 'block';
+                    document.getElementById('diagError').textContent = "Something didn't go through. Give it another try, or just WhatsApp me your answers.";
+                });
+            });
+        })();
+        </script>
+    </body>
+</html>
