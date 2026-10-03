@@ -43,6 +43,9 @@
             #diagThanks h2 { color: #092a49; font-family: 'Oswald', sans-serif; margin-bottom: 15px; }
             #diagThanks p { color: #797979; font-size: 16px; }
             #diagError { display: none; color: #e2554d; text-align: center; margin-top: 15px; }
+            .diag-edit-banner { display:none; background:#eef6ff; border:1px solid #bfe0ff; color:#092a49; font-size:14px; line-height:1.7; text-align:left; padding:16px 20px; border-radius:4px; margin-bottom:20px; }
+            .diag-edit-banner.is-locked { background:#f2f3f5; border-color:#dcdfe4; }
+            .diag-edit-banner strong { color:#092a49; }
         </style>
     </head>
 
@@ -71,6 +74,10 @@
                         <p>
                             Answer them the way things actually are today, not the way you'd like them to be. The honest version is the only one
                             that helps me see Lawkraft clearly enough to tell you something useful back.
+                        </p>
+                        <p>
+                            One more thing: once you send this, you'll have 24 hours to come back to this same page and change any answer you want &mdash;
+                            your answers will already be sitting there, filled in. After that window, I'll treat what you've sent as final.
                         </p>
                     </div>
                     <div class="diag-progress"><span id="diagProgressText">0 of 24 answered</span></div>
@@ -298,6 +305,7 @@
                         </div>
 
                         <div style="text-align:center; margin-top: 30px;">
+                            <div id="diagEditBanner" class="diag-edit-banner"></div>
                             <button type="submit" class="diag-submit-btn" id="diagSubmitBtn">Send My Answers</button>
                             <div id="diagError">Something didn't go through. Give it another try, or just WhatsApp me your answers.</div>
                         </div>
@@ -308,6 +316,7 @@
                 <div id="diagThanks">
                     <h2>Got it, thank you.</h2>
                     <p>I'll go through these properly and come back to you directly, not over this page.</p>
+                    <p>Changed your mind about something? Just come back to this page within 24 hours and your answers will be waiting here, ready to edit.</p>
                 </div>
 
             </div>
@@ -333,6 +342,74 @@
         (function () {
             var TOTAL_Q = 24;
             var FORM_ENDPOINT = 'https://formspree.io/f/mdekwrzq';
+            var STORAGE_KEY = 'lawkraftDiagSubmission_v1';
+            var EDIT_WINDOW_MS = 24 * 60 * 60 * 1000;
+
+            function loadSaved() {
+                try {
+                    var raw = localStorage.getItem(STORAGE_KEY);
+                    return raw ? JSON.parse(raw) : null;
+                } catch (e) { return null; }
+            }
+
+            function saveSubmission(answers, name, email, firstSubmittedAt) {
+                try {
+                    var prev = loadSaved();
+                    var revision = prev ? (prev.revision || 1) + 1 : 1;
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+                        answers: answers,
+                        name: name,
+                        email: email,
+                        firstSubmittedAt: firstSubmittedAt,
+                        lastSubmittedAt: new Date().toISOString(),
+                        revision: revision
+                    }));
+                } catch (e) { /* localStorage unavailable, degrade silently */ }
+            }
+
+            function fmtDate(iso) {
+                try {
+                    return new Date(iso).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
+                } catch (e) { return iso; }
+            }
+
+            function applyEditWindowState() {
+                var saved = loadSaved();
+                if (!saved) { return; }
+
+                for (var q in saved.answers) {
+                    if (!saved.answers.hasOwnProperty(q)) { continue; }
+                    var opts = document.getElementsByName(q);
+                    for (var i = 0; i < opts.length; i++) {
+                        if (opts[i].value === saved.answers[q]) { opts[i].checked = true; }
+                    }
+                }
+                if (document.getElementById('diagName')) { document.getElementById('diagName').value = saved.name || ''; }
+                if (document.getElementById('diagEmail')) { document.getElementById('diagEmail').value = saved.email || ''; }
+                updateProgress();
+
+                var cutoff = new Date(new Date(saved.firstSubmittedAt).getTime() + EDIT_WINDOW_MS).toISOString();
+                var elapsed = Date.now() - new Date(saved.firstSubmittedAt).getTime();
+                var banner = document.getElementById('diagEditBanner');
+                var btn = document.getElementById('diagSubmitBtn');
+
+                if (elapsed < EDIT_WINDOW_MS) {
+                    banner.style.display = 'block';
+                    banner.innerHTML = 'You submitted this on <strong>' + fmtDate(saved.firstSubmittedAt) + '</strong>. ' +
+                        'Your answers are filled in below &mdash; change anything you like until <strong>' + fmtDate(cutoff) + '</strong>, ' +
+                        'after which they\'re considered final.';
+                    btn.textContent = 'Update My Answers';
+                } else {
+                    banner.style.display = 'block';
+                    banner.classList.add('is-locked');
+                    banner.innerHTML = 'Your answers were finalized on <strong>' + fmtDate(cutoff) + '</strong> and can\'t be changed anymore. ' +
+                        'Thanks again for going through these, Will &mdash; I\'ve got what I need.';
+                    btn.style.display = 'none';
+                    document.getElementById('diagError').style.display = 'none';
+                    var allFields = document.querySelectorAll('#diagnosticForm input');
+                    for (var j = 0; j < allFields.length; j++) { allFields[j].disabled = true; }
+                }
+            }
 
             var SECTION_TITLES = {
                 q1: 'Who You\'re Actually Selling To', q2: 'Who You\'re Actually Selling To', q3: 'Who You\'re Actually Selling To',
@@ -396,7 +473,20 @@
                 btn.textContent = 'Sending…';
                 btn.disabled = true;
 
-                var fullMessage = 'LAWKRAFT GTM DIAGNOSTIC — ' + nameVal + '\n\n' + lines.join('\n');
+
+                var answersObj = {};
+                for (var k = 1; k <= TOTAL_Q; k++) {
+                    var nm = 'q' + k;
+                    var chk = document.querySelector('input[name="' + nm + '"]:checked');
+                    if (chk) { answersObj[nm] = chk.value; }
+                }
+                var priorSaved = loadSaved();
+                var isRevision = !!priorSaved;
+                var firstSubmittedAt = isRevision ? priorSaved.firstSubmittedAt : new Date().toISOString();
+                var subjectLine = isRevision
+                    ? 'Lawkraft GTM Diagnostic — ' + nameVal + ' (updated answers)'
+                    : 'Lawkraft GTM Diagnostic — ' + nameVal;
+                var fullMessage = (isRevision ? 'LAWKRAFT GTM DIAGNOSTIC — UPDATED ANSWERS — ' : 'LAWKRAFT GTM DIAGNOSTIC — ') + nameVal + '\n\n' + lines.join('\n');
 
                 fetch(FORM_ENDPOINT, {
                     method: 'POST',
@@ -405,11 +495,12 @@
                         name: nameVal,
                         email: emailVal,
                         _replyto: emailVal,
-                        subject: 'Lawkraft GTM Diagnostic — ' + nameVal,
+                        subject: subjectLine,
                         message: fullMessage
                     })
                 }).then(function (res) {
                     if (res.ok) {
+                        saveSubmission(answersObj, nameVal, emailVal, firstSubmittedAt);
                         document.getElementById('diagForm').style.display = 'none';
                         document.getElementById('diagThanks').style.display = 'block';
                         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -423,6 +514,8 @@
                     document.getElementById('diagError').textContent = "Something didn't go through. Give it another try, or just WhatsApp me your answers.";
                 });
             });
+
+            applyEditWindowState();
         })();
         </script>
     </body>
