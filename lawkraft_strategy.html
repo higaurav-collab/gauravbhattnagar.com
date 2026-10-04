@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Lawkraft — Strategy Read | Gaurav Bhatnagar</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="robots" content="noindex, nofollow, noarchive">
+        <!-- Favicon -->
+        <link href="img/favicon.ico" rel="icon">
+        <link href="img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Lato&family=Oswald:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="lib/animate/animate.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+
+        <!-- Strategy-read additions — matched to the site's own long-form pattern (see newsletter issue pages):
+             quicknav bar, section-eyebrow + h2, meaning-box, tldr, signal-band stat cards. Palette unchanged:
+             navy #092a49, blue #0796fe, dark panel #1d2434, body grey #797979/#555. -->
+        <style>
+            .strat-meta { text-transform: uppercase; letter-spacing: 1.5px; font-size: 12px; color: #0796fe; font-weight: 600; text-align: center; margin-bottom: 10px; }
+            .strat-intro { max-width: 720px; margin: 0 auto 10px auto; text-align: center; }
+            .strat-intro h1 { font-size: 30px; margin-bottom: 20px; }
+            .strat-intro p { color: #797979; font-size: 16px; line-height: 1.9; }
+            .strat-intro .signed-note { color: #0796fe; font-size: 14px; margin-top: 6px; }
+
+            .quicknav { background: #f8f9fa; border-top: 1px solid #eeeeee; border-bottom: 1px solid #eeeeee; padding: 14px 0; margin: 30px 0 0 0; }
+            .quicknav .container { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+            .quicknav span.label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #797979; margin-right: 6px; }
+            .quicknav a { display: inline-block; font-size: 13px; padding: 6px 14px; border: 1px solid rgba(9,42,73,.15); border-radius: 20px; color: #092a49; }
+            .quicknav a:hover { background: #092a49; color: #ffffff; border-color: #092a49; }
+
+            .strat-section { padding: 42px 0; border-top: 1px solid #eee; scroll-margin-top: 40px; }
+            .strat-section:first-of-type { border-top: none; }
+            .strat-section.alt { background: #f8f9fa; }
+            .section-eyebrow { text-transform: uppercase; letter-spacing: 1.5px; font-size: 12px; color: #0796fe; font-weight: 600; margin-bottom: 8px; }
+            .strat-section h2 { font-size: 24px; margin-bottom: 18px; font-weight: 400; }
+            .strat-section p { color: #555; font-size: 16px; line-height: 1.8; margin-bottom: 14px; }
+            .strat-section p:last-child { margin-bottom: 0; }
+            .strat-section ul { color: #555; font-size: 16px; line-height: 1.8; padding-left: 20px; margin-bottom: 0; }
+            .strat-section li { margin-bottom: 10px; }
+
+            .meaning-box { margin: 20px 0; padding: 20px 24px; background: #eef6ff; border-left: 3px solid #0796fe; }
+            .meaning-box .label { text-transform: uppercase; font-size: 11px; letter-spacing: 1.5px; font-weight: 600; display: block; margin-bottom: 8px; color: #0796fe; }
+            .meaning-box p { margin: 0; font-size: 15.5px; line-height: 1.75; color: #092a49; }
+            .meaning-box p:not(:last-child) { margin-bottom: 10px; }
+
+            .tldr { border-left: 3px solid #0796fe; background: #f8f9fa; padding: 22px 26px; margin: 10px 0; }
+            .tldr h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; color: #092a49; }
+            .tldr ul { margin: 0; padding-left: 18px; }
+            .tldr li { margin-bottom: 8px; font-size: 15px; line-height: 1.6; }
+            .tldr li:last-child { margin-bottom: 0; }
+
+            .signal-band { background: #092a49; color: #cfe3f5; }
+            .signal-band h2 { color: #ffffff; }
+            .signal-band .section-eyebrow { color: #5ec4ff; }
+            .signal-band p { color: #cfe3f5; }
+            .signal-band .strat-section-intro { color: #cfe3f5; font-size: 15px; line-height: 1.7; margin-bottom: 26px; }
+            .stat-row { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 26px; }
+            .stat-card { flex: 1 1 260px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.16); border-radius: 4px; padding: 26px 24px; }
+            .stat-card .tag { text-transform: uppercase; font-size: 11px; letter-spacing: 1px; color: #5ec4ff; margin-bottom: 10px; }
+            .stat-card .num { font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 38px; line-height: 1.1; color: #ffffff; margin-bottom: 10px; }
+            .stat-card p { color: #cfe3f5; font-size: 14.5px; line-height: 1.65; margin: 0; }
+            .signal-band .meaning-box { background: rgba(94,196,255,.1); border-left: 3px solid #5ec4ff; }
+            .signal-band .meaning-box .label { color: #5ec4ff; }
+            .signal-band .meaning-box p { color: #eaf3fb; }
+
+            .strat-table { width: 100%; border-collapse: collapse; font-size: 14.5px; background: #ffffff; }
+            .strat-table th { background: #092a49; color: #fff; font-family: 'Oswald', sans-serif; text-transform: uppercase; font-weight: 400; font-size: 12px; letter-spacing: .5px; padding: 10px 14px; text-align: left; }
+            .strat-table td { padding: 12px 14px; border-bottom: 1px solid #eee; color: #555; vertical-align: top; }
+            .strat-table tbody tr:nth-child(even) { background: #fafbfc; }
+
+            .q-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin: 28px 0 0 0; }
+            .q-card { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.18); border-radius: 4px; padding: 22px 24px; }
+            .q-card .q-tag2 { display: inline-block; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: .5px; font-size: 10.5px; padding: 3px 10px; border-radius: 3px; margin-bottom: 12px; font-weight: 500; }
+            .q-card .q-tag2.whatif { background: #5ec4ff; color: #092a49; }
+            .q-card .q-tag2.whynot { background: #ffffff; color: #092a49; }
+            .q-card p { color: #ffffff !important; font-size: 16px; font-weight: 500; line-height: 1.55; margin: 0 !important; }
+            .q-capstone-wrap { margin: 34px 0 4px 0; text-align: center; }
+            .q-capstone-label { text-transform: uppercase; letter-spacing: 1.5px; font-size: 11.5px; color: #5ec4ff; font-weight: 600; margin-bottom: 14px; }
+            .q-capstone { background: rgba(94,196,255,.12); border: 1px solid rgba(94,196,255,.4); border-radius: 4px; padding: 30px 36px; max-width: 640px; margin: 0 auto; }
+            .q-capstone p { color: #ffffff !important; font-size: 21px; font-family: 'Oswald', sans-serif; font-weight: 400; line-height: 1.5; margin: 0 !important; }
+            @media (max-width: 767px) { .q-grid { grid-template-columns: 1fr; } }
+
+            .strat-btn { display: inline-flex; align-items: center; gap: 10px; background: #0796fe; color: #ffffff; border: none; padding: 14px 32px; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-size: 13.5px; border-radius: 3px; cursor: pointer; transition: .2s; }
+            .strat-btn:hover { background: #067ed6; color: #ffffff; }
+            .strat-btn:disabled { opacity: .65; cursor: default; }
+            .strat-btn-wrap { text-align: center; margin: 22px 0 6px 0; }
+            .strat-btn-note { text-align: center; color: #a3a3a3; font-size: 12.5px; margin-top: 10px; }
+        </style>
+    </head>
+
+    <body>
+        <!-- Nav Bar Start -->
+        <div class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <div class="container-fluid">
+                <a href="index.html" class="navbar-brand">Gaurav Bhatnagar</a>
+            </div>
+        </div>
+        <!-- Nav Bar End -->
+
+        <!-- Strategy Read Start -->
+        <div class="service mt-125">
+            <div class="container">
+                <div class="strat-intro">
+                    <p class="strat-meta">Lawkraft Legal Network</p>
+                    <h1 style="color:#092a49; font-family:'Oswald',sans-serif;">Where Lawkraft Stands: the Next 90 Days, and the 180-Day Stretch</h1>
+                    <p>
+                        Will, this is the full version. I went through all 24 of your original answers, the six you sent back
+                        in the second round, and what you told me on WhatsApp about how ARC deals actually work underneath
+                        the surface, and sat all of it against the market research I'd pulled together separately. This is
+                        me, person to person, working through everything you've given me so far.
+                    </p>
+                    <div class="strat-btn-wrap">
+                        <button type="button" class="strat-btn" id="strategyPdfBtnTop" onclick="downloadStrategyPdf()"><i class="fa fa-file-pdf"></i> Download Signed Report (PDF)</button>
+                        <p class="strat-btn-note">The complete report above, signed and dated the moment you download it.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quicknav">
+            <div class="container">
+                <span class="label">Jump to</span>
+                <a href="#sec01">01 Where You're At</a>
+                <a href="#sec02">02 What You're Missing</a>
+                <a href="#sec03">03 The Real Gap</a>
+                <a href="#sec04">04 Course Correct</a>
+                <a href="#sec05">05 Efficiency</a>
+                <a href="#sec06">06 Discipline</a>
+                <a href="#sec07">07 Second Round</a>
+                <a href="#sec08">08 Other Avenues</a>
+                <a href="#sec09">09 New Clients</a>
+                <a href="#sec10">10 One More Thing</a>
+                <a href="#sec11">11 The Year Ahead</a>
+                <a href="#sec12">12 To Discuss</a>
+                <a href="#sec13">13 To-Dos</a>
+            </div>
+        </div>
+
+        <div class="strat-section" id="sec01">
+            <div class="container">
+                <div class="section-eyebrow">01 &middot; Where You're At</div>
+                <h2>A real business, in a genuine gap</h2>
+                <p>
+                    Lawkraft is a real business making real money, sitting in a genuine gap in the market. Post-judgment
+                    recovery, the 90-plus-days-past-due end of debt collection, is still run on spreadsheets and local
+                    lawyers at most lenders. I checked that independently rather than just taking your word for it, and
+                    it holds up. The well-funded players like Credgenics mostly work the stage before a case ever reaches
+                    court. You're not fighting for space in a crowded field. You're one of the only organized players in
+                    an empty one.
+                </p>
+                <p>
+                    You're also in better shape operationally than I'd expect from a company that's just 9 months old
+                    on papers. Your team and advocate network could take on 3 new clients tomorrow without strain.
+                    Reporting is ready to send today, nothing to build specially. Once a client signs, the work runs
+                    itself, no fresh approval needed batch to batch. Whatever's holding growth back, it isn't delivery.
+                </p>
+                <p>
+                    And you're sharper on strategy than you're giving yourself credit for. I asked you the same question
+                    twice, in two different ways, without telling you what the research found, and both times you named
+                    Asset Reconstruction Companies as the most underserved segment and the one you'd chase hardest over
+                    the next six months. That's exactly what the independent research says too. You've already had real
+                    conversations with lenders outside your usual base. You picked the right target yourself, nobody had
+                    to point you there.
+                </p>
+            </div>
+        </div>
+
+        <div class="strat-section alt" id="sec02">
+            <div class="container">
+                <div class="section-eyebrow">02 &middot; What You're Missing</div>
+                <h2>Five gaps, none of them about delivery</h2>
+                <ul>
+                    <li><strong>A written ICP.</strong> Right now, who's worth chasing lives in your head, not on a page the team can actually use. Fine at 3 people. Won't hold as you grow.</li>
+                    <li><strong>One consistent answer to "why us."</strong> Ask three people on your team why a bank should pick Lawkraft over the law firm they've used for ten years, and you'll get three different answers. That's a tax on a sales cycle that's already running past 3 months.</li>
+                    <li><strong>A written compliance answer.</strong> If a bank's risk team asked today how you handle debtor data and whether your advocates follow RBI's fair-practice rules, you'd be putting something together on the spot. That's exactly the question the bigger buyers you're chasing will ask first.</li>
+                    <li><strong>A pricing stance.</strong> When a rival drops price 30% to win an account, your answer today is "depends on the account." That's not a position you can repeat, and it'll get tested more as you move up-market, not less.</li>
+                    <li><strong>A process for growing inside clients you already have.</strong> Once a client's first batch of 50 cases is running, whether you go after the rest of their portfolio depends on someone remembering to ask. That's revenue sitting on the table with people who already trust you.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="strat-section" id="sec03">
+            <div class="container">
+                <div class="section-eyebrow">03 &middot; The Real Gap</div>
+                <h2>A visibility problem, not a targeting one</h2>
+                <p>
+                    Here's the sharpest thing I found in your answers, and I want you to sit with it for a second. You
+                    identified ARCs as the right market, unprimed, twice. You've had real conversations with lenders
+                    outside your current base. You're bootstrapped and careful with money. And yet right now, someone
+                    running collections at a large Asset Reconstruction Company has never heard of Lawkraft.
+                </p>
+                <div class="meaning-box">
+                    <span class="label">What it means</span>
+                    <p><strong>This isn't a targeting problem.</strong> You already solved that part yourself. It's a
+                    visibility problem. You picked the right market, and nobody in it knows you're there yet.</p>
+                </div>
+                <p>
+                    The second gap is smaller, but worth saying plainly: new business still runs through a founder being
+                    in the room. Your delivery side could take on more clients without blinking. The constraint isn't
+                    capacity, it's that growth still depends on you and your co-founders personally showing up to close
+                    it.
+                </p>
+            </div>
+        </div>
+
+        <div class="strat-section alt" id="sec04">
+            <div class="container">
+                <div class="section-eyebrow">04 &middot; Course Correct</div>
+                <h2>Four moves that fix the diagnosis above</h2>
+                <ul>
+                    <li>Stop asking "who else could we sell to." You already answered that one. The real question now is how people running collections at ARCs actually find out you exist. A narrow, targeted push aimed at getting known by that specific buyer, not broad brand marketing.</li>
+                    <li>Write the ICP and the "why us" answer down, two one-pagers the whole team actually uses. Fixes the instinct-based targeting and the inconsistent pitch in one move, and it costs you a few hours, not a budget line.</li>
+                    <li>Build the compliance one-pager now, before a deal is sitting on it. Turns "we'd need to scramble" into something you hand over the same day it's asked for.</li>
+                    <li>Turn "next batch" into a scheduled step inside the six-stage process you already run, not something that depends on memory. Cheaper revenue than any new logo, because the trust's already built.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="strat-section" id="sec05">
+            <div class="container">
+                <div class="section-eyebrow">05 &middot; Efficiency</div>
+                <h2>Without piling up expenses</h2>
+                <p>
+                    You're already comfortable with AI, so this isn't me telling you to start using it. It's about being
+                    specific on where it actually saves you time. Two places worth it: getting first drafts of the ICP,
+                    "why us," and compliance documents above off the ground fast, so you're editing instead of starting
+                    from a blank page. And building a targeted research list of exactly who runs collections at the
+                    named ARCs you're going after, instead of general prospecting.
+                </p>
+                <p>
+                    Delivery capacity isn't the constraint here, so run the ARC outreach alongside whatever's already
+                    moving through your pipeline, not after it. You're not choosing between the two.
+                </p>
+                <p>
+                    Two levers add revenue without adding expense. You told me you'd take a revenue-share deal with a
+                    platform like Credgenics for cases that reach court. That's a real channel, and one or two
+                    partnership conversations could bring case flow with zero marketing spend. And the account-expansion
+                    fix in point 4 is, by definition, free revenue from clients who already trust you.
+                </p>
+            </div>
+        </div>
+
+        <div class="strat-section alt" id="sec06">
+            <div class="container">
+                <div class="section-eyebrow">06 &middot; Discipline</div>
+                <h2>The approach that holds across both the 90-day base and the 180-day stretch</h2>
+                <ul>
+                    <li>Make the ICP and "why us" documents real and written, not something living in your head. Your team can't be consistent with an instinct they were never given.</li>
+                    <li>A weekly, founder-led review of the ARC pipeline specifically, kept separate from general business development. The right priority loses out to day-to-day delivery work too easily without its own slot on the calendar. Keep this cadence running the full 180 days, not just the first 90, since the ARC payoff lands in the second half.</li>
+                    <li>A standing, calendared check at the "next batch" decision point for every existing client, so account growth stops depending on someone remembering.</li>
+                    <li>Decide your price-war stance in advance, not deal by deal. What you'll hold firm on and what you'll flex on, written down once, so "depends on the account" turns into a rule instead of an improvisation.</li>
+                    <li>New business still needs a founder in the room, so be deliberate about which room that is. Spend that time on ARC and partnership conversations specifically, the two channels with the most leverage, not spread thin across general outreach.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="strat-section" id="sec07">
+            <div class="container">
+                <div class="section-eyebrow">07 &middot; Second Round</div>
+                <h2>What your drilldown answers told me</h2>
+                <p>
+                    Your six answers this round line up with something I already had a hunch about, which is exactly
+                    why I kept asking you about ARCs specifically instead of taking the first round at face value.
+                    They don't change the diagnosis in section 3. If anything, they confirm it.
+                </p>
+                <p>
+                    Start with the ARC conversations themselves. You called them early exploratory talks, nothing
+                    concrete yet. That's exactly what I'd expect from a market that doesn't know you exist, so no
+                    surprise there. And when I asked what would actually slow you down once ARC interest starts coming
+                    in, you said nothing structural, that you'd just need the conversations to happen. That's the
+                    clearest confirmation I've gotten that this really is a visibility problem and not a capability one.
+                    You believe you can close it once it shows up. I believe you too.
+                </p>
+                <div class="meaning-box">
+                    <span class="label">What it means</span>
+                    <p><strong>But what you told me on WhatsApp about how ARCs actually work changes what "closing it" means.</strong>
+                    You said ARCs aren't what they look like from outside, that on paper they own the bad loan but the
+                    original lender is still the one running the file behind the scenes, and that getting an ARC to the
+                    table means working through that multi-party structure at margins that are already thin.</p>
+                    <p>I'm raising this plainly because it's a real constraint, not because it caught me off guard. It
+                    doesn't mean stop chasing ARCs, you picked the right market and the visibility push still stands.
+                    It means weighing this properly and exactly, the real time, structuring and margin an ARC deal
+                    takes, rather than chasing it because it's the bigger, more prestigious name to land. That's a
+                    different test than "is this the right market," and it deserves its own honest answer, not a
+                    prestige one.</p>
+                </div>
+                <p>
+                    Here are three concrete ways to work around that constraint, not just live with it:
+                </p>
+                <ul>
+                    <li><strong>Go in through the lender, not the ARC.</strong> You told me yourself the original lender keeps running the file behind the scenes. That's not just a complication, it's the door. Get positioned with the bank or NBFC itself, before or right at the point they sell a retail pool to an ARC, so you're already the recovery executor of record when the ARC relationship kicks in, instead of cold-pitching a brand-new counterparty from zero.</li>
+                    <li><strong>Chase the pool, not the relationship.</strong> Don't try to land "an ARC" as one big logo upfront, that's exactly the multi-party negotiation that eats time and margin before you've proven anything. ARCs regularly buy specific retail and unsecured pools, Bandhan Bank alone sold nearly Rs. 7,000 crore of exactly this kind of portfolio to ARCs in a single deal in November 2025, and a recovery mandate on one pool is a far smaller, contained ask than an enterprise-wide tie-up. Win one pool, then expand from inside it.</li>
+                    <li><strong>Price for their margin, not yours.</strong> Public numbers on retail NPA sales back up what you told me, Ujjivan Small Finance Bank's microfinance portfolio sold to an ARC recovered just 9.39% of face value, a haircut north of 90%. That's the real economics behind an ARC deal, and your flat per-case fee wasn't built for it. A separate, success-fee-heavy structure for ARC-sourced work specifically, low or no base fee, a real percentage of what actually comes back, moves your economics with theirs instead of against them.</li>
+                </ul>
+                <p>
+                    One more thing worth using. You said the deals that stall usually get stuck in the lender's
+                    internal approval process, not with you. That's not something you control directly, but it tells
+                    you where to put effort: the compliance one-pager from section 4 isn't just useful for your own
+                    pitch anymore, it's something your contact inside the lender can hand upward to move their own
+                    approval along faster. Build it for them, not just for you.
+                </p>
+            </div>
+        </div>
+
+        <div class="strat-section alt" id="sec08">
+            <div class="container">
+                <div class="section-eyebrow">08 &middot; Other Avenues</div>
+                <h2>Where else you could be fishing</h2>
+                <p>
+                    Here's the thing, though. A little detour never hurts, and this one's worth taking because it's
+                    good for your bank account right now, not just for the ARC story later. Before anything else,
+                    here's what's already sitting in front of you that doesn't need a single new ARC conversation to
+                    turn into revenue: one deal in your existing pipeline you called likely to close inside this
+                    window, no new activity needed; the revenue-share conversation with a named partner, which isn't
+                    hypothetical anymore; and your biggest client, 20 to 40% of revenue, stable but not actively
+                    nurtured lately, which is the clearest opening I've seen yet for the account-expansion fix in
+                    sections 2 and 4.
+                </p>
+                <p>
+                    You told me on our call you're filing somewhere around 1,500 cases a month, or was it a week, I
+                    want to double-check that one with you, the two tell very different stories, but either way
+                    that's a genuinely impressive operating pace for a company that's just 9 months old on papers,
+                    worth being proud of on its own, not just as a footnote.
+                </p>
+                <p>
+                    One thing worth being precise about before I show you numbers: not every NPA statistic out there
+                    is relevant to you. Your own client base and the six-stage process you've built are tuned for
+                    retail and small-business defaults, personal loans, gold loans, vehicle and asset finance,
+                    microfinance group loans, MSME working capital, not the crore-plus corporate accounts sitting in
+                    IBC and DRT proceedings. So here's the fuller landscape that's actually yours to go after,
+                    cooperative banks and MFIs you already know about, plus three more I went looking for
+                    specifically because I don't think you've sized them yet:
+                </p>
+                <div class="table-responsive">
+                    <table class="table table-bordered strat-table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>What's Outstanding</th>
+                                <th>As Of</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Cooperative banks and credit societies (urban, state and district central, combined)</td>
+                                <td>Rs. 73,674 crore in gross NPAs</td>
+                                <td>March 2026</td>
+                            </tr>
+                            <tr>
+                                <td>Microfinance institutions</td>
+                                <td>Rs. 55,000 crore in NPAs, 14.8% of the entire loan book, and worsening quarter on quarter</td>
+                                <td>March 2025</td>
+                            </tr>
+                            <tr>
+                                <td>Retail and unsecured NPA pools sold to ARCs</td>
+                                <td>Bandhan Bank alone sold nearly Rs. 7,000 crore of unsecured retail, microfinance, small-business and agri loans to ARCs in one deal; Ujjivan's microfinance portfolio sold to an ARC recovered just 9.39% of face value, your margin warning, confirmed independently</td>
+                                <td>November 2025</td>
+                            </tr>
+                            <tr>
+                                <td>Affordable housing finance companies</td>
+                                <td>Aadhar Housing Finance alone, one of the larger players in this space, carries Rs. 391 crore in gross NPAs on a Rs. 27,554 crore book, average ticket size just Rs. 10.5 lakh, the same small-ticket retail profile as your current clients, not a new kind of case</td>
+                                <td>September 2025</td>
+                            </tr>
+                            <tr>
+                                <td>Unsecured retail lending stress, banks and NBFCs broadly</td>
+                                <td>Fitch expects new bad loans in FY25 and FY26 to run roughly 25% higher than FY24, driven specifically by retail, agriculture and MFI books, named lenders include HDFC Bank and Kotak Mahindra Bank</td>
+                                <td>FY25-26</td>
+                            </tr>
+                            <tr>
+                                <td>Section 138 cheque-bounce litigation, nationwide</td>
+                                <td>Over 33 lakh cases pending in court, and rising, this is the most recent public count I could find, so treat it as a floor, not a ceiling</td>
+                                <td>April 2022</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>
+                    A couple of these are worth a word each. Affordable housing finance runs the same playbook as
+                    your current clients, small ticket sizes, retail borrowers, growing fast enough that defaults
+                    are growing right alongside it. And on the nationalised-bank side, this isn't a door you'd have
+                    to invent, banks like SBI and Indian Bank already run formal empanelment processes for exactly
+                    this kind of recovery work, it's a process you apply to, not a relationship you have to build
+                    from nothing.
+                </p>
+                <p>
+                    You probably already know some of this in your bones, you're closer to these numbers day to day
+                    than I am. But written down together like this, the point is simple: cooperative banks, MFIs,
+                    and affordable housing finance alone are sitting on real, recoverable volume, run by lenders
+                    with far less recovery infrastructure than even your current clients. And the retail NPA pools
+                    now moving to ARCs are the same kind of case you already know how to run, not a new, unfamiliar
+                    deal type, which is exactly why chasing the pool instead of the relationship, from section 7,
+                    is the practical way in. Over a 90-day window, cooperative banks and credit societies are the
+                    one avenue here fast enough to close. Housing finance companies and nationalised-bank
+                    empanelment are slower to start, but a 180-day horizon is long enough to get the first one
+                    moving if you start the application now, which is exactly what section 9 walks through.
+                </p>
+            </div>
+        </div>
+
+        <div class="strat-section signal-band" id="sec09">
+            <div class="container">
+                <div class="section-eyebrow">09 &middot; New Clients</div>
+                <h2>Two horizons, not one number</h2>
+                <p class="strat-section-intro">
+                    Your own sales cycle already runs past 3 months before you even add in the multi-party
+                    structuring an ARC deal needs. A single 90-day number was always going to undersell what's
+                    realistic here, or oversell it, depending which way I rounded. So here's both numbers, grounded
+                    in what you actually told me, not a generic growth projection.
+                </p>
+                <div class="stat-row">
+                    <div class="stat-card">
+                        <div class="tag">Days 1&ndash;90</div>
+                        <div class="num">3&ndash;4 new clients</div>
+                        <p>Two of these are close to certain: one deal already in your pipeline that you called likely to close in this window, and the revenue-share conversation with your named partner, which given it's already active, is realistic, not a reach. The other one or two come from actually working cooperative banks and credit societies as a volume channel, many smaller, faster-deciding accounts in parallel, which is exactly where section 8 points you first.</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="tag">Days 91&ndash;180, the stretch</div>
+                        <div class="num">+2&ndash;3 more</div>
+                        <p>This is where the visibility push actually pays off: your first signed ARC client, once the multi-party structuring from section 7 has had time to run its course. Alongside it, continued volume from cooperative banks and credit societies, and, if you file the empanelment application in month one, a real shot at your first nationalised-bank mandate clearing in time.</p>
+                    </div>
+                </div>
+                <div class="meaning-box">
+                    <span class="label">Why not more, and why not sooner</span>
+                    <p>I want to be straight about both numbers. The first two 90-day wins were always within reach,
+                    you'd likely have closed those without me. The real test of this engagement is what gets added
+                    on top, and cooperative banks and credit societies are the one new avenue genuinely built for a
+                    90-day timeline, smaller institutions, simpler decision-making, no enterprise procurement
+                    process to sit through.</p>
+                    <p>Housing finance companies, the broader NBFC and nationalised-bank unsecured book, and ARCs
+                    are all real, but every one of them runs through a slower, more structured sales or empanelment
+                    process, the kind that outlasts a 90-day window even when you start today. Stretching the
+                    horizon to 180 days is what lets the ARC push and the nationalised-bank door actually land
+                    inside this report's numbers instead of getting waved at as "someday." Even then, the broader
+                    NBFC book is honestly more likely a next-quarter story than a 180-day one, I'd rather tell you
+                    that now than have it quietly slip and have you wondering why.</p>
+                </div>
+                <p>
+                    Meanwhile, the stable-but-unnurtured biggest client is worth a direct conversation inside the
+                    first 90 days, not next quarter. It's not a new logo, so it won't move either client count, but
+                    reconnecting there protects revenue that's already concentrated at 20 to 40%, and it's the
+                    fastest-moving lever you have right now.
+                </p>
+            </div>
+        </div>
+
+        <div class="strat-section" id="sec10">
+            <div class="container">
+                <div class="section-eyebrow">10 &middot; One More Thing</div>
+                <h2>Two questions worth sitting with</h2>
+                <p>
+                    <strong>Your pricing model.</strong> You charge a flat fee per case today, no matter the recovery.
+                    But the numbers you lead with, over 70% recovery rate, Rs.1 Cr+ recovered monthly, are outcome
+                    numbers. A pure per-case fee doesn't let that advantage show up in the price itself. I'm not telling
+                    you to change it. I'm raising a real question worth sitting with: would an outcome-linked or hybrid
+                    pricing piece make your real differentiation harder to wave away, especially when you're already
+                    having to argue why the Credgenics comparison doesn't hold?
+                </p>
+                <p>
+                    <strong>Revenue concentration.</strong> Your single biggest client is 20 to 40% of revenue today.
+                    Not an alarm on its own, but worth tracking deliberately over the full 180 days as new clients
+                    come in, so growth doesn't quietly trade one concentration risk for another.
+                </p>
+            </div>
+        </div>
+
+        <div class="strat-section signal-band" id="sec11">
+            <div class="container">
+                <div class="section-eyebrow">11 &middot; The Year Ahead</div>
+                <h2>Twelve months from now, not ninety days back</h2>
+                <p class="strat-section-intro">
+                    Everything above is about the next 90 to 180 days, what's doable, what's provable, what's
+                    already in motion. This part is different. It isn't a recap of the report, and it isn't a
+                    checklist. These are the questions worth sitting with if you're thinking about where Lawkraft
+                    stands in a year, not a quarter. A few of them won't have a comfortable answer yet. That's
+                    exactly why they belong here.
+                </p>
+                <div class="q-grid">
+                    <div class="q-card">
+                        <span class="q-tag2 whatif">What If</span>
+                        <p>What if, twelve months from now, you're the first name every recovery head at a cooperative bank reaches for, not one of three quotes they're comparing?</p>
+                    </div>
+                    <div class="q-card">
+                        <span class="q-tag2 whatif">What If</span>
+                        <p>What if the first ARC pool deal isn't the exception you tell people about, but the shape every ARC deal after it takes?</p>
+                    </div>
+                    <div class="q-card">
+                        <span class="q-tag2 whatif">What If</span>
+                        <p>What if the next twelve months is the only window before a better-funded competitor notices the exact gap you're sitting in right now?</p>
+                    </div>
+                    <div class="q-card">
+                        <span class="q-tag2 whatif">What If</span>
+                        <p>What if the one thing standing between Lawkraft and double the client base isn't the market, the team, or the pricing, but simply nobody watching the whole board while you and your co-founders run the day to day?</p>
+                    </div>
+                    <div class="q-card">
+                        <span class="q-tag2 whatif">What If</span>
+                        <p>What if, a year from now, the firms you're being compared to aren't law firms anymore, because you've already moved the conversation to the platforms?</p>
+                    </div>
+                    <div class="q-card">
+                        <span class="q-tag2 whynot">Why Not</span>
+                        <p>Why not decide, deliberately, this month, what Lawkraft looks like in twelve months, instead of finding out by accident next October?</p>
+                    </div>
+                    <div class="q-card">
+                        <span class="q-tag2 whynot">Why Not</span>
+                        <p>Why not have someone whose only job is thinking two steps ahead of the business, while your team runs the cases that are already signed?</p>
+                    </div>
+                    <div class="q-card">
+                        <span class="q-tag2 whynot">Why Not</span>
+                        <p>Why not treat this exact moment, before the ARC pipeline is proven and before you've scaled past what founder-led growth can carry, as the one real chance to build the positioning properly, instead of retrofitting it later at a harder, costlier stage?</p>
+                    </div>
+                    <div class="q-card">
+                        <span class="q-tag2 whynot">Why Not</span>
+                        <p>Why not find out what it's like to have someone catch the thing you haven't thought of yet, instead of finding out about it the way most founders do, after it's already a problem?</p>
+                    </div>
+                </div>
+                <div class="q-capstone-wrap">
+                    <div class="q-capstone-label">The question underneath all of them</div>
+                    <div class="q-capstone">
+                        <p>Why not ask, right now, what it would actually cost to have this kind of thinking on your side every month, not just once?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="strat-section alt" id="sec12">
+            <div class="container">
+                <div class="section-eyebrow">12 &middot; To Discuss on a Call</div>
+                <h2>Judgment calls, not fixes</h2>
+                <p>
+                    A few things here are better worked through out loud than written as a recommendation, because
+                    they're judgment calls, not fixes. Noting them so neither of us loses track, for whenever you're
+                    ready to go deeper than this report, on a retainer:
+                </p>
+                <ul>
+                    <li>Whether ARC is still worth the same share of founder time now that you have three concrete ways to work it, or whether even the leaner version of it should rank behind the revenue-share channel for the next two quarters.</li>
+                    <li>Whether to formalize "go in through the lender" as a standing part of your sales process generally, not just an ARC-specific move, given how much of the real decision-making already happens there.</li>
+                    <li>Whether the outcome-linked, success-fee pricing idea, from section 10 and the ARC-specific version in section 7, is worth testing on a single client first, rather than deciding it in the abstract.</li>
+                    <li>Whether housing finance companies and the broader NBFC book deserve a dedicated push next quarter, once cooperative banks and credit societies have proven the volume approach out in the first 90 days.</li>
+                    <li>Whether it's worth scoping any engagement between us to the full 180 days rather than just 90, given that the honest numbers above show the real second wave of wins, the first ARC client especially, lands in the back half, not the front.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="strat-section" id="sec13">
+            <div class="container">
+                <div class="section-eyebrow">13 &middot; To-Dos</div>
+                <h2>If you read nothing else</h2>
+                <div class="tldr">
+                    <h3>Six things to actually do, across the 90-day base and the 180-day stretch</h3>
+                    <ul>
+                        <li><strong>Reconnect with your biggest client this month.</strong> Stable but unnurtured is the easiest risk to fix and the fastest lever you have. Inside the first 90 days.</li>
+                        <li><strong>Push the revenue-share conversation with your named partner to a real decision.</strong> It's already live, don't let it drift. Inside the first 90 days.</li>
+                        <li><strong>Launch a volume push into cooperative banks and credit societies.</strong> Many smaller, faster-deciding targets, not one big account, this is where the extra client or two inside the first 90 days actually comes from, and it keeps compounding through day 180.</li>
+                        <li><strong>Write the ICP and "why us" one-pagers, and the compliance one-pager.</strong> The compliance piece now does double duty, hand it to your contact inside the lender to help clear their internal approval process faster. Do this in month one so it's working for you the rest of the way.</li>
+                        <li><strong>Start the narrow, ARC-specific visibility push, and file the nationalised-bank empanelment application.</strong> Not broad marketing, a targeted list of who runs collections at the named ARCs you're going after, plus the paperwork banks like SBI and Indian Bank already have a process for. Both are planted in month one so they have a real shot at landing inside the 180-day stretch, not the quarter after.</li>
+                        <li><strong>Put a price-war stance and a standing account-expansion check on the calendar.</strong> Both are one-time setup costs that keep paying you back every quarter after.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="padding: 10px 0 50px 0;">
+            <div class="meaning-box" style="margin-top: 0;">
+                <p>That's everything I've got from what you've given me so far, the original 24 questions, the follow-up
+                six, and what you told me on WhatsApp. I'd rather you push back on any of this than nod along, so if
+                something here doesn't match how you see it, tell me and we'll work through it.</p>
+            </div>
+            <div class="strat-btn-wrap">
+                <button type="button" class="strat-btn" id="strategyPdfBtnBottom" onclick="downloadStrategyPdf()"><i class="fa fa-file-pdf"></i> Download Signed Report (PDF)</button>
+                <p class="strat-btn-note">Every section above, signed and dated the moment you download it.</p>
+            </div>
+        </div>
+        <!-- Strategy Read End -->
+
+        <!-- Footer Start -->
+        <div class="footer">
+            <div class="container copyright">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p style="text-align:left;">&copy; <a href="#">Gaurav Bhatnagar</a>, All Right Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.1/jspdf.umd.min.js"></script>
+        <script>
+            var SIG_IMG_DATA = "data:image/png;base64,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";
+            var SIG_IMG_RATIO = 127 / 254;
+
+            function downloadStrategyPdf() {
+                var btns = [document.getElementById('strategyPdfBtnTop'), document.getElementById('strategyPdfBtnBottom')];
+                btns.forEach(function (b) { if (b) { b.disabled = true; b.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Preparing PDF...'; } });
+
+                try {
+                    var jsPDFCtor = window.jspdf.jsPDF;
+                    var doc = new jsPDFCtor({ unit: 'mm', format: 'a4' });
+                    var pageW = 210, pageH = 297, margin = 18, contentW = pageW - margin * 2;
+                    var navy = [9, 42, 73], navyLight = [22, 54, 86], blue = [7, 150, 254], lightBlue = [94, 196, 255],
+                        grey = [85, 85, 85], lightGrey = [248, 249, 250];
+
+                    var today = new Date();
+                    var dateStr = today.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+                    var y = margin;
+                    var mode = 'light';
+                    var pageNum = 0;
+
+                    function paintBg() {
+                        if (mode === 'dark') {
+                            doc.setFillColor(navy[0], navy[1], navy[2]);
+                            doc.rect(0, 0, pageW, pageH, 'F');
+                        }
+                    }
+
+                    function footer() {
+                        doc.setFont('helvetica', 'normal');
+                        doc.setFontSize(7.5);
+                        if (mode === 'dark') { doc.setTextColor(150, 180, 210); } else { doc.setTextColor(180, 180, 180); }
+                        doc.text('Lawkraft Legal Network · Strategy Report · Prepared for William Emmanuel', margin, pageH - 10);
+                        pageNum++;
+                        doc.text(String(pageNum), pageW - margin, pageH - 10, { align: 'right' });
+                    }
+
+                    function newPage(newMode) {
+                        footer();
+                        doc.addPage();
+                        mode = newMode || mode;
+                        y = margin;
+                        paintBg();
+                    }
+
+                    function ensureSpace(h) {
+                        if (y + h > pageH - margin - 8) { newPage(mode); }
+                    }
+
+                    function textColor(light) {
+                        if (mode === 'dark') { doc.setTextColor(light ? 255 : 207, light ? 255 : 227, light ? 255 : 245); }
+                        else { doc.setTextColor(grey[0], grey[1], grey[2]); }
+                    }
+
+                    function headingColor() {
+                        if (mode === 'dark') { doc.setTextColor(255, 255, 255); } else { doc.setTextColor(navy[0], navy[1], navy[2]); }
+                    }
+
+                    function eyebrowColor() {
+                        if (mode === 'dark') { doc.setTextColor(lightBlue[0], lightBlue[1], lightBlue[2]); } else { doc.setTextColor(blue[0], blue[1], blue[2]); }
+                    }
+
+                    function sectionHeader(label, title) {
+                        ensureSpace(28);
+                        eyebrowColor();
+                        doc.setFont('helvetica', 'bold');
+                        doc.setFontSize(9.5);
+                        doc.text(label.toUpperCase(), margin, y + 6);
+                        y += 10;
+                        headingColor();
+                        doc.setFont('helvetica', 'normal');
+                        doc.setFontSize(17);
+                        var titleLines = doc.splitTextToSize(title, contentW);
+                        doc.text(titleLines, margin, y + 6);
+                        y += titleLines.length * 7.5 + 9;
+                    }
+
+                    function para(text, opts) {
+                        opts = opts || {};
+                        var size = opts.size || 10.3;
+                        var lh = size * 0.46;
+                        doc.setFont('helvetica', opts.bold ? 'bold' : 'normal');
+                        doc.setFontSize(size);
+                        var lines = doc.splitTextToSize(text, contentW);
+                        ensureSpace(lines.length * lh + 6);
+                        doc.setFont('helvetica', opts.bold ? 'bold' : 'normal');
+                        doc.setFontSize(size);
+                        textColor(opts.light);
+                        doc.text(lines, margin, y + lh * 0.75);
+                        y += lines.length * lh + (opts.gap !== undefined ? opts.gap : 5.5);
+                    }
+
+                    function richBullet(lead, rest) {
+                        var indent = 7;
+                        doc.setFont('helvetica', 'bold');
+                        doc.setFontSize(10.3);
+                        var leadLines = doc.splitTextToSize(lead, contentW - indent);
+                        var restLines = rest ? (doc.setFont('helvetica', 'normal'), doc.setFontSize(10), doc.splitTextToSize(rest, contentW - indent)) : [];
+                        var totalH = leadLines.length * 4.9 + 1.5 + restLines.length * 4.8 + 5;
+                        ensureSpace(totalH);
+                        doc.setFillColor(mode === 'dark' ? lightBlue[0] : blue[0], mode === 'dark' ? lightBlue[1] : blue[1], mode === 'dark' ? lightBlue[2] : blue[2]);
+                        doc.circle(margin + 1.3, y + 1.6, 1.1, 'F');
+                        doc.setFont('helvetica', 'bold');
+                        doc.setFontSize(10.3);
+                        headingColor();
+                        doc.text(leadLines, margin + indent, y + 2.3);
+                        y += leadLines.length * 4.9 + 1.5;
+                        if (rest) {
+                            doc.setFont('helvetica', 'normal');
+                            doc.setFontSize(10);
+                            textColor(false);
+                            doc.text(restLines, margin + indent, y + 2.3);
+                            y += restLines.length * 4.8;
+                        }
+                        y += 5;
+                    }
+
+                    function plainBullet(text) {
+                        var indent = 7;
+                        doc.setFont('helvetica', 'normal');
+                        doc.setFontSize(10.3);
+                        var lines = doc.splitTextToSize(text, contentW - indent);
+                        ensureSpace(lines.length * 4.9 + 5);
+                        doc.setFillColor(mode === 'dark' ? lightBlue[0] : blue[0], mode === 'dark' ? lightBlue[1] : blue[1], mode === 'dark' ? lightBlue[2] : blue[2]);
+                        doc.circle(margin + 1.3, y + 1.6, 1.1, 'F');
+                        textColor(false);
+                        doc.text(lines, margin + indent, y + 2.3);
+                        y += lines.length * 4.9 + 5.5;
+                    }
+
+                    function measureMeaningBox(label, paras) {
+                        var padX = 8, padY = 7;
+                        var hasLabel = !!label;
+                        doc.setFont('helvetica', 'normal');
+                        doc.setFontSize(9.8);
+                        var lineSets = paras.map(function (p) { return doc.splitTextToSize(p, contentW - padX * 2 - 4); });
+                        var totalLines = lineSets.reduce(function (a, s) { return a + s.length; }, 0);
+                        var boxH = padY * 2 + (hasLabel ? 8 : 0) + totalLines * 5.1 + (paras.length - 1) * 2.5;
+                        return { lineSets: lineSets, boxH: boxH };
+                    }
+
+                    function meaningBox(label, paras, precomputed) {
+                        var padX = 8, padY = 7;
+                        var hasLabel = !!label;
+                        var m = precomputed || measureMeaningBox(label, paras);
+                        var lineSets = m.lineSets, boxH = m.boxH;
+                        ensureSpace(boxH + 7);
+                        var boxFill = mode === 'dark' ? [28, 66, 100] : [238, 246, 255];
+                        var accent = mode === 'dark' ? lightBlue : blue;
+                        doc.setFillColor(boxFill[0], boxFill[1], boxFill[2]);
+                        doc.rect(margin, y, contentW, boxH, 'F');
+                        doc.setFillColor(accent[0], accent[1], accent[2]);
+                        doc.rect(margin, y, 1.3, boxH, 'F');
+                        var ly = y + padY;
+                        if (hasLabel) {
+                            doc.setFont('helvetica', 'bold');
+                            doc.setFontSize(8.5);
+                            doc.setTextColor(accent[0], accent[1], accent[2]);
+                            doc.text(label.toUpperCase(), margin + padX, ly + 3);
+                            ly += 9;
+                        }
+                        doc.setFont('helvetica', 'normal');
+                        doc.setFontSize(9.8);
+                        lineSets.forEach(function (lines) {
+                            if (mode === 'dark') { doc.setTextColor(234, 243, 251); } else { doc.setTextColor(9, 42, 73); }
+                            doc.text(lines, margin + padX, ly + 3);
+                            ly += lines.length * 5.1 + 2.5;
+                        });
+                        y += boxH + 6;
+                    }
+
+                    function statPair(cards) {
+                        var gap = 7, cardW = (contentW - gap) / 2;
+                        doc.setFont('helvetica', 'normal');
+                        doc.setFontSize(8);
+                        var descLineSets = cards.map(function (c) { return doc.splitTextToSize(c.desc, cardW - 12); });
+                        var cardH = Math.max.apply(null, descLineSets.map(function (l) { return l.length; })) * 4.3 + 24;
+                        cardH = Math.max(cardH, 34);
+                        ensureSpace(cardH + 9);
+                        cards.forEach(function (c, i) {
+                            var cx = margin + i * (cardW + gap);
+                            doc.setFillColor(navyLight[0], navyLight[1], navyLight[2]);
+                            doc.setDrawColor(70, 100, 130);
+                            doc.roundedRect(cx, y, cardW, cardH, 2, 2, mode === 'dark' ? 'FD' : 'F');
+                            doc.setFont('helvetica', 'bold');
+                            doc.setFontSize(8);
+                            doc.setTextColor(lightBlue[0], lightBlue[1], lightBlue[2]);
+                            doc.text(c.tag.toUpperCase(), cx + 6, y + 8);
+                            doc.setFontSize(16);
+                            doc.setTextColor(255, 255, 255);
+                            doc.text(c.num, cx + 6, y + 17);
+                            doc.setFont('helvetica', 'normal');
+                            doc.setFontSize(8);
+                            doc.setTextColor(207, 227, 245);
+                            doc.text(descLineSets[i], cx + 6, y + 23);
+                        });
+                        y += cardH + 9;
+                    }
+
+                    function table(headers, rows, colWidths) {
+                        var rowH = 9;
+                        function headerRow() {
+                            ensureSpace(rowH + 2);
+                            doc.setFillColor(navy[0], navy[1], navy[2]);
+                            doc.rect(margin, y, contentW, rowH, 'F');
+                            doc.setFont('helvetica', 'bold');
+                            doc.setFontSize(8);
+                            doc.setTextColor(255, 255, 255);
+                            var tx = margin;
+                            headers.forEach(function (h, i) {
+                                doc.text(h.toUpperCase(), tx + 3, y + 6);
+                                tx += colWidths[i];
+                            });
+                            y += rowH;
+                        }
+                        headerRow();
+                        rows.forEach(function (r, ri) {
+                            doc.setFont('helvetica', 'normal');
+                            doc.setFontSize(7.8);
+                            var cellLines = r.map(function (c, i) { return doc.splitTextToSize(String(c), colWidths[i] - 5); });
+                            var h = Math.max.apply(null, cellLines.map(function (l) { return l.length; })) * 4.3 + 5;
+                            if (y + h > pageH - margin - 8) { newPage(mode); headerRow(); }
+                            var fill = ri % 2 === 0 ? [255, 255, 255] : lightGrey;
+                            doc.setFillColor(fill[0], fill[1], fill[2]);
+                            doc.rect(margin, y, contentW, h, 'F');
+                            doc.setFont('helvetica', 'normal');
+                            doc.setFontSize(7.8);
+                            textColor(false);
+                            var tx = margin;
+                            cellLines.forEach(function (lines, i) {
+                                doc.text(lines, tx + 3, y + 4.3);
+                                tx += colWidths[i];
+                            });
+                            doc.setDrawColor(230, 230, 230);
+                            doc.line(margin, y + h, pageW - margin, y + h);
+                            y += h;
+                        });
+                        y += 8;
+                    }
+
+                    function tldrTitle(title) {
+                        ensureSpace(14);
+                        eyebrowColor();
+                        doc.setFont('helvetica', 'bold');
+                        doc.setFontSize(9);
+                        var titleLines = doc.splitTextToSize(title.toUpperCase(), contentW);
+                        doc.text(titleLines, margin, y + 5);
+                        y += titleLines.length * 4.6 + 7;
+                    }
+
+                    function qHeroGrid(cards) {
+                        var gap = 6, cardW = (contentW - gap) / 2;
+                        var i = 0;
+                        while (i < cards.length) {
+                            var rowCards = cards.slice(i, i + 2);
+                            var heights = rowCards.map(function (c) {
+                                doc.setFont('helvetica', 'normal');
+                                doc.setFontSize(9.8);
+                                var lines = doc.splitTextToSize(c.text, cardW - 14);
+                                return lines.length * 5 + 22;
+                            });
+                            var rowH = Math.max.apply(null, heights);
+                            ensureSpace(rowH + gap);
+                            rowCards.forEach(function (c, j) {
+                                var cx = margin + j * (cardW + gap);
+                                doc.setFillColor(navyLight[0], navyLight[1], navyLight[2]);
+                                doc.setDrawColor(70, 100, 130);
+                                doc.roundedRect(cx, y, cardW, rowH, 2, 2, 'FD');
+                                var tagColor = c.tag === 'whatif' ? lightBlue : [255, 255, 255];
+                                var tagW = c.tag === 'whatif' ? 21 : 19;
+                                doc.setFillColor(tagColor[0], tagColor[1], tagColor[2]);
+                                doc.roundedRect(cx + 6, y + 6, tagW, 6.5, 1, 1, 'F');
+                                doc.setFont('helvetica', 'bold');
+                                doc.setFontSize(7.5);
+                                doc.setTextColor(navy[0], navy[1], navy[2]);
+                                doc.text(c.tag === 'whatif' ? 'WHAT IF' : 'WHY NOT', cx + 8.5, y + 10.4);
+                                doc.setFont('helvetica', 'normal');
+                                doc.setFontSize(9.8);
+                                doc.setTextColor(255, 255, 255);
+                                var lines = doc.splitTextToSize(c.text, cardW - 14);
+                                doc.text(lines, cx + 7, y + 19);
+                            });
+                            y += rowH + gap;
+                            i += 2;
+                        }
+                    }
+
+                    function capstone(text) {
+                        y += 5;
+                        doc.setFont('helvetica', 'bold');
+                        doc.setFontSize(9);
+                        var labelLines = doc.splitTextToSize('THE QUESTION UNDERNEATH ALL OF THEM', contentW);
+                        var boxW = contentW - 20;
+                        doc.setFont('helvetica', 'normal');
+                        doc.setFontSize(13);
+                        var textLines = doc.splitTextToSize(text, boxW - 20);
+                        var boxH = textLines.length * 7.2 + 20;
+                        ensureSpace(labelLines.length * 5 + 12 + boxH + 6);
+                        doc.setFont('helvetica', 'bold');
+                        doc.setFontSize(9);
+                        doc.setTextColor(lightBlue[0], lightBlue[1], lightBlue[2]);
+                        doc.text(labelLines, pageW / 2, y + 4, { align: 'center' });
+                        y += labelLines.length * 5 + 9;
+                        doc.setFillColor(28, 66, 100);
+                        doc.setDrawColor(94, 196, 255);
+                        doc.roundedRect(margin + 10, y, boxW, boxH, 2, 2, 'FD');
+                        doc.setFont('helvetica', 'normal');
+                        doc.setFontSize(13);
+                        doc.setTextColor(255, 255, 255);
+                        doc.text(textLines, pageW / 2, y + 12, { align: 'center' });
+                        y += boxH + 10;
+                    }
+
+                    // ---------- COVER PAGE ----------
+                    mode = 'dark';
+                    doc.setFillColor(navy[0], navy[1], navy[2]);
+                    doc.rect(0, 0, pageW, pageH, 'F');
+                    y = 34;
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(10);
+                    doc.setTextColor(lightBlue[0], lightBlue[1], lightBlue[2]);
+                    doc.text('LAWKRAFT LEGAL NETWORK', margin, y);
+                    y += 15;
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(25);
+                    doc.setTextColor(255, 255, 255);
+                    var coverTitle = doc.splitTextToSize('Where Lawkraft Stands: the Next 90 Days, and the 180-Day Stretch', contentW - 6);
+                    doc.text(coverTitle, margin, y);
+                    y += coverTitle.length * 10 + 8;
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(11);
+                    doc.setTextColor(207, 227, 245);
+                    var coverIntro = doc.splitTextToSize("Will, this is the full version. I went through all 24 of your original answers, the six you sent back in the second round, and what you told me on WhatsApp about how ARC deals actually work underneath the surface, and sat all of it against the market research I'd pulled together separately. This is me, person to person, working through everything you've given me so far.", contentW - 6);
+                    doc.text(coverIntro, margin, y);
+                    y = 168;
+                    doc.setDrawColor(70, 100, 130);
+                    doc.line(margin, y, pageW - margin, y);
+                    y += 12;
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(9);
+                    doc.setTextColor(lightBlue[0], lightBlue[1], lightBlue[2]);
+                    doc.text("WHAT'S INSIDE", margin, y);
+                    y += 9;
+                    var toc = [
+                        '01   Where You’re At', '02   What You’re Missing', '03   The Real Gap', '04   Course Correct',
+                        '05   Efficiency', '06   Discipline', '07   Second Round', '08   Other Avenues',
+                        '09   New Clients', '10   One More Thing', '11   The Year Ahead', '12   To Discuss', '13   To-Dos'
+                    ];
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(9.5);
+                    doc.setTextColor(255, 255, 255);
+                    var tocColW = contentW / 2;
+                    toc.forEach(function (item, i) {
+                        var cx = margin + (i % 2) * tocColW;
+                        var cy = y + Math.floor(i / 2) * 7.5;
+                        doc.text(item, cx, cy);
+                    });
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(9);
+                    doc.setTextColor(170, 195, 220);
+                    doc.text('Prepared for William Emmanuel · ' + dateStr, margin, 282);
+                    doc.text('gauravbhattnagar.com', pageW - margin, 282, { align: 'right' });
+
+                    // ---------- SECTION 01 ----------
+                    newPage('light');
+                    sectionHeader('01 · Where You’re At', 'A real business, in a genuine gap');
+                    para("Lawkraft is a real business making real money, sitting in a genuine gap in the market. Post-judgment recovery, the 90-plus-days-past-due end of debt collection, is still run on spreadsheets and local lawyers at most lenders. I checked that independently rather than just taking your word for it, and it holds up. The well-funded players like Credgenics mostly work the stage before a case ever reaches court. You're not fighting for space in a crowded field. You're one of the only organised players in an empty one.");
+                    para("You're also in better shape operationally than I'd expect from a company that's just 9 months old on papers. Your team and advocate network could take on 3 new clients tomorrow without strain. Reporting is ready to send today, nothing to build specially. Once a client signs, the work runs itself, no fresh approval needed batch to batch. Whatever's holding growth back, it isn't delivery.");
+                    para("And you're sharper on strategy than you're giving yourself credit for. I asked you the same question twice, in two different ways, without telling you what the research found, and both times you named Asset Reconstruction Companies as the most underserved segment and the one you'd chase hardest over the next six months. That's exactly what the independent research says too. You've already had real conversations with lenders outside your usual base. You picked the right target yourself, nobody had to point you there.");
+
+                    // ---------- SECTION 02 ----------
+                    newPage('light');
+                    sectionHeader('02 · What You’re Missing', 'Five gaps, none of them about delivery');
+                    richBullet('A written ICP.', "Right now, who's worth chasing lives in your head, not on a page the team can actually use. Fine at 3 people. Won't hold as you grow.");
+                    richBullet('One consistent answer to "why us."', "Ask three people on your team why a bank should pick Lawkraft over the law firm they've used for ten years, and you'll get three different answers. That's a tax on a sales cycle that's already running past 3 months.");
+                    richBullet('A written compliance answer.', "If a bank's risk team asked today how you handle debtor data and whether your advocates follow RBI's fair-practice rules, you'd be putting something together on the spot. That's exactly the question the bigger buyers you're chasing will ask first.");
+                    richBullet('A pricing stance.', 'When a rival drops price 30% to win an account, your answer today is "depends on the account." That\'s not a position you can repeat, and it\'ll get tested more as you move up-market, not less.');
+                    richBullet('A process for growing inside clients you already have.', "Once a client's first batch of 50 cases is running, whether you go after the rest of their portfolio depends on someone remembering to ask. That's revenue sitting on the table with people who already trust you.");
+
+                    // ---------- SECTION 03 ----------
+                    newPage('light');
+                    sectionHeader('03 · The Real Gap', 'A visibility problem, not a targeting one');
+                    para("Here's the sharpest thing I found in your answers, and I want you to sit with it for a second. You identified ARCs as the right market, unprimed, twice. You've had real conversations with lenders outside your current base. You're bootstrapped and careful with money. And yet right now, someone running collections at a large Asset Reconstruction Company has never heard of Lawkraft.");
+                    meaningBox('What it means', ["This isn't a targeting problem. You already solved that part yourself. It's a visibility problem. You picked the right market, and nobody in it knows you're there yet."]);
+                    para("The second gap is smaller, but worth saying plainly: new business still runs through a founder being in the room. Your delivery side could take on more clients without blinking. The constraint isn't capacity, it's that growth still depends on you and your co-founders personally showing up to close it.");
+
+                    // ---------- SECTION 04 ----------
+                    newPage('light');
+                    sectionHeader('04 · Course Correct', 'Four moves that fix the diagnosis above');
+                    plainBullet('Stop asking "who else could we sell to." You already answered that one. The real question now is how people running collections at ARCs actually find out you exist. A narrow, targeted push aimed at getting known by that specific buyer, not broad brand marketing.');
+                    plainBullet('Write the ICP and the "why us" answer down, two one-pagers the whole team actually uses. Fixes the instinct-based targeting and the inconsistent pitch in one move, and it costs you a few hours, not a budget line.');
+                    plainBullet("Build the compliance one-pager now, before a deal is sitting on it. Turns \"we'd need to scramble\" into something you hand over the same day it's asked for.");
+                    plainBullet('Turn "next batch" into a scheduled step inside the six-stage process you already run, not something that depends on memory. Cheaper revenue than any new logo, because the trust\'s already built.');
+
+                    // ---------- SECTION 05 ----------
+                    newPage('light');
+                    sectionHeader('05 · Efficiency', 'Without piling up expenses');
+                    para("You're already comfortable with AI, so this isn't me telling you to start using it. It's about being specific on where it actually saves you time. Two places worth it: getting first drafts of the ICP, \"why us,\" and compliance documents above off the ground fast, so you're editing instead of starting from a blank page. And building a targeted research list of exactly who runs collections at the named ARCs you're going after, instead of general prospecting.");
+                    para("Delivery capacity isn't the constraint here, so run the ARC outreach alongside whatever's already moving through your pipeline, not after it. You're not choosing between the two.");
+                    para("Two levers add revenue without adding expense. You told me you'd take a revenue-share deal with a platform like Credgenics for cases that reach court. That's a real channel, and one or two partnership conversations could bring case flow with zero marketing spend. And the account-expansion fix in point 4 is, by definition, free revenue from clients who already trust you.");
+
+                    // ---------- SECTION 06 ----------
+                    newPage('light');
+                    sectionHeader('06 · Discipline', 'The approach that holds across both the 90-day base and the 180-day stretch');
+                    plainBullet("Make the ICP and \"why us\" documents real and written, not something living in your head. Your team can't be consistent with an instinct they were never given.");
+                    plainBullet('A weekly, founder-led review of the ARC pipeline specifically, kept separate from general business development. The right priority loses out to day-to-day delivery work too easily without its own slot on the calendar. Keep this cadence running the full 180 days, not just the first 90, since the ARC payoff lands in the second half.');
+                    plainBullet('A standing, calendared check at the "next batch" decision point for every existing client, so account growth stops depending on someone remembering.');
+                    plainBullet('Decide your price-war stance in advance, not deal by deal. What you\'ll hold firm on and what you\'ll flex on, written down once, so "depends on the account" turns into a rule instead of an improvisation.');
+                    plainBullet('New business still needs a founder in the room, so be deliberate about which room that is. Spend that time on ARC and partnership conversations specifically, the two channels with the most leverage, not spread thin across general outreach.');
+
+                    // ---------- SECTION 07 ----------
+                    newPage('light');
+                    sectionHeader('07 · Second Round', 'What your drilldown answers told me');
+                    para("Your six answers this round line up with something I already had a hunch about, which is exactly why I kept asking you about ARCs specifically instead of taking the first round at face value. They don't change the diagnosis in section 3. If anything, they confirm it.");
+                    para("Start with the ARC conversations themselves. You called them early exploratory talks, nothing concrete yet. That's exactly what I'd expect from a market that doesn't know you exist, so no surprise there. And when I asked what would actually slow you down once ARC interest starts coming in, you said nothing structural, that you'd just need the conversations to happen. That's the clearest confirmation I've gotten that this really is a visibility problem and not a capability one. You believe you can close it once it shows up. I believe you too.");
+                    meaningBox('What it means', [
+                        "But what you told me on WhatsApp about how ARCs actually work changes what \"closing it\" means. You said ARCs aren't what they look like from outside, that on paper they own the bad loan but the original lender is still the one running the file behind the scenes, and that getting an ARC to the table means working through that multi-party structure at margins that are already thin.",
+                        "I'm raising this plainly because it's a real constraint, not because it caught me off guard. It doesn't mean stop chasing ARCs, you picked the right market and the visibility push still stands. It means weighing this properly and exactly, the real time, structuring and margin an ARC deal takes, rather than chasing it because it's the bigger, more prestigious name to land. That's a different test than \"is this the right market,\" and it deserves its own honest answer, not a prestige one."
+                    ]);
+                    para('Here are three concrete ways to work around that constraint, not just live with it:');
+                    richBullet('Go in through the lender, not the ARC.', "You told me yourself the original lender keeps running the file behind the scenes. That's not just a complication, it's the door. Get positioned with the bank or NBFC itself, before or right at the point they sell a retail pool to an ARC, so you're already the recovery executor of record when the ARC relationship kicks in, instead of cold-pitching a brand-new counterparty from zero.");
+                    richBullet('Chase the pool, not the relationship.', "Don't try to land \"an ARC\" as one big logo upfront, that's exactly the multi-party negotiation that eats time and margin before you've proven anything. ARCs regularly buy specific retail and unsecured pools, Bandhan Bank alone sold nearly Rs. 7,000 crore of exactly this kind of portfolio to ARCs in a single deal in November 2025, and a recovery mandate on one pool is a far smaller, contained ask than an enterprise-wide tie-up. Win one pool, then expand from inside it.");
+                    richBullet('Price for their margin, not yours.', "Public numbers on retail NPA sales back up what you told me, Ujjivan Small Finance Bank's microfinance portfolio sold to an ARC recovered just 9.39% of face value, a haircut north of 90%. That's the real economics behind an ARC deal, and your flat per-case fee wasn't built for it. A separate, success-fee-heavy structure for ARC-sourced work specifically, low or no base fee, a real percentage of what actually comes back, moves your economics with theirs instead of against them.");
+                    para("One more thing worth using. You said the deals that stall usually get stuck in the lender's internal approval process, not with you. That's not something you control directly, but it tells you where to put effort: the compliance one-pager from section 4 isn't just useful for your own pitch anymore, it's something your contact inside the lender can hand upward to move their own approval along faster. Build it for them, not just for you.");
+
+                    // ---------- SECTION 08 ----------
+                    newPage('light');
+                    sectionHeader('08 · Other Avenues', 'Where else you could be fishing');
+                    para("Here's the thing, though. A little detour never hurts, and this one's worth taking because it's good for your bank account right now, not just for the ARC story later. Before anything else, here's what's already sitting in front of you that doesn't need a single new ARC conversation to turn into revenue: one deal in your existing pipeline you called likely to close inside this window, no new activity needed; the revenue-share conversation with a named partner, which isn't hypothetical anymore; and your biggest client, 20 to 40% of revenue, stable but not actively nurtured lately, which is the clearest opening I've seen yet for the account-expansion fix in sections 2 and 4.");
+                    para("You told me on our call you're filing somewhere around 1,500 cases a month, or was it a week, I want to double-check that one with you, the two tell very different stories, but either way that's a genuinely impressive operating pace for a company that's just 9 months old on papers, worth being proud of on its own, not just as a footnote.");
+                    para("One thing worth being precise about before I show you numbers: not every NPA statistic out there is relevant to you. Your own client base and the six-stage process you've built are tuned for retail and small-business defaults, personal loans, gold loans, vehicle and asset finance, microfinance group loans, MSME working capital, not the crore-plus corporate accounts sitting in IBC and DRT proceedings. So here's the fuller landscape that's actually yours to go after, cooperative banks and MFIs you already know about, plus three more I went looking for specifically because I don't think you've sized them yet:");
+                    table(['Category', "What's Outstanding", 'As Of'], [
+                        ['Cooperative banks and credit societies (urban, state and district central, combined)', 'Rs. 73,674 crore in gross NPAs', 'March 2026'],
+                        ['Microfinance institutions', 'Rs. 55,000 crore in NPAs, 14.8% of the entire loan book, and worsening quarter on quarter', 'March 2025'],
+                        ['Retail and unsecured NPA pools sold to ARCs', "Bandhan Bank alone sold nearly Rs. 7,000 crore of unsecured retail, microfinance, small-business and agri loans to ARCs in one deal; Ujjivan's microfinance portfolio sold to an ARC recovered just 9.39% of face value, your margin warning, confirmed independently", 'November 2025'],
+                        ['Affordable housing finance companies', 'Aadhar Housing Finance alone, one of the larger players in this space, carries Rs. 391 crore in gross NPAs on a Rs. 27,554 crore book, average ticket size just Rs. 10.5 lakh, the same small-ticket retail profile as your current clients, not a new kind of case', 'September 2025'],
+                        ['Unsecured retail lending stress, banks and NBFCs broadly', 'Fitch expects new bad loans in FY25 and FY26 to run roughly 25% higher than FY24, driven specifically by retail, agriculture and MFI books, named lenders include HDFC Bank and Kotak Mahindra Bank', 'FY25-26'],
+                        ['Section 138 cheque-bounce litigation, nationwide', 'Over 33 lakh cases pending in court, and rising, this is the most recent public count I could find, so treat it as a floor, not a ceiling', 'April 2022']
+                    ], [55, 103, 28]);
+                    para("A couple of these are worth a word each. Affordable housing finance runs the same playbook as your current clients, small ticket sizes, retail borrowers, growing fast enough that defaults are growing right alongside it. And on the nationalised-bank side, this isn't a door you'd have to invent, banks like SBI and Indian Bank already run formal empanelment processes for exactly this kind of recovery work, it's a process you apply to, not a relationship you have to build from nothing.");
+                    para("You probably already know some of this in your bones, you're closer to these numbers day to day than I am. But written down together like this, the point is simple: cooperative banks, MFIs, and affordable housing finance alone are sitting on real, recoverable volume, run by lenders with far less recovery infrastructure than even your current clients. And the retail NPA pools now moving to ARCs are the same kind of case you already know how to run, not a new, unfamiliar deal type, which is exactly why chasing the pool instead of the relationship, from section 7, is the practical way in. Over a 90-day window, cooperative banks and credit societies are the one avenue here fast enough to close. Housing finance companies and nationalised-bank empanelment are slower to start, but a 180-day horizon is long enough to get the first one moving if you start the application now, which is exactly what section 9 walks through.");
+
+                    // ---------- SECTION 09 (dark) ----------
+                    newPage('dark');
+                    sectionHeader('09 · New Clients', 'Two horizons, not one number');
+                    para("Your own sales cycle already runs past 3 months before you even add in the multi-party structuring an ARC deal needs. A single 90-day number was always going to undersell what's realistic here, or oversell it, depending which way I rounded. So here's both numbers, grounded in what you actually told me, not a generic growth projection.");
+                    statPair([
+                        { tag: 'Days 1–90', num: '3–4 new clients', desc: 'Two of these are close to certain: one deal already in your pipeline, and the revenue-share conversation with your named partner. The other one or two come from working cooperative banks and credit societies as a volume channel, exactly where section 8 points you first.' },
+                        { tag: 'Days 91–180, the stretch', num: '+2–3 more', desc: 'Your first signed ARC client, once the multi-party structuring from section 7 has run its course. Alongside it, continued coop-bank volume, and, if you file the empanelment application in month one, a real shot at your first nationalised-bank mandate.' }
+                    ]);
+                    meaningBox('Why not more, and why not sooner', [
+                        "I want to be straight about both numbers. The first two 90-day wins were always within reach, you'd likely have closed those without me. The real test of this engagement is what gets added on top, and cooperative banks and credit societies are the one new avenue genuinely built for a 90-day timeline, smaller institutions, simpler decision-making, no enterprise procurement process to sit through.",
+                        "Housing finance companies, the broader NBFC and nationalised-bank unsecured book, and ARCs are all real, but every one of them runs through a slower, more structured sales or empanelment process, the kind that outlasts a 90-day window even when you start today. Stretching the horizon to 180 days is what lets the ARC push and the nationalised-bank door actually land inside this report's numbers instead of getting waved at as \"someday.\" Even then, the broader NBFC book is honestly more likely a next-quarter story than a 180-day one, I'd rather tell you that now than have it quietly slip and have you wondering why."
+                    ]);
+                    para("Meanwhile, the stable-but-unnurtured biggest client is worth a direct conversation inside the first 90 days, not next quarter. It's not a new logo, so it won't move either client count, but reconnecting there protects revenue that's already concentrated at 20 to 40%, and it's the fastest-moving lever you have right now.");
+
+                    // ---------- SECTION 10 ----------
+                    newPage('light');
+                    sectionHeader('10 · One More Thing', 'Two questions worth sitting with');
+                    richBullet('Your pricing model.', "You charge a flat fee per case today, no matter the recovery. But the numbers you lead with, over 70% recovery rate, Rs.1 Cr+ recovered monthly, are outcome numbers. A pure per-case fee doesn't let that advantage show up in the price itself. I'm not telling you to change it. I'm raising a real question worth sitting with: would an outcome-linked or hybrid pricing piece make your real differentiation harder to wave away, especially when you're already having to argue why the Credgenics comparison doesn't hold?");
+                    richBullet('Revenue concentration.', "Your single biggest client is 20 to 40% of revenue today. Not an alarm on its own, but worth tracking deliberately over the full 180 days as new clients come in, so growth doesn't quietly trade one concentration risk for another.");
+
+                    // ---------- SECTION 11 (dark hero) ----------
+                    newPage('dark');
+                    sectionHeader('11 · The Year Ahead', 'Twelve months from now, not ninety days back');
+                    para("Everything above is about the next 90 to 180 days, what's doable, what's provable, what's already in motion. This part is different. It isn't a recap of the report, and it isn't a checklist. These are the questions worth sitting with if you're thinking about where Lawkraft stands in a year, not a quarter. A few of them won't have a comfortable answer yet. That's exactly why they belong here.", { gap: 10 });
+                    qHeroGrid([
+                        { tag: 'whatif', text: "What if, twelve months from now, you're the first name every recovery head at a cooperative bank reaches for, not one of three quotes they're comparing?" },
+                        { tag: 'whatif', text: "What if the first ARC pool deal isn't the exception you tell people about, but the shape every ARC deal after it takes?" },
+                        { tag: 'whatif', text: "What if the next twelve months is the only window before a better-funded competitor notices the exact gap you're sitting in right now?" },
+                        { tag: 'whatif', text: "What if the one thing standing between Lawkraft and double the client base isn't the market, the team, or the pricing, but simply nobody watching the whole board while you and your co-founders run the day to day?" },
+                        { tag: 'whatif', text: "What if, a year from now, the firms you're being compared to aren't law firms anymore, because you've already moved the conversation to the platforms?" },
+                        { tag: 'whynot', text: 'Why not decide, deliberately, this month, what Lawkraft looks like in twelve months, instead of finding out by accident next October?' },
+                        { tag: 'whynot', text: 'Why not have someone whose only job is thinking two steps ahead of the business, while your team runs the cases that are already signed?' },
+                        { tag: 'whynot', text: "Why not treat this exact moment, before the ARC pipeline is proven and before you've scaled past what founder-led growth can carry, as the one real chance to build the positioning properly, instead of retrofitting it later at a harder, costlier stage?" },
+                        { tag: 'whynot', text: "Why not find out what it's like to have someone catch the thing you haven't thought of yet, instead of finding out about it the way most founders do, after it's already a problem?" }
+                    ]);
+                    capstone('Why not ask, right now, what it would actually cost to have this kind of thinking on your side every month, not just once?');
+
+                    // ---------- SECTION 12 ----------
+                    newPage('light');
+                    sectionHeader('12 · To Discuss on a Call', 'Judgment calls, not fixes');
+                    para("A few things here are better worked through out loud than written as a recommendation, because they're judgment calls, not fixes. Noting them so neither of us loses track, for whenever you're ready to go deeper than this report, on a retainer:");
+                    plainBullet('Whether ARC is still worth the same share of founder time now that you have three concrete ways to work it, or whether even the leaner version of it should rank behind the revenue-share channel for the next two quarters.');
+                    plainBullet('Whether to formalise "go in through the lender" as a standing part of your sales process generally, not just an ARC-specific move, given how much of the real decision-making already happens there.');
+                    plainBullet('Whether the outcome-linked, success-fee pricing idea, from section 10 and the ARC-specific version in section 7, is worth testing on a single client first, rather than deciding it in the abstract.');
+                    plainBullet('Whether housing finance companies and the broader NBFC book deserve a dedicated push next quarter, once cooperative banks and credit societies have proven the volume approach out in the first 90 days.');
+                    plainBullet("Whether it's worth scoping any engagement between us to the full 180 days rather than just 90, given that the honest numbers above show the real second wave of wins, the first ARC client especially, lands in the back half, not the front.");
+
+                    // ---------- SECTION 13 ----------
+                    newPage('light');
+                    sectionHeader('13 · To-Dos', 'If you read nothing else');
+                    tldrTitle('Six things to actually do, across the 90-day base and the 180-day stretch');
+                    richBullet('Reconnect with your biggest client this month.', 'Stable but unnurtured is the easiest risk to fix and the fastest lever you have. Inside the first 90 days.');
+                    richBullet('Push the revenue-share conversation with your named partner to a real decision.', "It's already live, don't let it drift. Inside the first 90 days.");
+                    richBullet('Launch a volume push into cooperative banks and credit societies.', 'Many smaller, faster-deciding targets, not one big account, this is where the extra client or two inside the first 90 days actually comes from, and it keeps compounding through day 180.');
+                    richBullet('Write the ICP and "why us" one-pagers, and the compliance one-pager.', "The compliance piece now does double duty, hand it to your contact inside the lender to help clear their internal approval process faster. Do this in month one so it's working for you the rest of the way.");
+                    richBullet('Start the narrow, ARC-specific visibility push, and file the nationalised-bank empanelment application.', "Not broad marketing, a targeted list of who runs collections at the named ARCs you're going after, plus the paperwork banks like SBI and Indian Bank already have a process for. Both are planted in month one so they have a real shot at landing inside the 180-day stretch, not the quarter after.");
+                    richBullet('Put a price-war stance and a standing account-expansion check on the calendar.', 'Both are one-time setup costs that keep paying you back every quarter after.');
+
+                    y += 3;
+                    var closingParas = ["That's everything I've got from what you've given me so far, the original 24 questions, the follow-up six, and what you told me on WhatsApp. I'd rather you push back on any of this than nod along, so if something here doesn't match how you see it, tell me and we'll work through it."];
+                    var closingMeasure = measureMeaningBox(null, closingParas);
+                    var sigW = 46, sigH = sigW * SIG_IMG_RATIO;
+                    var sigGap = 6, sigBlockH = sigH + 24;
+                    // Reserve the closing quote and the signature as one unit, so the signature
+                    // never ends up alone on an otherwise-empty page with a lot of blank space above it.
+                    ensureSpace(closingMeasure.boxH + 6 + sigGap + sigBlockH);
+                    meaningBox(null, closingParas, closingMeasure);
+
+                    // ---------- SIGNATURE ----------
+                    y += sigGap;
+                    var sigX = margin;
+                    var sigLineY = y + sigH + 4;
+                    doc.setDrawColor(navy[0], navy[1], navy[2]);
+                    doc.setLineWidth(0.3);
+                    doc.line(sigX, sigLineY, sigX + 64, sigLineY);
+                    doc.addImage(SIG_IMG_DATA, 'PNG', sigX, sigLineY - sigH + 5, sigW, sigH);
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(11);
+                    doc.setTextColor(navy[0], navy[1], navy[2]);
+                    doc.text('Gaurav Bhatnagar', sigX, sigLineY + 6.5);
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(9.5);
+                    doc.setTextColor(grey[0], grey[1], grey[2]);
+                    doc.text('GTM Consultant', sigX, sigLineY + 12);
+                    doc.text('Dated: ' + dateStr, sigX, sigLineY + 17.5);
+
+                    footer();
+                    doc.save('Lawkraft-Strategy-Report.pdf');
+                } catch (err) {
+                    console.error('PDF generation failed', err);
+                    alert('Something went wrong generating the PDF. Please try again, or let Gaurav know.');
+                } finally {
+                    btns.forEach(function (b) { if (b) { b.disabled = false; b.innerHTML = '<i class="fa fa-file-pdf"></i> Download Signed Report (PDF)'; } });
+                }
+            }
+        </script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
