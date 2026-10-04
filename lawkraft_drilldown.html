@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>One Last Round of Questions | Gaurav Bhatnagar</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="robots" content="noindex, nofollow, noarchive">
+        <!-- Favicon -->
+        <link href="img/favicon.ico" rel="icon">
+        <link href="img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Lato&family=Oswald:wght@200;300;400&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="lib/animate/animate.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+
+        <style>
+            .diag-intro { max-width: 760px; margin: 0 auto 40px auto; text-align: center; }
+            .diag-intro p { color: #797979; font-size: 16px; line-height: 1.9; }
+            .diag-section-label { color: #0796fe; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; margin-bottom: 6px; }
+            .diag-section-title { color: #092a49; font-family: 'Oswald', sans-serif; font-size: 26px; margin-bottom: 25px; padding-bottom: 12px; border-bottom: 2px solid #eee; }
+            .diag-q { background: #fff; border: 1px solid #eee; border-radius: 4px; padding: 25px 30px; margin-bottom: 20px; }
+            .diag-q-text { color: #092a49; font-size: 17px; font-weight: 600; margin-bottom: 16px; line-height: 1.6; }
+            .diag-option { display: block; position: relative; padding: 10px 10px 10px 36px; margin-bottom: 4px; border-radius: 3px; cursor: pointer; color: #555; font-size: 15px; line-height: 1.5; }
+            .diag-option:hover { background: #f7f9fb; }
+            .diag-option input { position: absolute; left: 12px; top: 13px; }
+            .diag-q.unanswered { border-color: #e2554d; box-shadow: 0 0 0 1px #e2554d inset; }
+            .diag-submit-btn { background: #0796fe; color: #fff; border: none; padding: 14px 45px; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; border-radius: 3px; margin-top: 10px; }
+            .diag-submit-btn:hover { background: #067ed6; color: #fff; }
+            .diag-submit-btn:disabled { opacity: 0.6; }
+            #diagThanks { display: none; text-align: center; max-width: 600px; margin: 60px auto; }
+            #diagThanks h2 { color: #092a49; font-family: 'Oswald', sans-serif; margin-bottom: 15px; }
+            #diagThanks p { color: #797979; font-size: 16px; }
+            #diagError { display: none; color: #e2554d; text-align: center; margin-top: 15px; }
+            .diag-edit-banner { display:none; background:#eef6ff; border:1px solid #bfe0ff; color:#092a49; font-size:14px; line-height:1.7; text-align:left; padding:16px 20px; border-radius:4px; margin-bottom:20px; }
+            .diag-edit-banner.is-locked { background:#f2f3f5; border-color:#dcdfe4; }
+            .diag-edit-banner strong { color:#092a49; }
+        </style>
+    </head>
+
+    <body>
+        <!-- Nav Bar Start -->
+        <div class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <div class="container-fluid">
+                <a href="index.html" class="navbar-brand">Gaurav Bhatnagar</a>
+            </div>
+        </div>
+        <!-- Nav Bar End -->
+
+        <!-- Drilldown Start -->
+        <div class="service mt-125">
+            <div class="container">
+
+                <div id="diagForm">
+                    <div class="diag-intro">
+                        <p class="diag-section-label" style="text-align:center;">Lawkraft Legal Network</p>
+                        <h2 style="color:#092a49; font-family:'Oswald',sans-serif; margin-bottom: 20px;">One Last Round, Then I Build the Plan</h2>
+                        <p>
+                            Will, this is the last set of questions I need from you. Once these six are in, I'm putting
+                            together one final report, your real plan of action for the next 90 days, with numbers I'm
+                            confident in instead of ones I'm estimating around gaps. So take a moment on these rather than
+                            picking the first option that looks close. Two minutes, same format as before.
+                        </p>
+                        <p style="color:#0796fe; font-weight:600;">
+                            One more thing: you've got links to both this and the first questionnaire on WhatsApp. Come
+                            back to either one anytime in the next 24 hours to change an answer, whatever you've already
+                            sent will be sitting there, filled in and ready to edit. After that, I'll treat both as final.
+                        </p>
+                    </div>
+
+                    <form id="diagnosticForm">
+
+                        <div class="diag-q" data-q="q1">
+                            <div class="diag-q-text">1. Right now, how many real ARC conversations are actually moving, not just on your radar, and how far has the furthest one gotten?</div>
+                            <label class="diag-option"><input type="radio" name="q1" value="Haven't started outreach yet, only internal discussion"> Haven't started outreach yet, only internal discussion</label>
+                            <label class="diag-option"><input type="radio" name="q1" value="Just early exploratory talks, nothing concrete yet"> Just early exploratory talks, nothing concrete yet</label>
+                            <label class="diag-option"><input type="radio" name="q1" value="A proposal or quote has gone out to at least one"> A proposal or quote has gone out to at least one</label>
+                            <label class="diag-option"><input type="radio" name="q1" value="In active negotiation on at least one"> In active negotiation on at least one</label>
+                            <label class="diag-option"><input type="radio" name="q1" value="Multiple ARCs, in different stages"> Multiple ARCs, in different stages</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q2">
+                            <div class="diag-q-text">2. Setting the ARC push aside for a second, look at your pipeline exactly as it stands today. How many of those deals do you honestly think could close in the next 90 days even if nothing new happens?</div>
+                            <label class="diag-option"><input type="radio" name="q2" value="None likely in that window"> None likely in that window</label>
+                            <label class="diag-option"><input type="radio" name="q2" value="1 deal likely"> 1 deal likely</label>
+                            <label class="diag-option"><input type="radio" name="q2" value="2 to 3 deals likely"> 2 to 3 deals likely</label>
+                            <label class="diag-option"><input type="radio" name="q2" value="4 or more likely"> 4 or more likely</label>
+                            <label class="diag-option"><input type="radio" name="q2" value="Haven't sized it that way, would need to check"> Haven't sized it that way, would need to check</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q3">
+                            <div class="diag-q-text">3. On a revenue-share deal with a platform like Credgenics for cases that reach court, where does that actually stand today, not where you'd like it to stand?</div>
+                            <label class="diag-option"><input type="radio" name="q3" value="Already talking to a specific partner about it"> Already talking to a specific partner about it</label>
+                            <label class="diag-option"><input type="radio" name="q3" value="Have specific partners in mind, haven't reached out yet"> Have specific partners in mind, haven't reached out yet</label>
+                            <label class="diag-option"><input type="radio" name="q3" value="Open to it, but no leads on who yet"> Open to it, but no leads on who yet</label>
+                            <label class="diag-option"><input type="radio" name="q3" value="Would want to think it through more first"> Would want to think it through more first</label>
+                            <label class="diag-option"><input type="radio" name="q3" value="Not something I'd want to pursue"> Not something I'd want to pursue</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q4">
+                            <div class="diag-q-text">4. Thinking about deals that take longer than expected, where do they usually get stuck?</div>
+                            <label class="diag-option"><input type="radio" name="q4" value="Price negotiation"> Price negotiation</label>
+                            <label class="diag-option"><input type="radio" name="q4" value="Compliance or risk review"> Compliance or risk review</label>
+                            <label class="diag-option"><input type="radio" name="q4" value="Getting to the right decision-maker"> Getting to the right decision-maker</label>
+                            <label class="diag-option"><input type="radio" name="q4" value="Internal approval process at the lender"> Internal approval process at the lender</label>
+                            <label class="diag-option"><input type="radio" name="q4" value="Somewhere else, varies a lot"> Somewhere else, varies a lot</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q5">
+                            <div class="diag-q-text">5. On your biggest client, the one that's 20 to 40% of revenue: what's the honest state of that relationship right now?</div>
+                            <label class="diag-option"><input type="radio" name="q5" value="Strong, want to deepen it further"> Strong, want to deepen it further</label>
+                            <label class="diag-option"><input type="radio" name="q5" value="Stable, but I haven't actively nurtured it lately"> Stable, but I haven't actively nurtured it lately</label>
+                            <label class="diag-option"><input type="radio" name="q5" value="Some early signs of strain, keeping an eye on it"> Some early signs of strain, keeping an eye on it</label>
+                            <label class="diag-option"><input type="radio" name="q5" value="Actively renegotiating terms right now"> Actively renegotiating terms right now</label>
+                            <label class="diag-option"><input type="radio" name="q5" value="Rather not increase dependence on it, prefer diversifying"> Rather not increase dependence on it, prefer diversifying</label>
+                        </div>
+
+                        <div class="diag-q" data-q="q6">
+                            <div class="diag-q-text">6. If ARC interest actually starts coming in over the next 90 days, what's most likely to be the real thing slowing you down from closing it, not generating it?</div>
+                            <label class="diag-option"><input type="radio" name="q6" value="My own time and bandwidth as founder"> My own time and bandwidth as founder</label>
+                            <label class="diag-option"><input type="radio" name="q6" value="The team's ability to execute without me in the room"> The team's ability to execute without me in the room</label>
+                            <label class="diag-option"><input type="radio" name="q6" value="Pricing or commercial terms"> Pricing or commercial terms</label>
+                            <label class="diag-option"><input type="radio" name="q6" value="Compliance or risk approvals on the client's side"> Compliance or risk approvals on the client's side</label>
+                            <label class="diag-option"><input type="radio" name="q6" value="Nothing structural, I'd just need the conversations to happen"> Nothing structural, I'd just need the conversations to happen</label>
+                        </div>
+
+                        <div style="text-align:center; margin-top: 30px;">
+                            <div id="diagEditBanner" class="diag-edit-banner"></div>
+                            <button type="submit" class="diag-submit-btn" id="diagSubmitBtn">Submit</button>
+                            <div id="diagError">Something didn't go through. Give it another try, or just WhatsApp me your answers.</div>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div id="diagThanks">
+                    <h2>Got it, thank you.</h2>
+                    <p>That's exactly what I needed to tighten things up. I'll fold these into the final plan directly.</p>
+                    <p>Changed your mind about anything, here or in the first questionnaire? You've got both links on WhatsApp, just click through and your answers will be sitting there, ready to edit, for the next 24 hours.</p>
+                </div>
+
+            </div>
+        </div>
+        <!-- Drilldown End -->
+
+        <!-- Footer Start -->
+        <div class="footer">
+            <div class="container copyright">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p style="text-align:left;">&copy; <a href="#">Gaurav Bhatnagar</a>, All Right Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+        (function () {
+            var TOTAL_Q = 6;
+            var FORM_ENDPOINT = 'https://formspree.io/f/mdekwrzq';
+            var KNOWN_NAME = 'Will Emmanuel';
+            var KNOWN_EMAIL = 'william.e@lawkraft.in';
+            var STORAGE_KEY = 'lawkraftDrilldownSubmission_v1';
+            // Same cutoff as the main questionnaire's edit window, so both links close together.
+            var DEADLINE_ISO = '2026-10-05T04:58:36Z';
+
+            function loadSaved() {
+                try {
+                    var raw = localStorage.getItem(STORAGE_KEY);
+                    return raw ? JSON.parse(raw) : null;
+                } catch (e) { return null; }
+            }
+
+            function saveSubmission(answers) {
+                try {
+                    var prev = loadSaved();
+                    var revision = prev ? (prev.revision || 1) + 1 : 1;
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+                        answers: answers,
+                        lastSubmittedAt: new Date().toISOString(),
+                        revision: revision
+                    }));
+                } catch (e) { /* localStorage unavailable, degrade silently */ }
+            }
+
+            function fmtDate(iso) {
+                try {
+                    return new Date(iso).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
+                } catch (e) { return iso; }
+            }
+
+            function applyEditWindowState() {
+                var saved = loadSaved();
+                var deadline = new Date(DEADLINE_ISO).getTime();
+                var past = Date.now() >= deadline;
+                var banner = document.getElementById('diagEditBanner');
+                var btn = document.getElementById('diagSubmitBtn');
+
+                if (saved) {
+                    for (var q in saved.answers) {
+                        if (!saved.answers.hasOwnProperty(q)) { continue; }
+                        var opts = document.getElementsByName(q);
+                        for (var i = 0; i < opts.length; i++) {
+                            if (opts[i].value === saved.answers[q]) { opts[i].checked = true; }
+                        }
+                    }
+                }
+
+                if (past) {
+                    banner.style.display = 'block';
+                    banner.classList.add('is-locked');
+                    if (saved) {
+                        banner.innerHTML = 'Your answers were finalized on <strong>' + fmtDate(DEADLINE_ISO) + '</strong> and can\'t be changed anymore. Thanks again for going through these, Will &mdash; I\'ve got what I need.';
+                    } else {
+                        banner.innerHTML = 'This questionnaire closed on <strong>' + fmtDate(DEADLINE_ISO) + '</strong>.';
+                    }
+                    btn.style.display = 'none';
+                    document.getElementById('diagError').style.display = 'none';
+                    var allFields = document.querySelectorAll('#diagnosticForm input');
+                    for (var j = 0; j < allFields.length; j++) { allFields[j].disabled = true; }
+                } else if (saved) {
+                    banner.style.display = 'block';
+                    banner.innerHTML = 'You already sent answers here on <strong>' + fmtDate(saved.lastSubmittedAt) + '</strong>. ' +
+                        'They\'re filled in below &mdash; change anything you like until <strong>' + fmtDate(DEADLINE_ISO) + '</strong>, ' +
+                        'after which they\'re considered final.';
+                    btn.textContent = 'Update My Answers';
+                }
+            }
+
+            document.addEventListener('change', function (e) {
+                if (e.target && e.target.type === 'radio') {
+                    var card = e.target.closest('.diag-q');
+                    if (card) { card.classList.remove('unanswered'); }
+                }
+            });
+
+            document.getElementById('diagnosticForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                var missing = [];
+                var lines = [];
+                for (var i = 1; i <= TOTAL_Q; i++) {
+                    var name = 'q' + i;
+                    var checked = document.querySelector('input[name="' + name + '"]:checked');
+                    var card = document.querySelector('.diag-q[data-q="' + name + '"]');
+                    if (!checked) {
+                        missing.push(name);
+                        if (card) { card.classList.add('unanswered'); }
+                    } else {
+                        var qText = card.querySelector('.diag-q-text').textContent.trim();
+                        lines.push(qText + '\nAnswer: ' + checked.value + '\n');
+                    }
+                }
+
+                if (missing.length > 0) {
+                    document.querySelector('.diag-q[data-q="' + missing[0] + '"]').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    document.getElementById('diagError').style.display = 'block';
+                    document.getElementById('diagError').textContent = 'Looks like ' + missing.length + ' question(s) are still unanswered, scrolled you to the first one.';
+                    return;
+                }
+                document.getElementById('diagError').style.display = 'none';
+
+                var btn = document.getElementById('diagSubmitBtn');
+                btn.textContent = 'Sending…';
+                btn.disabled = true;
+
+                var answersObj = {};
+                for (var k = 1; k <= TOTAL_Q; k++) {
+                    var nm = 'q' + k;
+                    var chk = document.querySelector('input[name="' + nm + '"]:checked');
+                    if (chk) { answersObj[nm] = chk.value; }
+                }
+                var isRevision = !!loadSaved();
+                var subjectLine = isRevision
+                    ? 'Lawkraft Drilldown — ' + KNOWN_NAME + ' (updated answers)'
+                    : 'Lawkraft Drilldown — ' + KNOWN_NAME;
+                var fullMessage = (isRevision ? 'LAWKRAFT DRILLDOWN — UPDATED ANSWERS — ' : 'LAWKRAFT DRILLDOWN — ') + KNOWN_NAME + '\n\n' + lines.join('\n');
+
+                fetch(FORM_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify({
+                        name: KNOWN_NAME,
+                        email: KNOWN_EMAIL,
+                        _replyto: KNOWN_EMAIL,
+                        subject: subjectLine,
+                        message: fullMessage
+                    })
+                }).then(function (res) {
+                    if (res.ok) {
+                        saveSubmission(answersObj);
+                        document.getElementById('diagForm').style.display = 'none';
+                        document.getElementById('diagThanks').style.display = 'block';
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                        throw new Error('bad response');
+                    }
+                }).catch(function () {
+                    btn.textContent = 'Submit';
+                    btn.disabled = false;
+                    document.getElementById('diagError').style.display = 'block';
+                    document.getElementById('diagError').textContent = "Something didn't go through. Give it another try, or just WhatsApp me your answers.";
+                });
+            });
+
+            applyEditWindowState();
+        })();
+        </script>
+    </body>
+</html>
