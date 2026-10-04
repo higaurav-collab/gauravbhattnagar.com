@@ -18,7 +18,11 @@
                 .diag-q card with data-q="bN", a question text div, either
                 radio .diag-option rows or a .diag-open-text textarea, and
                 the standard flag-row + optional-add-on block — copy an
-                existing question block as your starting point).
+                existing question block as your starting point). If you add
+                a whole new section, wrap it in its own
+                <div class="strat-section" id="secG"> (alternate the "alt"
+                class with the section before it) and add a matching pill
+                to the quicknav bar further down.
              4. Update FORM_ENDPOINT in the script if this business gets
                 its own Formspree endpoint (optional — the default below
                 reuses the same one used for Lawkraft, fine to keep as
@@ -30,6 +34,13 @@
              6. Do not touch the flagging / autosave / lock logic unless
                 you're deliberately changing the mechanism for every
                 future engagement, not just this one.
+
+             DESIGN NOTE: this reuses the same quicknav / section-eyebrow /
+             alternating-band / meaning-box / signal-band visual language as
+             the long-form strategy report (lawkraft_strategy.html), not the
+             older plain-bordered-card look of the first diagnostic form —
+             that's the current house style, keep it that way in future
+             reuses rather than drifting back to boxed cards.
              ============================================================ -->
         <title>{{BUSINESS_NAME}} — A Few Honest Questions | Gaurav Bhatnagar</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -50,47 +61,64 @@
         <link href="css/style.css" rel="stylesheet">
 
         <style>
-            .diag-intro { max-width: 760px; margin: 0 auto 40px auto; text-align: center; }
-            .diag-intro p { color: #797979; font-size: 16px; line-height: 1.9; }
-            .diag-section-label { color: #0796fe; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; margin-bottom: 6px; }
-            .diag-section-title { color: #092a49; font-family: 'Oswald', sans-serif; font-size: 26px; margin-bottom: 25px; padding-bottom: 12px; border-bottom: 2px solid #eee; }
-            .diag-q { background: #fff; border: 1px solid #eee; border-radius: 4px; padding: 25px 30px; margin-bottom: 20px; transition: opacity .2s, background .2s; }
-            .diag-q-text { color: #092a49; font-size: 17px; font-weight: 600; margin-bottom: 16px; line-height: 1.6; }
-            .diag-q-tag { display: inline-block; background: #1d2434; color: #fff; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px; border-radius: 3px; margin-bottom: 10px; }
-            .diag-option { display: block; position: relative; padding: 10px 10px 10px 36px; margin-bottom: 4px; border-radius: 3px; cursor: pointer; color: #555; font-size: 15px; line-height: 1.5; }
-            .diag-option:hover { background: #f7f9fb; }
-            .diag-option input { position: absolute; left: 12px; top: 13px; }
-            .diag-q.unanswered { border-color: #e2554d; box-shadow: 0 0 0 1px #e2554d inset; }
-            .diag-contact-block { background: #1d2434; border-radius: 4px; padding: 35px 30px; margin-top: 10px; }
-            .diag-contact-block label { color: #fff; font-size: 14px; margin-bottom: 6px; display: block; }
-            .diag-contact-block p { color: #b9c0cc; font-size: 14px; margin-bottom: 20px; }
-            .diag-submit-btn { background: #0796fe; color: #fff; border: none; padding: 14px 45px; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; border-radius: 3px; margin-top: 10px; }
-            .diag-submit-btn:hover { background: #067ed6; color: #fff; }
-            .diag-submit-btn:disabled { opacity: 0.6; }
-            .diag-progress { max-width: 760px; margin: 0 auto 30px auto; text-align: center; color: #999; font-size: 13px; }
-            #diagThanks { display: none; text-align: center; max-width: 600px; margin: 60px auto; }
-            #diagThanks h2 { color: #092a49; font-family: 'Oswald', sans-serif; margin-bottom: 15px; }
-            #diagThanks p { color: #797979; font-size: 16px; }
-            #diagError { display: none; color: #e2554d; text-align: center; margin-top: 15px; }
-            .diag-edit-banner { display:none; background:#eef6ff; border:1px solid #bfe0ff; color:#092a49; font-size:14px; line-height:1.7; text-align:left; padding:16px 20px; border-radius:4px; margin-bottom:20px; }
+            /* ---- hero / intro — same treatment as the strategy report's opener ---- */
+            .strat-meta { text-transform: uppercase; letter-spacing: 1.5px; font-size: 12px; color: #0796fe; font-weight: 600; text-align: center; margin-bottom: 10px; }
+            .strat-intro { max-width: 720px; margin: 0 auto; text-align: center; }
+            .strat-intro h1 { font-size: 30px; margin-bottom: 20px; color: #092a49; font-family: 'Oswald', sans-serif; }
+            .strat-intro p { color: #797979; font-size: 16px; line-height: 1.9; margin-bottom: 14px; }
+            .strat-intro p:last-child { margin-bottom: 0; }
+
+            .diag-progress { max-width: 720px; margin: 26px auto 0 auto; text-align: center; color: #999; font-size: 13px; }
+            .diag-edit-banner { display:none; max-width: 720px; margin: 20px auto 0 auto; background:#eef6ff; border:1px solid #bfe0ff; color:#092a49; font-size:14px; line-height:1.7; text-align:left; padding:16px 20px; border-radius:4px; }
             .diag-edit-banner.is-locked { background:#f2f3f5; border-color:#dcdfe4; }
             .diag-edit-banner strong { color:#092a49; }
 
-            /* --- optional "anything to add" box under every MCQ question --- */
+            /* ---- quicknav, same pill bar as the strategy report ---- */
+            .quicknav { background: #f8f9fa; border-top: 1px solid #eeeeee; border-bottom: 1px solid #eeeeee; padding: 14px 0; margin: 34px 0 0 0; }
+            .quicknav .container { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+            .quicknav span.label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #797979; margin-right: 6px; }
+            .quicknav a { display: inline-block; font-size: 13px; padding: 6px 14px; border: 1px solid rgba(9,42,73,.15); border-radius: 20px; color: #092a49; }
+            .quicknav a:hover { background: #092a49; color: #ffffff; border-color: #092a49; text-decoration: none; }
+
+            /* ---- section bands, alternating white/grey, same as the strategy report ---- */
+            .strat-section { padding: 46px 0; border-top: 1px solid #eee; scroll-margin-top: 30px; }
+            .strat-section:first-of-type { border-top: none; }
+            .strat-section.alt { background: #f8f9fa; }
+            .section-eyebrow { text-transform: uppercase; letter-spacing: 1.5px; font-size: 12px; color: #0796fe; font-weight: 600; margin-bottom: 8px; }
+            .strat-section h2 { font-size: 24px; margin-bottom: 10px; font-weight: 400; color: #092a49; font-family: 'Oswald', sans-serif; }
+            .strat-section-intro { color: #555; font-size: 15.5px; line-height: 1.8; margin: 0 0 28px 0; max-width: 680px; }
+
+            .signal-band { background: #092a49; color: #cfe3f5; }
+            .signal-band h2 { color: #ffffff; }
+            .signal-band .section-eyebrow { color: #5ec4ff; }
+            .signal-band p { color: #cfe3f5; }
+            .signal-band .strat-section-intro { color: #cfe3f5; }
+
+            /* ---- question cards: left-accent divider rows, not boxed cards ---- */
+            .diag-q { padding: 26px 22px 26px 20px; border-bottom: 1px solid #eee; border-left: 3px solid transparent; transition: opacity .2s, background .2s, border-color .2s; }
+            .diag-q-tag { display: inline-block; background: #1d2434; color: #fff; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px; border-radius: 3px; margin-bottom: 10px; }
+            .diag-q-text { color: #092a49; font-size: 17px; font-weight: 600; margin-bottom: 16px; line-height: 1.6; }
+            .diag-option { display: block; position: relative; padding: 10px 10px 10px 36px; margin-bottom: 4px; border-radius: 3px; cursor: pointer; color: #555; font-size: 15px; line-height: 1.5; }
+            .diag-option:hover { background: #ffffff; }
+            .diag-option input { position: absolute; left: 12px; top: 13px; }
+            .diag-q.unanswered { border-left-color: #e2554d; background: #fff8f7; }
+
+            /* ---- optional "anything to add" box under every MCQ question ---- */
             .diag-addl { margin-top: 14px; }
             .diag-addl label { display:block; color:#999; font-size:12.5px; text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
-            .diag-addl textarea, .diag-open-text { width:100%; border:1px solid #e2e2e2; border-radius:3px; padding:10px 12px; font-size:14.5px; color:#444; font-family:'Lato',sans-serif; resize:vertical; min-height:54px; }
+            .diag-addl textarea, .diag-open-text { width:100%; border:1px solid #e2e2e2; border-radius:3px; padding:10px 12px; font-size:14.5px; color:#444; font-family:'Lato',sans-serif; resize:vertical; min-height:54px; background:#fff; }
             .diag-addl textarea:focus, .diag-open-text:focus { outline:none; border-color:#0796fe; }
             .diag-open-text { min-height:90px; font-size:15px; }
 
-            /* --- brand-comparison example box --- */
-            .diag-example-box { background:#f7f9fb; border-left:3px solid #0796fe; border-radius:3px; padding:14px 18px; margin-bottom:16px; }
-            .diag-example-box p { color:#5c6b7a; font-size:13.5px; line-height:1.8; margin:0 0 6px 0; }
-            .diag-example-box p:last-child { margin-bottom:0; }
-            .diag-example-box em { color:#092a49; font-style:italic; }
+            /* ---- brand-comparison example box — the site's own meaning-box component ---- */
+            .meaning-box { margin: 0 0 18px 0; padding: 18px 22px; background: #eef6ff; border-left: 3px solid #0796fe; }
+            .meaning-box .label { text-transform: uppercase; font-size: 11px; letter-spacing: 1.5px; font-weight: 600; display: block; margin-bottom: 8px; color: #0796fe; }
+            .meaning-box p { margin: 0; font-size: 14.5px; line-height: 1.8; color: #092a49; }
+            .meaning-box p:not(:last-child) { margin-bottom: 8px; }
+            .meaning-box em { font-style: italic; }
 
-            /* --- flag-for-clarity control --- */
-            .diag-flag-row { margin-top:14px; padding-top:12px; border-top:1px dashed #eee; }
+            /* ---- flag-for-clarity control ---- */
+            .diag-flag-row { margin-top:14px; padding-top:12px; border-top:1px dashed #e2e2e2; }
             .diag-flag-link { color:#a98b3a; font-size:13px; cursor:pointer; text-decoration:underline; background:none; border:none; padding:0; }
             .diag-flag-link:hover { color:#8a6f28; }
             .diag-flag-confirm { display:none; background:#fff8e8; border:1px solid #f0dca0; border-radius:3px; padding:12px 16px; margin-top:10px; }
@@ -98,8 +126,8 @@
             .diag-flag-confirm button { font-size:13px; padding:6px 14px; border-radius:3px; border:none; margin-right:8px; cursor:pointer; }
             .diag-flag-yes { background:#d9a63b; color:#fff; }
             .diag-flag-no { background:#eee; color:#555; }
-            .diag-q.flagged { background:#fbfaf7; opacity:.85; }
-            .diag-q.flagged .diag-option, .diag-q.flagged .diag-addl, .diag-q.flagged .diag-open-text-wrap { opacity:.35; pointer-events:none; }
+            .diag-q.flagged { border-left-color:#d9a63b; background:#fffaf0; opacity:.85; }
+            .diag-q.flagged .diag-option, .diag-q.flagged .diag-addl, .diag-q.flagged .diag-open-text-wrap, .diag-q.flagged .meaning-box { opacity:.35; pointer-events:none; }
             .diag-flag-badge { display:none; background:#d9a63b; color:#fff; font-size:11px; text-transform:uppercase; letter-spacing:1px; padding:3px 10px; border-radius:3px; margin-bottom:10px; }
             .diag-q.flagged .diag-flag-badge { display:inline-block; }
             .diag-unflag-row { display:none; margin-top:12px; }
@@ -107,11 +135,25 @@
             .diag-q.flagged .diag-flag-row { display:none; }
             .diag-unflag-link { color:#0796fe; font-size:13px; cursor:pointer; text-decoration:underline; background:none; border:none; padding:0; }
 
-            /* --- closing pain-point section --- */
-            .diag-painpoint-wrap { background:#fff; border:1px solid #eee; border-radius:4px; padding:25px 30px; margin-bottom:14px; }
-            .diag-painpoint-wrap textarea { width:100%; border:1px solid #e2e2e2; border-radius:3px; padding:10px 12px; font-size:15px; color:#444; font-family:'Lato',sans-serif; resize:vertical; min-height:60px; }
-            .diag-painpoint-wrap textarea:focus { outline:none; border-color:#0796fe; }
-            .diag-painpoint-label { color:#092a49; font-size:14px; font-weight:600; margin-bottom:8px; }
+            /* ---- closing pain-point section, styled to sit on the navy signal-band ---- */
+            .diag-painpoint-wrap { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.18); border-radius: 4px; padding: 20px 24px; margin-bottom: 16px; }
+            .diag-painpoint-wrap textarea { width:100%; background: rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.22); border-radius:3px; padding:10px 12px; font-size:15px; color:#eaf3fb; font-family:'Lato',sans-serif; resize:vertical; min-height:60px; }
+            .diag-painpoint-wrap textarea::placeholder { color: #8ca6bd; }
+            .diag-painpoint-wrap textarea:focus { outline:none; border-color:#5ec4ff; }
+            .diag-painpoint-label { color:#5ec4ff; font-size:11px; text-transform:uppercase; letter-spacing:1.5px; font-weight:600; margin-bottom:10px; }
+
+            /* ---- the finish line: name / email / submit ---- */
+            .diag-contact-block { background: #1d2434; border-radius: 4px; padding: 35px 30px; max-width: 560px; margin: 0 auto; }
+            .diag-contact-block label { color: #fff; font-size: 14px; margin-bottom: 6px; display: block; }
+            .diag-contact-block p { color: #b9c0cc; font-size: 14px; margin-bottom: 20px; }
+            .diag-submit-btn { background: #0796fe; color: #fff; border: none; padding: 14px 45px; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; border-radius: 3px; margin-top: 10px; cursor: pointer; transition: .2s; }
+            .diag-submit-btn:hover { background: #067ed6; color: #fff; }
+            .diag-submit-btn:disabled { opacity: 0.6; }
+            #diagError { display: none; color: #e2554d; text-align: center; margin-top: 15px; font-size: 13.5px; }
+
+            #diagThanks { display: none; text-align: center; max-width: 600px; margin: 70px auto; }
+            #diagThanks h2 { color: #092a49; font-family: 'Oswald', sans-serif; margin-bottom: 15px; }
+            #diagThanks p { color: #797979; font-size: 16px; }
         </style>
     </head>
 
@@ -125,13 +167,13 @@
         <!-- Nav Bar End -->
 
         <!-- Diagnostic Start -->
-        <div class="service mt-125">
-            <div class="container">
+        <div id="diagForm">
 
-                <div id="diagForm">
-                    <div class="diag-intro">
-                        <p class="diag-section-label" style="text-align:center;">{{BUSINESS_NAME}}</p>
-                        <h2 style="color:#092a49; font-family:'Oswald',sans-serif; margin-bottom: 20px;">A Few Honest Questions About {{BUSINESS_NAME}}</h2>
+            <div class="service mt-125">
+                <div class="container">
+                    <div class="strat-intro">
+                        <p class="strat-meta">{{BUSINESS_NAME}}</p>
+                        <h1>A Few Honest Questions About {{BUSINESS_NAME}}</h1>
                         <p>
                             Before I put any real thinking down on paper about how I can help {{BUSINESS_NAME}}, I'd rather ask you directly than guess.
                             Most of what's below is pick-one, with room underneath every question to add anything the options don't quite capture,
@@ -155,17 +197,36 @@
                     </div>
                     <div class="diag-progress"><span id="diagProgressText">0 of 0 answered</span></div>
                     <div class="diag-edit-banner" id="diagEditBanner"></div>
+                </div>
+            </div>
 
-                    <form id="diagnosticForm">
+            <div class="quicknav">
+                <div class="container">
+                    <span class="label">Jump to</span>
+                    <a href="#secA">A &middot; Start With You</a>
+                    <a href="#secB">B &middot; Growth &amp; Revenue</a>
+                    <a href="#secC">C &middot; Competition</a>
+                    <a href="#secD">D &middot; Team &amp; Delivery</a>
+                    <a href="#secE">E &middot; Money &amp; Pricing</a>
+                    <a href="#secF">F &middot; The Honest Section</a>
+                    <!-- Add a pill here (e.g. "G · [new section name]") if you add a business-specific section -->
+                    <a href="#secPain">Pain Points</a>
+                </div>
+            </div>
 
-                        <!-- SECTION A -->
-                        <p class="diag-section-label">Section A</p>
-                        <h3 class="diag-section-title">Start With You</h3>
+            <form id="diagnosticForm">
+
+                <!-- SECTION A -->
+                <div class="strat-section" id="secA">
+                    <div class="container">
+                        <div class="section-eyebrow">Section A</div>
+                        <h2>Start With You</h2>
 
                         <div class="diag-q" data-q="q1" data-type="open">
                             <div class="diag-flag-badge">Flagged for clarification</div>
                             <div class="diag-q-text">1. If you had to describe {{BUSINESS_NAME}} the way people describe a well-known brand, which brand would you pick, and why? Pick a brand that has nothing to do with your industry, but has one clear trait that's true of you too.</div>
-                            <div class="diag-example-box">
+                            <div class="meaning-box">
+                                <span class="label">For example</span>
                                 <p>"We're the <em>Royal Enfield</em> of residential construction — made like a gun, nothing fancy, built to outlast everything else on the site."</p>
                                 <p>"We're the <em>Amul</em> of neighbourhood bakeries — a handful of products everyone trusts blindly, so we never have to discount to be chosen."</p>
                                 <p>"We're the <em>Apple</em> of office furniture — fewer models, higher prices, but people wait for our next launch instead of shopping around."</p>
@@ -188,10 +249,14 @@
                             </div>
                             <div class="diag-unflag-row"><button type="button" class="diag-unflag-link">Got the clarification — unflag and answer now</button></div>
                         </div>
+                    </div>
+                </div>
 
-                        <!-- SECTION B -->
-                        <p class="diag-section-label">Section B</p>
-                        <h3 class="diag-section-title">Growth &amp; Revenue Reality</h3>
+                <!-- SECTION B -->
+                <div class="strat-section alt" id="secB">
+                    <div class="container">
+                        <div class="section-eyebrow">Section B</div>
+                        <h2>Growth &amp; Revenue Reality</h2>
 
                         <div class="diag-q" data-q="q3">
                             <div class="diag-flag-badge">Flagged for clarification</div>
@@ -237,10 +302,14 @@
                             </div>
                             <div class="diag-unflag-row"><button type="button" class="diag-unflag-link">Got the clarification — unflag and answer now</button></div>
                         </div>
+                    </div>
+                </div>
 
-                        <!-- SECTION C -->
-                        <p class="diag-section-label">Section C</p>
-                        <h3 class="diag-section-title">Competition &amp; Positioning</h3>
+                <!-- SECTION C -->
+                <div class="strat-section" id="secC">
+                    <div class="container">
+                        <div class="section-eyebrow">Section C</div>
+                        <h2>Competition &amp; Positioning</h2>
 
                         <div class="diag-q" data-q="q6">
                             <div class="diag-flag-badge">Flagged for clarification</div>
@@ -269,10 +338,14 @@
                             </div>
                             <div class="diag-unflag-row"><button type="button" class="diag-unflag-link">Got the clarification — unflag and answer now</button></div>
                         </div>
+                    </div>
+                </div>
 
-                        <!-- SECTION D -->
-                        <p class="diag-section-label">Section D</p>
-                        <h3 class="diag-section-title">Team &amp; Delivery Capacity</h3>
+                <!-- SECTION D -->
+                <div class="strat-section alt" id="secD">
+                    <div class="container">
+                        <div class="section-eyebrow">Section D</div>
+                        <h2>Team &amp; Delivery Capacity</h2>
 
                         <div class="diag-q" data-q="q8">
                             <div class="diag-flag-badge">Flagged for clarification</div>
@@ -301,10 +374,14 @@
                             </div>
                             <div class="diag-unflag-row"><button type="button" class="diag-unflag-link">Got the clarification — unflag and answer now</button></div>
                         </div>
+                    </div>
+                </div>
 
-                        <!-- SECTION E -->
-                        <p class="diag-section-label">Section E</p>
-                        <h3 class="diag-section-title">Money &amp; Pricing</h3>
+                <!-- SECTION E -->
+                <div class="strat-section" id="secE">
+                    <div class="container">
+                        <div class="section-eyebrow">Section E</div>
+                        <h2>Money &amp; Pricing</h2>
 
                         <div class="diag-q" data-q="q10">
                             <div class="diag-flag-badge">Flagged for clarification</div>
@@ -335,10 +412,14 @@
                             </div>
                             <div class="diag-unflag-row"><button type="button" class="diag-unflag-link">Got the clarification — unflag and answer now</button></div>
                         </div>
+                    </div>
+                </div>
 
-                        <!-- SECTION F -->
-                        <p class="diag-section-label">Section F</p>
-                        <h3 class="diag-section-title">The Honest Section</h3>
+                <!-- SECTION F -->
+                <div class="strat-section alt" id="secF">
+                    <div class="container">
+                        <div class="section-eyebrow">Section F</div>
+                        <h2>The Honest Section</h2>
 
                         <div class="diag-q" data-q="q12" data-type="open">
                             <div class="diag-flag-badge">Flagged for clarification</div>
@@ -361,22 +442,33 @@
                             </div>
                             <div class="diag-unflag-row"><button type="button" class="diag-unflag-link">Got the clarification — unflag and answer now</button></div>
                         </div>
+                    </div>
+                </div>
 
-                        <!-- ============================================================
-                             BUSINESS-SPECIFIC QUESTIONS GO HERE
-                             After researching this business from every angle, add
-                             numbered question cards here (q14, q15, ...), same markup
-                             pattern as above. This is the zone the generic skeleton
-                             exists to feed into — do not skip the research step.
-                             ============================================================ -->
-                        <!-- <p class="diag-section-label">Section G</p>
-                        <h3 class="diag-section-title">[Business-specific section title]</h3> -->
+                <!-- ============================================================
+                     BUSINESS-SPECIFIC QUESTIONS GO HERE
+                     After researching this business from every angle, add a new
+                     <div class="strat-section" id="secG"> (same markup pattern as
+                     the sections above — section-eyebrow, h2, then .diag-q cards
+                     numbered q14, q15, ...) and add a matching pill in the
+                     quicknav bar above. This is the zone the generic skeleton
+                     exists to feed into — do not skip the research step.
+                     ============================================================ -->
+                <!--
+                <div class="strat-section" id="secG">
+                    <div class="container">
+                        <div class="section-eyebrow">Section G</div>
+                        <h2>[Business-specific section title]</h2>
+                    </div>
+                </div>
+                -->
 
-
-                        <!-- CLOSING: THREE PAIN POINTS -->
-                        <p class="diag-section-label">Last Thing</p>
-                        <h3 class="diag-section-title">Three Pain Points I Didn't Ask About</h3>
-                        <p style="color:#797979; font-size:15px; margin-bottom:20px;">
+                <!-- CLOSING: THREE PAIN POINTS -->
+                <div class="strat-section signal-band" id="secPain">
+                    <div class="container">
+                        <div class="section-eyebrow">Last Thing</div>
+                        <h2>Three Pain Points I Didn't Ask About</h2>
+                        <p class="strat-section-intro">
                             Nothing above is a complete list. If there are up to three things weighing on you about {{BUSINESS_NAME}} that this
                             questionnaire never touched, say them here. Even one is useful — you don't need all three.
                         </p>
@@ -392,7 +484,12 @@
                             <div class="diag-painpoint-label">Pain point 3</div>
                             <textarea name="pain3" placeholder="Optional"></textarea>
                         </div>
+                    </div>
+                </div>
 
+                <!-- FINISH LINE: NAME / EMAIL / SUBMIT -->
+                <div class="strat-section" id="secSubmit">
+                    <div class="container">
                         <div class="diag-contact-block">
                             <label for="diagName">Your Name</label>
                             <input type="text" id="diagName" class="form-control" style="margin-bottom:16px;">
@@ -402,30 +499,18 @@
                             <button type="submit" class="diag-submit-btn" id="diagSubmitBtn">Send My Answers</button>
                             <div id="diagError"></div>
                         </div>
-                    </form>
-                </div>
-
-                <div id="diagThanks">
-                    <h2>Got it, thank you.</h2>
-                    <p>I'll go through these properly and come back to you directly, not over this page.</p>
-                    <p id="diagThanksEditNote">Changed your mind about something, or want to resolve a flagged question? Just come back to this page and your answers will be waiting here, ready to edit.</p>
-                </div>
-
-            </div>
-        </div>
-        <!-- Diagnostic End -->
-
-        <!-- Footer Start -->
-        <div class="footer">
-            <div class="container copyright">
-                <div class="row">
-                    <div class="col-md-12">
-                        <p style="text-align:left;">&copy; <a href="#">Gaurav Bhatnagar</a>, All Right Reserved.</p>
                     </div>
                 </div>
-            </div>
+
+            </form>
         </div>
-        <!-- Footer End -->
+
+        <div id="diagThanks">
+            <h2>Got it, thank you.</h2>
+            <p>I'll go through these properly and come back to you directly, not over this page.</p>
+            <p id="diagThanksEditNote">Changed your mind about something, or want to resolve a flagged question? Just come back to this page and your answers will be waiting here, ready to edit.</p>
+        </div>
+        <!-- Diagnostic End -->
 
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
