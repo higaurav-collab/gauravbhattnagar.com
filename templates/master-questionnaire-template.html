@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <!-- ============================================================
+             MASTER QUESTIONNAIRE — GENERIC SKELETON TEMPLATE
+             ============================================================
+             HOW TO REUSE THIS FOR A NEW ENGAGEMENT:
+             1. Research the business first (deep research, multiple lenses)
+                before touching this file.
+             2. Find every occurrence of {{BUSINESS_NAME}} and replace it
+                with the real business name (search/replace, case-sensitive,
+                it appears in <title>, the intro copy, the submit payload,
+                and the thank-you message).
+             3. Drop business-specific questions into the clearly marked
+                "BUSINESS-SPECIFIC QUESTIONS" zone below Section F. Follow
+                the same markup pattern as the generic questions (a
+                .diag-q card with data-q="bN", a question text div, either
+                radio .diag-option rows or a .diag-open-text textarea, and
+                the standard flag-row + optional-add-on block — copy an
+                existing question block as your starting point).
+             4. Update FORM_ENDPOINT in the script if this business gets
+                its own Formspree endpoint (optional — the default below
+                reuses the same one used for Lawkraft, fine to keep as
+                long as the subject line disambiguates, which it does).
+             5. Rename the file to <business-name>.html (lowercase,
+                hyphenated), keep <meta name="robots" content="noindex,
+                nofollow, noarchive"> as-is, never link it from the public
+                site nav.
+             6. Do not touch the flagging / autosave / lock logic unless
+                you're deliberately changing the mechanism for every
+                future engagement, not just this one.
+             ============================================================ -->
+        <title>{{BUSINESS_NAME}} — A Few Honest Questions | Gaurav Bhatnagar</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="robots" content="noindex, nofollow, noarchive">
+        <!-- Favicon -->
+        <link href="img/favicon.ico" rel="icon">
+        <link href="img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Lato&family=Oswald:wght@200;300;400&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="lib/animate/animate.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+
+        <style>
+            .diag-intro { max-width: 760px; margin: 0 auto 40px auto; text-align: center; }
+            .diag-intro p { color: #797979; font-size: 16px; line-height: 1.9; }
+            .diag-section-label { color: #0796fe; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; margin-bottom: 6px; }
+            .diag-section-title { color: #092a49; font-family: 'Oswald', sans-serif; font-size: 26px; margin-bottom: 25px; padding-bottom: 12px; border-bottom: 2px solid #eee; }
+            .diag-q { background: #fff; border: 1px solid #eee; border-radius: 4px; padding: 25px 30px; margin-bottom: 20px; transition: opacity .2s, background .2s; }
+            .diag-q-text { color: #092a49; font-size: 17px; font-weight: 600; margin-bottom: 16px; line-height: 1.6; }
+            .diag-q-tag { display: inline-block; background: #1d2434; color: #fff; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px; border-radius: 3px; margin-bottom: 10px; }
+            .diag-option { display: block; position: relative; padding: 10px 10px 10px 36px; margin-bottom: 4px; border-radius: 3px; cursor: pointer; color: #555; font-size: 15px; line-height: 1.5; }
+            .diag-option:hover { background: #f7f9fb; }
+            .diag-option input { position: absolute; left: 12px; top: 13px; }
+            .diag-q.unanswered { border-color: #e2554d; box-shadow: 0 0 0 1px #e2554d inset; }
+            .diag-contact-block { background: #1d2434; border-radius: 4px; padding: 35px 30px; margin-top: 10px; }
+            .diag-contact-block label { color: #fff; font-size: 14px; margin-bottom: 6px; display: block; }
+            .diag-contact-block p { color: #b9c0cc; font-size: 14px; margin-bottom: 20px; }
+            .diag-submit-btn { background: #0796fe; color: #fff; border: none; padding: 14px 45px; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; border-radius: 3px; margin-top: 10px; }
+            .diag-submit-btn:hover { background: #067ed6; color: #fff; }
+            .diag-submit-btn:disabled { opacity: 0.6; }
+            .diag-progress { max-width: 760px; margin: 0 auto 30px auto; text-align: center; color: #999; font-size: 13px; }
+            #diagThanks { display: none; text-align: center; max-width: 600px; margin: 60px auto; }
+            #diagThanks h2 { color: #092a49; font-family: 'Oswald', sans-serif; margin-bottom: 15px; }
+            #diagThanks p { color: #797979; font-size: 16px; }
+            #diagError { display: none; color: #e2554d; text-align: center; margin-top: 15px; }
+            .diag-edit-banner { display:none; background:#eef6ff; border:1px solid #bfe0ff; color:#092a49; font-size:14px; line-height:1.7; text-align:left; padding:16px 20px; border-radius:4px; margin-bottom:20px; }
+            .diag-edit-banner.is-locked { background:#f2f3f5; border-color:#dcdfe4; }
+            .diag-edit-banner strong { color:#092a49; }
+
+            /* --- optional "anything to add" box under every MCQ question --- */
+            .diag-addl { margin-top: 14px; }
+            .diag-addl label { display:block; color:#999; font-size:12.5px; text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
+            .diag-addl textarea, .diag-open-text { width:100%; border:1px solid #e2e2e2; border-radius:3px; padding:10px 12px; font-size:14.5px; color:#444; font-family:'Lato',sans-serif; resize:vertical; min-height:54px; }
+            .diag-addl textarea:focus, .diag-open-text:focus { outline:none; border-color:#0796fe; }
+            .diag-open-text { min-height:90px; font-size:15px; }
+
+            /* --- brand-comparison example box --- */
+            .diag-example-box { background:#f7f9fb; border-left:3px solid #0796fe; border-radius:3px; padding:14px 18px; margin-bottom:16px; }
+            .diag-example-box p { color:#5c6b7a; font-size:13.5px; line-height:1.8; margin:0 0 6px 0; }
+            .diag-example-box p:last-child { margin-bottom:0; }
+            .diag-example-box em { color:#092a49; font-style:italic; }
+
+            /* --- flag-for-clarity control --- */
+            .diag-flag-row { margin-top:14px; padding-top:12px; border-top:1px dashed #eee; }
+            .diag-flag-link { color:#a98b3a; font-size:13px; cursor:pointer; text-decoration:underline; background:none; border:none; padding:0; }
+            .diag-flag-link:hover { color:#8a6f28; }
+            .diag-flag-confirm { display:none; background:#fff8e8; border:1px solid #f0dca0; border-radius:3px; padding:12px 16px; margin-top:10px; }
+            .diag-flag-confirm p { color:#6b5a28; font-size:13.5px; margin-bottom:10px; }
+            .diag-flag-confirm button { font-size:13px; padding:6px 14px; border-radius:3px; border:none; margin-right:8px; cursor:pointer; }
+            .diag-flag-yes { background:#d9a63b; color:#fff; }
+            .diag-flag-no { background:#eee; color:#555; }
+            .diag-q.flagged { background:#fbfaf7; opacity:.85; }
+            .diag-q.flagged .diag-option, .diag-q.flagged .diag-addl, .diag-q.flagged .diag-open-text-wrap { opacity:.35; pointer-events:none; }
+            .diag-flag-badge { display:none; background:#d9a63b; color:#fff; font-size:11px; text-transform:uppercase; letter-spacing:1px; padding:3px 10px; border-radius:3px; margin-bottom:10px; }
+            .diag-q.flagged .diag-flag-badge { display:inline-block; }
+            .diag-unflag-row { display:none; margin-top:12px; }
+            .diag-q.flagged .diag-unflag-row { display:block; }
+            .diag-q.flagged .diag-flag-row { display:none; }
+            .diag-unflag-link { color:#0796fe; font-size:13px; cursor:pointer; text-decoration:underline; background:none; border:none; padding:0; }
+
+            /* --- closing pain-point section --- */
+            .diag-painpoint-wrap { background:#fff; border:1px solid #eee; border-radius:4px; padding:25px 30px; margin-bottom:14px; }
+            .diag-painpoint-wrap textarea { width:100%; border:1px solid #e2e2e2; border-radius:3px; padding:10px 12px; font-size:15px; color:#444; font-family:'Lato',sans-serif; resize:vertical; min-height:60px; }
+            .diag-painpoint-wrap textarea:focus { outline:none; border-color:#0796fe; }
+            .diag-painpoint-label { color:#092a49; font-size:14px; font-weight:600; margin-bottom:8px; }
+        </style>
+    </head>
+
+    <body>
+        <!-- Nav Bar Start -->
+        <div class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <div class="container-fluid">
+                <a href="index.html" class="navbar-brand">Gaurav Bhatnagar</a>
+            </div>
+        </div>
+        <!-- Nav Bar End -->
+
+        <!-- Diagnostic Start -->
+        <div class="service mt-125">
+            <div class="container">
+
+                <div id="diagForm">
+                    <div class="diag-intro">
+                        <p class="diag-section-label" style="text-align:center;">{{BUSINESS_NAME}}</p>
+                        <h2 style="color:#092a49; font-family:'Oswald',sans-serif; margin-bottom: 20px;">A Few Honest Questions About {{BUSINESS_NAME}}</h2>
+                        <p>
+                            Before I put any real thinking down on paper about how I can help {{BUSINESS_NAME}}, I'd rather ask you directly than guess.
+                            Most of what's below is pick-one, with room underneath every question to add anything the options don't quite capture,
+                            plus a few that are just open questions. It should take about 20 minutes.
+                        </p>
+                        <p>
+                            Answer the way things actually are today, not the way you'd like them to be. The honest version is the only one
+                            that helps me see {{BUSINESS_NAME}} clearly enough to tell you something useful back.
+                        </p>
+                        <p style="color:#a98b3a; font-weight:600;">
+                            If a question genuinely isn't clear, don't guess at it — flag it right there and move on. I'll follow up by email
+                            explaining what I meant, and you can come back here and answer it properly.
+                        </p>
+                        <p style="color:#0796fe; font-weight:600;">
+                            Your answers are saved here as you go, and stay fully editable until you submit a version with nothing flagged —
+                            after that, you'll still have a window to come back and change anything before I treat it as final.
+                        </p>
+                        <p>
+                            Everything you share here comes straight to my own inbox, no one else sees it. Your information is in safe hands.
+                        </p>
+                    </div>
+                    <div class="diag-progress"><span id="diagProgressText">0 of 0 answered</span></div>
+                    <div class="diag-edit-banner" id="diagEditBanner"></div>
+
+                    <form id="diagnosticForm">
+
+                        <!-- SECTION A -->
+                        <p class="diag-section-label">Section A</p>
+                        <h3 class="diag-section-title">Start With You</h3>
+
+                        <div class="diag-q" data-q="q1" data-type="open">
+                            <div class="diag-flag-badge">Flagged for clarification</div>
+                            <div class="diag-q-text">1. If you had to describe {{BUSINESS_NAME}} the way people describe a well-known brand, which brand would you pick, and why? Pick a brand that has nothing to do with your industry, but has one clear trait that's true of you too.</div>
+                            <div class="diag-example-box">
+                                <p>"We're the <em>Royal Enfield</em> of residential construction — made like a gun, nothing fancy, built to outlast everything else on the site."</p>
+                                <p>"We're the <em>Amul</em> of neighbourhood bakeries — a handful of products everyone trusts blindly, so we never have to discount to be chosen."</p>
+                                <p>"We're the <em>Apple</em> of office furniture — fewer models, higher prices, but people wait for our next launch instead of shopping around."</p>
+                            </div>
+                            <div class="diag-open-text-wrap"><textarea class="diag-open-text" name="q1" placeholder="We're the ___ of ___, because ___"></textarea></div>
+                            <div class="diag-flag-row"><button type="button" class="diag-flag-link">This isn't clear to me — flag it instead</button>
+                                <div class="diag-flag-confirm"><p>Flag this question for clarification and move to the next one? Gaurav will follow up by email.</p>
+                                    <button type="button" class="diag-flag-yes">Yes, flag it</button><button type="button" class="diag-flag-no">No, go back</button></div>
+                            </div>
+                            <div class="diag-unflag-row"><button type="button" class="diag-unflag-link">Got the clarification — unflag and answer now</button></div>
+                        </div>
+
+                        <div class="diag-q" data-q="q2" data-type="open">
+                            <div class="diag-flag-badge">Flagged for clarification</div>
+                            <div class="diag-q-text">2. In plain words, the way you'd explain it to a stranger at a wedding, what does {{BUSINESS_NAME}} actually sell, and who actually pays for it?</div>
+                            <div class="diag-open-text-wrap"><textarea class="diag-open-text" name="q2" placeholder="Your answer"></textarea></div>
+                            <div class="diag-flag-row"><button type="button" class="diag-flag-link">This isn't clear to me — flag it instead</button>
+                                <div class="diag-flag-confirm"><p>Flag this question for clarification and move to the next one? Gaurav will follow up by email.</p>
+                                    <button type="button" class="diag-flag-yes">Yes, flag it</button><button type="button" class="diag-flag-no">No, go back</button></div>
+                            </div>
+                            <div class="diag-unflag-row"><button type="button" class="diag-unflag-link">Got the clarification — unflag and answer now</button></div>
+                        </div>
+
+                        <!-- SECTION B -->
+                        <p class="diag-section-label">Section B</p>
+                        <h3 class="diag-section-title">Growth &amp; Revenue Reality</h3>
+
+                        <div class="diag-q" data-q="q3">
+                            <div class="diag-flag-badge">Flagged for clarification</div>
+                            <div class="diag-q-text">3. How would you honestly describe {{BUSINESS_NAME}}'s growth right now?</div>
+                            <label class="diag-option"><input type="radio" name="q3" value="Scaling fast"> Scaling fast</label>
+                            <label class="diag-option"><input type="radio" name="q3" value="Steady but slow"> Steady but slow</label>
+                            <label class="diag-option"><input type="radio" name="q3" value="Flat"> Flat</label>
+                            <label class="diag-option"><input type="radio" name="q3" value="Declining"> Declining</label>
+                            <label class="diag-option"><input type="radio" name="q3" value="Honestly not sure"> Honestly not sure</label>
+                            <div class="diag-addl"><label>Anything to add?</label><textarea name="q3_addl" placeholder="Optional"></textarea></div>
+                            <div class="diag-flag-row"><button type="button" class="diag-flag-link">This isn't clear to me — flag it instead</button>
+                                <div class="diag-flag-confirm"><p>Flag this question for clarification and move to the next one? Gaurav will follow up by email.</p>
+                                    <button type="button" class="diag-flag-yes">Yes, flag it</button><button type="button" class="diag-flag-no">No, go back</button></div>
+                            </div>
+                            <div class="diag-unflag-row"><button type="button" class="diag-unflag-link">Got the clarification — unflag and answer now</button></div>
+                        </div>
+
+                        <div class="diag-q" data-q="q4">
+                            <div class="diag-flag-badge">Flagged for clarification</div>
+                            <div class="diag-q-text">4. Do you know your true cost to acquire a customer, including the time and effort, not just ad spend?</div>
+                            <label class="diag-option"><input type="radio" name="q4" value="Yes, tracked properly"> Yes, tracked properly</label>
+                            <label class="diag-option"><input type="radio" name="q4" value="Rough estimate only"> Rough estimate only</label>
+                            <label class="diag-option"><input type="radio" name="q4" value="No idea"> No idea</label>
+                            <div class="diag-addl"><label>Anything to add?</label><textarea name="q4_addl" placeholder="Optional"></textarea></div>
+                            <div class="diag-flag-row"><button type="button" class="diag-flag-link">This isn't clear to me — flag it instead</button>
+                                <div class="diag-flag-confirm"><p>Flag this question for clarification and move to the next one? Gaurav will follow up by email.</p>
+                                    <button type="button" class="diag-flag-yes">Yes, flag it</button><button type="button" class="diag-flag-no">No, go back</button></div>
+                            </div>
+                            <div class="diag-unflag-row"><button type="button" class="diag-unflag-link">Got the clarification — unflag and answer now</button></div>
+                        </div>
+
+                        <div class="diag-q" data-q="q5">
+                            <div class="diag-flag-badge">Flagged for clarification</div>
+                            <div class="diag-q-text">5. How concentrated is your revenue in a small number of customers?</div>
+                            <label class="diag-option"><input type="radio" name="q5" value="One client is over 30% of revenue"> One client is over 30% of revenue</label>
+                            <label class="diag-option"><input type="radio" name="q5" value="Top 3 clients are over half"> Top 3 clients are over half</label>
+                            <label class="diag-option"><input type="radio" name="q5" value="Broadly spread across many"> Broadly spread across many</label>
+                            <label class="diag-option"><input type="radio" name="q5" value="We don't really track this"> We don't really track this</label>
+                            <div class="diag-addl"><label>Anything to add?</label><textarea name="q5_addl" placeholder="Optional"></textarea></div>
+                            <div class="diag-flag-row"><button type="button" class="diag-flag-link">This isn't clear to me — flag it instead</button>
+                                <div class="diag-flag-confirm"><p>Flag this question for clarification and move to the next one? Gaurav will follow up by email.</p>
+                                    <button type="button" class="diag-flag-yes">Yes, flag it</button><button type="button" class="diag-flag-no">No, go back</button></div>
+                            </div>
+                            <div class="diag-unflag-row"><button type="button" class="diag-unflag-link">Got the clarification — unflag and answer now</button></div>
+                        </div>
+
+                        <!-- SECTION C -->
+                        <p class="diag-section-label">Section C</p>
+                        <h3 class="diag-section-title">Competition &amp; Positioning</h3>
+
+                        <div class="diag-q" data-q="q6">
+                            <div class="diag-flag-badge">Flagged for clarification</div>
+                            <div class="diag-q-text">6. Could you name your three closest competitors right now without hesitating?</div>
+                            <label class="diag-option"><input type="radio" name="q6" value="Yes, easily"> Yes, easily</label>
+                            <label class="diag-option"><input type="radio" name="q6" value="Only one or two come to mind"> Only one or two come to mind</label>
+                            <label class="diag-option"><input type="radio" name="q6" value="Honestly, no"> Honestly, no</label>
+                            <div class="diag-addl"><label>Anything to add?</label><textarea name="q6_addl" placeholder="Optional"></textarea></div>
+                            <div class="diag-flag-row"><button type="button" class="diag-flag-link">This isn't clear to me — flag it instead</button>
+                                <div class="diag-flag-confirm"><p>Flag this question for clarification and move to the next one? Gaurav will follow up by email.</p>
+                                    <button type="button" class="diag-flag-yes">Yes, flag it</button><button type="button" class="diag-flag-no">No, go back</button></div>
+                            </div>
+                            <div class="diag-unflag-row"><button type="button" class="diag-unflag-link">Got the clarification — unflag and answer now</button></div>
+                        </div>
+
+                        <div class="diag-q" data-q="q7">
+                            <div class="diag-flag-badge">Flagged for clarification</div>
+                            <div class="diag-q-text">7. If a competitor dropped their price 30% tomorrow to win an account, do you have a planned response?</div>
+                            <label class="diag-option"><input type="radio" name="q7" value="Yes, we have one"> Yes, we have one</label>
+                            <label class="diag-option"><input type="radio" name="q7" value="We'd improvise"> We'd improvise</label>
+                            <label class="diag-option"><input type="radio" name="q7" value="Not sure we'd even notice in time"> Not sure we'd even notice in time</label>
+                            <div class="diag-addl"><label>Anything to add?</label><textarea name="q7_addl" placeholder="Optional"></textarea></div>
+                            <div class="diag-flag-row"><button type="button" class="diag-flag-link">This isn't clear to me — flag it instead</button>
+                                <div class="diag-flag-confirm"><p>Flag this question for clarification and move to the next one? Gaurav will follow up by email.</p>
+                                    <button type="button" class="diag-flag-yes">Yes, flag it</button><button type="button" class="diag-flag-no">No, go back</button></div>
+                            </div>
+                            <div class="diag-unflag-row"><button type="button" class="diag-unflag-link">Got the clarification — unflag and answer now</button></div>
+                        </div>
+
+                        <!-- SECTION D -->
+                        <p class="diag-section-label">Section D</p>
+                        <h3 class="diag-section-title">Team &amp; Delivery Capacity</h3>
+
+                        <div class="diag-q" data-q="q8">
+                            <div class="diag-flag-badge">Flagged for clarification</div>
+                            <div class="diag-q-text">8. Could {{BUSINESS_NAME}} take on 2-3 more clients or customers tomorrow without you personally stepping in?</div>
+                            <label class="diag-option"><input type="radio" name="q8" value="Yes, easily"> Yes, easily</label>
+                            <label class="diag-option"><input type="radio" name="q8" value="Partially, some strain"> Partially, some strain</label>
+                            <label class="diag-option"><input type="radio" name="q8" value="No, it runs through me"> No, it runs through me</label>
+                            <div class="diag-addl"><label>Anything to add?</label><textarea name="q8_addl" placeholder="Optional"></textarea></div>
+                            <div class="diag-flag-row"><button type="button" class="diag-flag-link">This isn't clear to me — flag it instead</button>
+                                <div class="diag-flag-confirm"><p>Flag this question for clarification and move to the next one? Gaurav will follow up by email.</p>
+                                    <button type="button" class="diag-flag-yes">Yes, flag it</button><button type="button" class="diag-flag-no">No, go back</button></div>
+                            </div>
+                            <div class="diag-unflag-row"><button type="button" class="diag-unflag-link">Got the clarification — unflag and answer now</button></div>
+                        </div>
+
+                        <div class="diag-q" data-q="q9">
+                            <div class="diag-flag-badge">Flagged for clarification</div>
+                            <div class="diag-q-text">9. Is your core delivery process written down somewhere, or does it mostly live in people's heads?</div>
+                            <label class="diag-option"><input type="radio" name="q9" value="Written down and used"> Written down and used</label>
+                            <label class="diag-option"><input type="radio" name="q9" value="Mostly in people's heads"> Mostly in people's heads</label>
+                            <label class="diag-option"><input type="radio" name="q9" value="Some of both"> Some of both</label>
+                            <div class="diag-addl"><label>Anything to add?</label><textarea name="q9_addl" placeholder="Optional"></textarea></div>
+                            <div class="diag-flag-row"><button type="button" class="diag-flag-link">This isn't clear to me — flag it instead</button>
+                                <div class="diag-flag-confirm"><p>Flag this question for clarification and move to the next one? Gaurav will follow up by email.</p>
+                                    <button type="button" class="diag-flag-yes">Yes, flag it</button><button type="button" class="diag-flag-no">No, go back</button></div>
+                            </div>
+                            <div class="diag-unflag-row"><button type="button" class="diag-unflag-link">Got the clarification — unflag and answer now</button></div>
+                        </div>
+
+                        <!-- SECTION E -->
+                        <p class="diag-section-label">Section E</p>
+                        <h3 class="diag-section-title">Money &amp; Pricing</h3>
+
+                        <div class="diag-q" data-q="q10">
+                            <div class="diag-flag-badge">Flagged for clarification</div>
+                            <div class="diag-q-text">10. How confident are you that your current pricing actually reflects the value you deliver?</div>
+                            <label class="diag-option"><input type="radio" name="q10" value="Very confident"> Very confident</label>
+                            <label class="diag-option"><input type="radio" name="q10" value="Somewhat"> Somewhat</label>
+                            <label class="diag-option"><input type="radio" name="q10" value="Not really"> Not really</label>
+                            <label class="diag-option"><input type="radio" name="q10" value="Never actually tested it"> Never actually tested it</label>
+                            <div class="diag-addl"><label>Anything to add?</label><textarea name="q10_addl" placeholder="Optional"></textarea></div>
+                            <div class="diag-flag-row"><button type="button" class="diag-flag-link">This isn't clear to me — flag it instead</button>
+                                <div class="diag-flag-confirm"><p>Flag this question for clarification and move to the next one? Gaurav will follow up by email.</p>
+                                    <button type="button" class="diag-flag-yes">Yes, flag it</button><button type="button" class="diag-flag-no">No, go back</button></div>
+                            </div>
+                            <div class="diag-unflag-row"><button type="button" class="diag-unflag-link">Got the clarification — unflag and answer now</button></div>
+                        </div>
+
+                        <div class="diag-q" data-q="q11">
+                            <div class="diag-flag-badge">Flagged for clarification</div>
+                            <div class="diag-q-text">11. How is {{BUSINESS_NAME}} funded today?</div>
+                            <label class="diag-option"><input type="radio" name="q11" value="Bootstrapped"> Bootstrapped</label>
+                            <label class="diag-option"><input type="radio" name="q11" value="Outside capital raised"> Outside capital raised</label>
+                            <label class="diag-option"><input type="radio" name="q11" value="A mix of both"> A mix of both</label>
+                            <label class="diag-option"><input type="radio" name="q11" value="Prefer not to say here"> Prefer not to say here</label>
+                            <div class="diag-addl"><label>Anything to add?</label><textarea name="q11_addl" placeholder="Optional"></textarea></div>
+                            <div class="diag-flag-row"><button type="button" class="diag-flag-link">This isn't clear to me — flag it instead</button>
+                                <div class="diag-flag-confirm"><p>Flag this question for clarification and move to the next one? Gaurav will follow up by email.</p>
+                                    <button type="button" class="diag-flag-yes">Yes, flag it</button><button type="button" class="diag-flag-no">No, go back</button></div>
+                            </div>
+                            <div class="diag-unflag-row"><button type="button" class="diag-unflag-link">Got the clarification — unflag and answer now</button></div>
+                        </div>
+
+                        <!-- SECTION F -->
+                        <p class="diag-section-label">Section F</p>
+                        <h3 class="diag-section-title">The Honest Section</h3>
+
+                        <div class="diag-q" data-q="q12" data-type="open">
+                            <div class="diag-flag-badge">Flagged for clarification</div>
+                            <div class="diag-q-text">12. What's the thing about {{BUSINESS_NAME}} that genuinely keeps you up at night, that you haven't said out loud to an advisor before?</div>
+                            <div class="diag-open-text-wrap"><textarea class="diag-open-text" name="q12" placeholder="Your answer"></textarea></div>
+                            <div class="diag-flag-row"><button type="button" class="diag-flag-link">This isn't clear to me — flag it instead</button>
+                                <div class="diag-flag-confirm"><p>Flag this question for clarification and move to the next one? Gaurav will follow up by email.</p>
+                                    <button type="button" class="diag-flag-yes">Yes, flag it</button><button type="button" class="diag-flag-no">No, go back</button></div>
+                            </div>
+                            <div class="diag-unflag-row"><button type="button" class="diag-unflag-link">Got the clarification — unflag and answer now</button></div>
+                        </div>
+
+                        <div class="diag-q" data-q="q13" data-type="open">
+                            <div class="diag-flag-badge">Flagged for clarification</div>
+                            <div class="diag-q-text">13. If the next few months go exactly right, what does different actually look like for you?</div>
+                            <div class="diag-open-text-wrap"><textarea class="diag-open-text" name="q13" placeholder="Your answer"></textarea></div>
+                            <div class="diag-flag-row"><button type="button" class="diag-flag-link">This isn't clear to me — flag it instead</button>
+                                <div class="diag-flag-confirm"><p>Flag this question for clarification and move to the next one? Gaurav will follow up by email.</p>
+                                    <button type="button" class="diag-flag-yes">Yes, flag it</button><button type="button" class="diag-flag-no">No, go back</button></div>
+                            </div>
+                            <div class="diag-unflag-row"><button type="button" class="diag-unflag-link">Got the clarification — unflag and answer now</button></div>
+                        </div>
+
+                        <!-- ============================================================
+                             BUSINESS-SPECIFIC QUESTIONS GO HERE
+                             After researching this business from every angle, add
+                             numbered question cards here (q14, q15, ...), same markup
+                             pattern as above. This is the zone the generic skeleton
+                             exists to feed into — do not skip the research step.
+                             ============================================================ -->
+                        <!-- <p class="diag-section-label">Section G</p>
+                        <h3 class="diag-section-title">[Business-specific section title]</h3> -->
+
+
+                        <!-- CLOSING: THREE PAIN POINTS -->
+                        <p class="diag-section-label">Last Thing</p>
+                        <h3 class="diag-section-title">Three Pain Points I Didn't Ask About</h3>
+                        <p style="color:#797979; font-size:15px; margin-bottom:20px;">
+                            Nothing above is a complete list. If there are up to three things weighing on you about {{BUSINESS_NAME}} that this
+                            questionnaire never touched, say them here. Even one is useful — you don't need all three.
+                        </p>
+                        <div class="diag-painpoint-wrap">
+                            <div class="diag-painpoint-label">Pain point 1</div>
+                            <textarea name="pain1" placeholder="Optional"></textarea>
+                        </div>
+                        <div class="diag-painpoint-wrap">
+                            <div class="diag-painpoint-label">Pain point 2</div>
+                            <textarea name="pain2" placeholder="Optional"></textarea>
+                        </div>
+                        <div class="diag-painpoint-wrap">
+                            <div class="diag-painpoint-label">Pain point 3</div>
+                            <textarea name="pain3" placeholder="Optional"></textarea>
+                        </div>
+
+                        <div class="diag-contact-block">
+                            <label for="diagName">Your Name</label>
+                            <input type="text" id="diagName" class="form-control" style="margin-bottom:16px;">
+                            <label for="diagEmail">Your Email</label>
+                            <input type="email" id="diagEmail" class="form-control">
+                            <p style="margin-top:16px;">I'll go through your answers properly and follow up directly, not over this page.</p>
+                            <button type="submit" class="diag-submit-btn" id="diagSubmitBtn">Send My Answers</button>
+                            <div id="diagError"></div>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="diagThanks">
+                    <h2>Got it, thank you.</h2>
+                    <p>I'll go through these properly and come back to you directly, not over this page.</p>
+                    <p id="diagThanksEditNote">Changed your mind about something, or want to resolve a flagged question? Just come back to this page and your answers will be waiting here, ready to edit.</p>
+                </div>
+
+            </div>
+        </div>
+        <!-- Diagnostic End -->
+
+        <!-- Footer Start -->
+        <div class="footer">
+            <div class="container copyright">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p style="text-align:left;">&copy; <a href="#">Gaurav Bhatnagar</a>, All Right Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+        (function () {
+            var FORM_ENDPOINT = 'https://formspree.io/f/mdekwrzq';
+            var STORAGE_KEY = 'masterQuestionnaire_{{BUSINESS_SLUG}}_v1';
+            var EDIT_WINDOW_MS = 48 * 60 * 60 * 1000; // generous window once a clean (flag-free) submission happens
+            var BUSINESS_NAME = '{{BUSINESS_NAME}}';
+
+            // Every question card on the page, discovered at runtime (so business-specific
+            // questions added later are picked up automatically, no code changes needed).
+            function allCards() {
+                return Array.prototype.slice.call(document.querySelectorAll('.diag-q[data-q]'));
+            }
+
+            function loadSaved() {
+                try {
+                    var raw = localStorage.getItem(STORAGE_KEY);
+                    return raw ? JSON.parse(raw) : null;
+                } catch (e) { return null; }
+            }
+
+            function saveState(answers, addl, flags, name, email, firstSubmittedAt, cleanSubmittedAt) {
+                try {
+                    var prev = loadSaved();
+                    var revision = prev ? (prev.revision || 1) + 1 : 1;
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+                        answers: answers,
+                        addl: addl,
+                        flags: flags,
+                        name: name,
+                        email: email,
+                        firstSubmittedAt: firstSubmittedAt,
+                        cleanSubmittedAt: cleanSubmittedAt || (prev ? prev.cleanSubmittedAt : null),
+                        lastSubmittedAt: new Date().toISOString(),
+                        revision: revision
+                    }));
+                } catch (e) { /* localStorage unavailable, degrade silently */ }
+            }
+
+            function fmtDate(iso) {
+                try { return new Date(iso).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' }); }
+                catch (e) { return iso; }
+            }
+
+            // ---------- FLAG HANDLING ----------
+            function setFlagged(card, flagged) {
+                if (flagged) {
+                    card.classList.add('flagged');
+                    var radios = card.querySelectorAll('input[type="radio"]');
+                    for (var i = 0; i < radios.length; i++) { radios[i].checked = false; radios[i].disabled = true; }
+                    var tas = card.querySelectorAll('textarea, input[type="text"]');
+                    for (var j = 0; j < tas.length; j++) { tas[j].disabled = true; }
+                } else {
+                    card.classList.remove('flagged');
+                    var radios2 = card.querySelectorAll('input[type="radio"]');
+                    for (var k = 0; k < radios2.length; k++) { radios2[k].disabled = false; }
+                    var tas2 = card.querySelectorAll('textarea, input[type="text"]');
+                    for (var m = 0; m < tas2.length; m++) { tas2[m].disabled = false; }
+                }
+            }
+
+            document.addEventListener('click', function (e) {
+                if (e.target && e.target.classList.contains('diag-flag-link')) {
+                    var row = e.target.parentElement;
+                    var confirmBox = row.querySelector('.diag-flag-confirm');
+                    confirmBox.style.display = 'block';
+                    e.target.style.display = 'none';
+                }
+                if (e.target && e.target.classList.contains('diag-flag-no')) {
+                    var row2 = e.target.closest('.diag-flag-row');
+                    row2.querySelector('.diag-flag-confirm').style.display = 'none';
+                    row2.querySelector('.diag-flag-link').style.display = 'inline';
+                }
+                if (e.target && e.target.classList.contains('diag-flag-yes')) {
+                    var card = e.target.closest('.diag-q');
+                    setFlagged(card, true);
+                    updateProgress();
+                    var cards = allCards();
+                    var idx = cards.indexOf(card);
+                    if (idx >= 0 && idx < cards.length - 1) {
+                        cards[idx + 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
+                if (e.target && e.target.classList.contains('diag-unflag-link')) {
+                    var card2 = e.target.closest('.diag-q');
+                    setFlagged(card2, false);
+                    var row3 = card2.querySelector('.diag-flag-row');
+                    row3.querySelector('.diag-flag-confirm').style.display = 'none';
+                    row3.querySelector('.diag-flag-link').style.display = 'inline';
+                    updateProgress();
+                }
+            });
+
+            // ---------- EDIT WINDOW / LOCK ----------
+            function applyEditWindowState() {
+                var saved = loadSaved();
+                if (!saved) { updateProgress(); return; }
+
+                for (var q in saved.answers) {
+                    if (!saved.answers.hasOwnProperty(q)) { continue; }
+                    var radios = document.getElementsByName(q);
+                    var isRadioGroup = radios.length && radios[0].type === 'radio';
+                    if (isRadioGroup) {
+                        for (var i = 0; i < radios.length; i++) { if (radios[i].value === saved.answers[q]) { radios[i].checked = true; } }
+                    } else if (radios.length) {
+                        radios[0].value = saved.answers[q];
+                    }
+                }
+                for (var a in (saved.addl || {})) {
+                    if (!saved.addl.hasOwnProperty(a)) { continue; }
+                    var el = document.getElementsByName(a)[0];
+                    if (el) { el.value = saved.addl[a]; }
+                }
+                for (var qid in (saved.flags || {})) {
+                    if (!saved.flags.hasOwnProperty(qid) || !saved.flags[qid]) { continue; }
+                    var card = document.querySelector('.diag-q[data-q="' + qid + '"]');
+                    if (card) { setFlagged(card, true); }
+                }
+                if (document.getElementById('diagName')) { document.getElementById('diagName').value = saved.name || ''; }
+                if (document.getElementById('diagEmail')) { document.getElementById('diagEmail').value = saved.email || ''; }
+                updateProgress();
+
+                var banner = document.getElementById('diagEditBanner');
+                var btn = document.getElementById('diagSubmitBtn');
+
+                if (!saved.cleanSubmittedAt) {
+                    // A submission happened but something was still flagged — stays fully
+                    // open, no lock countdown, because resolving it depends on Gaurav's
+                    // email reply timing, not a fixed clock.
+                    banner.style.display = 'block';
+                    banner.innerHTML = 'You submitted this on <strong>' + fmtDate(saved.firstSubmittedAt) + '</strong>, with one or more questions ' +
+                        'flagged for clarification. This page stays open and editable until a version goes through with nothing flagged.';
+                    btn.textContent = 'Update My Answers';
+                    return;
+                }
+
+                var cutoff = new Date(new Date(saved.cleanSubmittedAt).getTime() + EDIT_WINDOW_MS).toISOString();
+                var elapsed = Date.now() - new Date(saved.cleanSubmittedAt).getTime();
+
+                if (elapsed < EDIT_WINDOW_MS) {
+                    banner.style.display = 'block';
+                    banner.innerHTML = 'You submitted a complete version on <strong>' + fmtDate(saved.cleanSubmittedAt) + '</strong>. ' +
+                        'Change anything you like until <strong>' + fmtDate(cutoff) + '</strong>, after which it\'s considered final.';
+                    btn.textContent = 'Update My Answers';
+                } else {
+                    banner.style.display = 'block';
+                    banner.classList.add('is-locked');
+                    banner.innerHTML = 'Your answers were finalized on <strong>' + fmtDate(cutoff) + '</strong> and can\'t be changed anymore. Thanks again for going through these.';
+                    btn.style.display = 'none';
+                    document.getElementById('diagError').style.display = 'none';
+                    var allFields = document.querySelectorAll('#diagnosticForm input, #diagnosticForm textarea, #diagnosticForm button');
+                    for (var f = 0; f < allFields.length; f++) { allFields[f].disabled = true; }
+                }
+            }
+
+            // ---------- PROGRESS ----------
+            function cardIsAnswered(card) {
+                var type = card.getAttribute('data-type') || 'mcq';
+                if (card.classList.contains('flagged')) { return true; } // flagged counts toward completion
+                if (type === 'open') {
+                    var ta = card.querySelector('.diag-open-text');
+                    return !!(ta && ta.value.trim());
+                }
+                return !!card.querySelector('input[type="radio"]:checked');
+            }
+
+            function updateProgress() {
+                var cards = allCards();
+                var answered = 0, flagged = 0;
+                for (var i = 0; i < cards.length; i++) {
+                    if (cards[i].classList.contains('flagged')) { flagged++; answered++; }
+                    else if (cardIsAnswered(cards[i])) { answered++; }
+                }
+                var text = answered + ' of ' + cards.length + ' answered';
+                if (flagged > 0) { text += ' (' + flagged + ' flagged for clarification)'; }
+                document.getElementById('diagProgressText').textContent = text;
+                return answered;
+            }
+
+            document.addEventListener('change', function (e) {
+                if (e.target && (e.target.type === 'radio' || e.target.tagName === 'TEXTAREA')) {
+                    var card = e.target.closest('.diag-q');
+                    if (card) { card.classList.remove('unanswered'); }
+                    updateProgress();
+                }
+            });
+
+            // ---------- SUBMIT ----------
+            document.getElementById('diagnosticForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                var cards = allCards();
+                var missing = [];
+                var lines = [];
+                var flaggedLines = [];
+                var answersObj = {}, addlObj = {}, flagsObj = {};
+
+                for (var i = 0; i < cards.length; i++) {
+                    var card = cards[i];
+                    var qid = card.getAttribute('data-q');
+                    var type = card.getAttribute('data-type') || 'mcq';
+                    var qText = card.querySelector('.diag-q-text').textContent.trim();
+
+                    if (card.classList.contains('flagged')) {
+                        flagsObj[qid] = true;
+                        flaggedLines.push(qText);
+                        continue;
+                    }
+                    if (type === 'open') {
+                        var ta = card.querySelector('.diag-open-text');
+                        var val = ta ? ta.value.trim() : '';
+                        if (!val) { missing.push(qid); card.classList.add('unanswered'); continue; }
+                        answersObj[qid] = val;
+                        lines.push(qText + '\nAnswer: ' + val + '\n');
+                    } else {
+                        var checked = card.querySelector('input[type="radio"]:checked');
+                        if (!checked) { missing.push(qid); card.classList.add('unanswered'); continue; }
+                        answersObj[qid] = checked.value;
+                        var addlEl = card.querySelector('.diag-addl textarea');
+                        var addlVal = addlEl ? addlEl.value.trim() : '';
+                        if (addlVal) { addlObj[qid + '_addl'] = addlVal; }
+                        lines.push(qText + '\nAnswer: ' + checked.value + (addlVal ? '\nAdditional: ' + addlVal : '') + '\n');
+                    }
+                }
+
+                // pain points are always optional
+                var painLines = [];
+                ['pain1', 'pain2', 'pain3'].forEach(function (name) {
+                    var el = document.querySelector('[name="' + name + '"]');
+                    var val = el ? el.value.trim() : '';
+                    if (val) { answersObj[name] = val; painLines.push(val); }
+                });
+
+                var nameVal = document.getElementById('diagName').value.trim();
+                var emailVal = document.getElementById('diagEmail').value.trim();
+
+                if (missing.length > 0 || !nameVal || !emailVal) {
+                    if (missing.length > 0) {
+                        document.querySelector('.diag-q[data-q="' + missing[0] + '"]').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                    document.getElementById('diagError').style.display = 'block';
+                    document.getElementById('diagError').textContent = missing.length > 0
+                        ? 'Looks like ' + missing.length + ' question(s) still need an answer or a flag, scrolled you to the first one.'
+                        : 'Name and email are needed before this can be sent.';
+                    return;
+                }
+                document.getElementById('diagError').style.display = 'none';
+
+                var btn = document.getElementById('diagSubmitBtn');
+                btn.textContent = 'Sending…';
+                btn.disabled = true;
+
+                var priorSaved = loadSaved();
+                var isRevision = !!priorSaved;
+                var firstSubmittedAt = isRevision ? priorSaved.firstSubmittedAt : new Date().toISOString();
+                var isClean = flaggedLines.length === 0;
+                var cleanSubmittedAt = isClean ? new Date().toISOString() : null;
+
+                var subjectBits = [BUSINESS_NAME + ' — Master Questionnaire — ' + nameVal];
+                if (isRevision) { subjectBits.push('(revised)'); }
+                if (!isClean) { subjectBits.push('(' + flaggedLines.length + ' flagged)'); }
+
+                var messageParts = [];
+                if (flaggedLines.length) {
+                    messageParts.push('⚠ FLAGGED FOR CLARIFICATION (' + flaggedLines.length + '):\n' + flaggedLines.map(function (t) { return '- ' + t; }).join('\n') + '\n');
+                }
+                messageParts.push(lines.join('\n'));
+                if (painLines.length) {
+                    messageParts.push('THREE PAIN POINTS NOT COVERED ABOVE:\n' + painLines.map(function (t, idx) { return (idx + 1) + '. ' + t; }).join('\n'));
+                }
+
+                fetch(FORM_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify({
+                        name: nameVal,
+                        email: emailVal,
+                        _replyto: emailVal,
+                        subject: subjectBits.join(' '),
+                        message: messageParts.join('\n')
+                    })
+                }).then(function (res) {
+                    if (res.ok) {
+                        saveState(answersObj, addlObj, flagsObj, nameVal, emailVal, firstSubmittedAt, cleanSubmittedAt);
+                        document.getElementById('diagForm').style.display = 'none';
+                        document.getElementById('diagThanks').style.display = 'block';
+                        if (!isClean) {
+                            document.getElementById('diagThanksEditNote').textContent = 'A few questions are flagged for clarification — I\'ll email you an explanation, then you can come back to this page any time to finish those and resubmit.';
+                        }
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                        throw new Error('bad response');
+                    }
+                }).catch(function () {
+                    btn.textContent = 'Send My Answers';
+                    btn.disabled = false;
+                    document.getElementById('diagError').style.display = 'block';
+                    document.getElementById('diagError').textContent = "Something didn't go through. Give it another try, or reach out directly.";
+                });
+            });
+
+            applyEditWindowState();
+        })();
+        </script>
+    </body>
+</html>
