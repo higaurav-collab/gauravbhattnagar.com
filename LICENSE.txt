@@ -1,31 +1,39 @@
-All of the creative works by HTML Codex (https://htmlcodex.com) are licensed under a Creative Commons Attribution 4.0 International License (https://creativecommons.org/licenses/by/4.0).
+ 
+
+ #82418529
 
 
-Legal Attribution
+ => CREDIT REMOVAL LICENSE FOR A SINGLE FREE TEMPLATE BY HTML Codex
 
-HTML Codex creates and publishes free HTML website templates, landing page templates, email templates, and snippets. When you download or use our creative works, it will attribute the following conditions.
-
-
-You are not allowed
-
-  =>  You are not allowed to remove the author’s credit link/backlink.
-  
-  =>  You are not allowed to sell, resale, rent, lease, license, or sub-license.
-  
-  =>  You are not allowed to upload on your template websites or template collection websites or any other third party websites without our permission.
+ This license grants you or the purchaser an ongoing, non-exclusive, worldwide license to make use of our any single free template without the author’s credit under the following conditions.
 
 
-You are allowed
+ => YOU ARE ALLOWED
 
-  =>  You are allowed to use for personal and commercial purposes.
+      1. You are allowed to use without the footer author’s credit link/attribution link/backlink.
 
-  =>  You are allowed to modify/customize however you like.
+      2. You are allowed to use for your personal and commercial purposes.
 
-  =>  You are allowed to convert/port for use for any CMS.
+      3. You are allowed to modify/customize however you like.
 
-  =>  You are allowed to share/distribute under the HTML Codex brand name.
+      4. You are allowed to convert/port for use for any CMS.
 
-  =>  You are allowed to put a screenshot or a link on your blog posts or any other websites.
+      5. You are allowed to share/distribute under the HTML Codex brand name.
+
+      6. You are allowed to put a screenshot or a link on your blog posts or any other websites.
 
 
-Contact us (https://htmlcodex.com/contact) for a special license if you have difficulty to credit us for your use case or you simply want to exclude it.
+ => YOU ARE NOT ALLOWED
+
+      1. You are not allowed to sell, resale, rent, lease, license, or sub-license.
+
+      2. You are not allowed to upload on your template websites or template collection websites or any other third party websites without our permission.
+
+
+ => If a template contains premium stock photos which are only for demo purposes and not distributed with the template. You need to purchase them separately from the corresponding stock photo website. You are responsible for adhering to the original license of them if necessary.
+
+
+ => This license can be terminated if you breach any of these conditions.
+
+
+ Please contact us (https://htmlcodex.com/contact) if you have any query.
