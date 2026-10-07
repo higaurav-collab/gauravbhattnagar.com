@@ -1820,5 +1820,4 @@ a:focus {
 .hero-sub { color: rgba(255,255,255,.88); font-size: 19px; line-height: 1.5; margin: 0; }
 @media (max-width: 991.98px) { .hero-with-text { height: 320px; } .hero-copy h1 { font-size: 40px; } }
 @media (max-width: 575.98px) { .hero-with-text { height: 300px; } .hero-copy h1 { font-size: 32px; } .hero-sub { font-size: 16px; } }
-
-@media (max-width: 575.98px) { .hero-with-text img { object-position: right center; } .hero-with-text::before { background: linear-gradient(90deg, rgba(9,42,73,.82) 0%, rgba(9,42,73,.55) 100%); } }
+@media (max-width: 575.98px) { .hero-with-text { height: auto; background: #092a49; } .hero-with-text::before { display: none; } .hero-with-text img { position: static; display: block; width: 100%; height: 170px; object-fit: cover; object-position: right center; } .hero-overlay { position: static; display: block; padding: 20px 0 32px; } }
