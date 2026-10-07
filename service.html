@@ -4,22 +4,21 @@
         <meta charset="utf-8">
         <title>Services | Gaurav Bhatnagar</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="fractional CMO services, GTM consulting, marketing advisory services, independent director, startup mentorship" name="keywords">
-        <meta content="Eight ways to bring in a fractional CMO, GTM consultant, and board advisor with 24 years of operating experience." name="description">
+        <meta content="GTM due diligence, fundraise readiness audit, AI claims audit, fractional CMO, GTM consulting, startup mentorship" name="keywords">
+        <meta content="Two kinds of work: building a growth engine, or verifying someone else's before money moves on it. Ten services across both." name="description">
         <!-- Open Graph / Social Share -->
         <meta property="og:type" content="website">
         <meta property="og:site_name" content="Gaurav Bhatnagar">
         <meta property="og:title" content="Services | Gaurav Bhatnagar">
-        <meta property="og:description" content="Eight ways to bring in a fractional CMO, GTM consultant, and board advisor with 24 years of operating experience.">
+        <meta property="og:description" content="Two kinds of work: building a growth engine, or verifying someone else's before money moves on it. Ten services across both.">
         <meta property="og:url" content="https://gauravbhattnagar.com/service.html">
         <meta property="og:image" content="https://gauravbhattnagar.com/img/hero-gaurav.jpg">
         <meta property="og:image:width" content="1672">
         <meta property="og:image:height" content="941">
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="Services | Gaurav Bhatnagar">
-        <meta name="twitter:description" content="Eight ways to bring in a fractional CMO, GTM consultant, and board advisor with 24 years of operating experience.">
+        <meta name="twitter:description" content="Two kinds of work: building a growth engine, or verifying someone else's before money moves on it. Ten services across both.">
         <meta name="twitter:image" content="https://gauravbhattnagar.com/img/hero-gaurav.jpg">
-
 
         <!-- Favicon -->
         <link href="img/favicon.ico" rel="icon">
@@ -36,6 +35,51 @@
 
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+
+        <style>
+            /* ---- Page-specific additions for the two-pillar services restructure ---- */
+            .fork-hero{padding:70px 0 55px;text-align:center;}
+            @media (max-width:991.98px){ .fork-hero{padding-top:40px;} }
+            .fork-hero .eyebrow{color:#0796fe;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;font-family:'Lato',sans-serif;}
+            .fork-hero h1{font-size:34px;font-weight:300;max-width:780px;margin:0 auto 16px;line-height:1.35;color:#092a49;}
+            .fork-hero p.sub{max-width:560px;margin:0 auto 40px;font-size:16px;}
+            .fork-wrap{display:flex;gap:24px;max-width:920px;margin:0 auto;}
+            .fork-card{flex:1;border:1px solid rgba(0,0,0,.1);padding:32px 28px;text-align:left;transition:.3s;cursor:default;background:#fff;}
+            .fork-card:hover{border-color:transparent;box-shadow:0 0 30px rgba(0,0,0,.1);transform:translateY(-4px);}
+            .fork-card .fork-kicker{font-size:12px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:#999;margin-bottom:10px;font-family:'Lato',sans-serif;}
+            .fork-card h3{font-size:21px;font-weight:300;margin-bottom:10px;letter-spacing:.5px;}
+            .fork-card p{font-size:14.5px;margin:0 0 16px;}
+            .fork-card .fork-cta{position:relative;font-size:14.5px;font-weight:700;color:#0796fe;}
+
+            .band-intro{max-width:840px;margin:-25px 0 20px 40px;font-size:15.5px;}
+            @media (max-width:575.98px){ .band-intro{margin-left:0;} }
+
+            .band-grey{background:#f8f9fa;}
+
+            .flagship-badge{display:block;width:max-content;background:#092a49;color:#fff;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:3px 9px;border-radius:2px;margin:0 auto 14px;}
+
+            .service .row{align-items:stretch;}
+            .service .service-item-link{display:flex;height:100%;margin-bottom:30px;}
+            .service .service-item-link .service-item{display:flex;flex-direction:column;width:100%;margin-bottom:0;}
+            .service .service-item-link .service-item .service-item-cta{margin-top:auto;}
+            .service .service-item-link .service-item > img{align-self:flex-start;width:auto;max-width:100%;object-fit:contain;}
+
+            .also-band{background:#1d2434;color:#b7c0cc;padding:55px 0;text-align:center;}
+            .also-band .eyebrow{color:#7fb3e8;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;font-family:'Lato',sans-serif;}
+            .also-band h2{color:#fff;font-size:26px;font-weight:300;margin-bottom:12px;}
+            .also-band p{max-width:620px;margin:0 auto 22px;font-size:15px;color:#aab4c2;}
+            .also-list{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;font-size:14px;font-weight:700;color:#e4e9ee;font-family:'Lato',sans-serif;margin-bottom:22px;}
+            .also-band a.also-more{color:#7fb3e8;font-weight:700;}
+            .also-band p a.inline-link{color:#7fb3e8;font-weight:700;text-decoration:underline;}
+
+            .fit-band{padding:55px 0;text-align:center;border-top:1px solid #eee;}
+            .fit-band h2{font-size:24px;font-weight:300;margin-bottom:10px;color:#092a49;}
+
+            @media (max-width:767px){
+                .fork-wrap{flex-direction:column;}
+                .also-list{gap:16px;}
+            }
+        </style>
     </head>
 
     <body>
@@ -46,7 +90,6 @@
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav ml-auto">
                         <a href="index.html" class="nav-item nav-link">Home</a>
@@ -62,25 +105,118 @@
         </div>
         <!-- Nav Bar End -->
 
-        <!-- Service Overview Start -->
-        <div class="service mt-125">
+        <!-- Hero fork -->
+        <div class="fork-hero mt-125">
+            <div class="container">
+                <div class="eyebrow">How I Work</div>
+                <h1>I build growth engines. Or I tell you the truth about one you're relying on.</h1>
+                <p class="sub">Two different jobs, two different moments. Find the one that matches what's actually in front of you.</p>
+                <div class="fork-wrap">
+                    <div class="fork-card">
+                        <div class="fork-kicker">For founders &amp; growth teams</div>
+                        <h3>Build &amp; Operate</h3>
+                        <p>Marketing leadership, GTM consulting, mentorship, and market-entry &mdash; someone builds or fixes the growth engine itself.</p>
+                        <a class="fork-cta" href="#build">See Build &amp; Operate services &rarr;</a>
+                    </div>
+                    <div class="fork-card">
+                        <div class="fork-kicker">For investors, boards &amp; acquirers</div>
+                        <h3>GTM Assurance</h3>
+                        <p>Diligence, audits, and growth-story verification for the moments where real money is about to move on someone else's numbers.</p>
+                        <a class="fork-cta" href="#assurance">See GTM Assurance services &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Assurance band -->
+        <div class="service" id="assurance">
             <div class="container">
                 <div class="section-header">
-                    <p>Services</p>
-                    <h2>Eight Ways to Bring Me In</h2>
+                    <p>GTM Assurance</p>
+                    <h2>Getting The Truth Before Money Moves</h2>
                 </div>
-                <p style="text-align: center; margin-bottom: 30px;">
-                    Not sure which one fits? <a href="qualify.html" style="color: #0796fe; text-decoration: underline;">Take the 2-minute Fit Check &rarr;</a>
-                </p>
+                <p class="band-intro">This is for PE and VC deal teams, corporate M&amp;A groups, and company boards &mdash; assessing a growth&nbsp;story before committing capital to it, not the founders whose numbers are being checked.</p>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <a href="pe-vc-due-diligence.html" class="service-item-link">
+                            <div class="service-item">
+                                <span class="flagship-badge">Flagship</span>
+                                <img src="img/icon-6.png" alt="Icon">
+                                <h3>GTM Due Diligence for Investors</h3>
+                                <p>Auditing a target's go-to-market and revenue story before a fund or acquirer commits capital.</p>
+                                <span class="service-item-cta">Read More</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <a href="fundraise-readiness-audit.html" class="service-item-link">
+                            <div class="service-item">
+                                <img src="img/icon-9.png" alt="Icon">
+                                <h3>Fundraise Readiness Audit</h3>
+                                <p>Stress-testing a founder's own growth story before they walk into investor meetings with it.</p>
+                                <span class="service-item-cta">Read More</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <a href="ipo-growth-narrative-audit.html" class="service-item-link">
+                            <div class="service-item">
+                                <img src="img/icon-4.png" alt="Icon">
+                                <h3>IPO Growth-Story Review</h3>
+                                <p>Pressure-testing the growth story a company will tell in its DRHP and roadshow, before bankers or SEBI scrutiny does.</p>
+                                <span class="service-item-cta">Read More</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <a href="ai-claims-audit.html" class="service-item-link">
+                            <div class="service-item">
+                                <img src="img/icon-10.png" alt="Icon">
+                                <h3>AI-Claims Audit</h3>
+                                <p>Checking whether a company's "AI-native" growth and marketing claims actually hold up, and catching AI-washing before an investor or board does.</p>
+                                <span class="service-item-cta">Read More</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <a href="revops-gtm-systems-audit.html" class="service-item-link">
+                            <div class="service-item">
+                                <img src="img/icon-3.png" alt="Icon">
+                                <h3>Revenue-Reporting Integrity Audit</h3>
+                                <p>Verifying whether the MarTech and attribution stack is really producing the numbers being reported upward.</p>
+                                <span class="service-item-cta">Read More</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <a href="post-acquisition-gtm-integration.html" class="service-item-link">
+                            <div class="service-item">
+                                <img src="img/icon-7.png" alt="Icon">
+                                <h3>Post-Acquisition GTM Integration</h3>
+                                <p>Merging two go-to-market motions, brands, and sales organisations cleanly after a deal closes.</p>
+                                <span class="service-item-cta">Read More</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Build & Operate band -->
+        <div class="service band-grey" id="build">
+            <div class="container">
+                <div class="section-header">
+                    <p>GTM Build &amp; Operate</p>
+                    <h2>Building The Thing That Will One Day Get Audited</h2>
+                </div>
+                <p class="band-intro">This is for founders and growth-stage leadership teams, from early funded startups to companies&nbsp;expanding into new markets.</p>
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
                         <a href="fractional-leadership.html" class="service-item-link">
                             <div class="service-item">
                                 <img src="img/icon-1.png" alt="Icon">
-                                <h3>Fractional / Interim Marketing Leadership</h3>
-                                <p>
-                                    Get a marketing leader in place, on your terms, without a full-time hire.
-                                </p>
+                                <h3>Fractional / Interim CMO</h3>
+                                <p>Senior marketing leadership on retainer, without a full-time hire.</p>
                                 <span class="service-item-cta">Read More</span>
                             </div>
                         </a>
@@ -89,34 +225,8 @@
                         <a href="gtm-consulting.html" class="service-item-link">
                             <div class="service-item">
                                 <img src="img/icon-2.png" alt="Icon">
-                                <h3>GTM / Marketing Consulting</h3>
-                                <p>
-                                    Get the actual problem diagnosed, then a plan built to fix it.
-                                </p>
-                                <span class="service-item-cta">Read More</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <a href="advisory-board-seats.html" class="service-item-link">
-                            <div class="service-item">
-                                <img src="img/icon-3.png" alt="Icon">
-                                <h3>Advisory Board Seats</h3>
-                                <p>
-                                    Get senior marketing judgment at your leadership table, without adding headcount.
-                                </p>
-                                <span class="service-item-cta">Read More</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <a href="independent-director.html" class="service-item-link">
-                            <div class="service-item">
-                                <img src="img/icon-4.png" alt="Icon">
-                                <h3>Independent Director / Board Seats</h3>
-                                <p>
-                                    Get board-level governance experience on your cap table.
-                                </p>
+                                <h3>GTM Consulting</h3>
+                                <p>Building or rebuilding the systems that turn marketing activity into pipeline.</p>
                                 <span class="service-item-cta">Read More</span>
                             </div>
                         </a>
@@ -126,45 +236,17 @@
                             <div class="service-item">
                                 <img src="img/icon-5.png" alt="Icon">
                                 <h3>Startup Mentorship</h3>
-                                <p>
-                                    Get hands-on guidance built for founders who already have traction, not theory.
-                                </p>
+                                <p>Question-led coaching, not answers handed down &mdash; built on real operating experience.</p>
                                 <span class="service-item-cta">Read More</span>
                             </div>
                         </a>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <a href="pe-vc-due-diligence.html" class="service-item-link">
-                            <div class="service-item">
-                                <img src="img/icon-6.png" alt="Icon">
-                                <h3>PE/VC Commercial Due-Diligence Advisory</h3>
-                                <p>
-                                    Get a marketing-specific read on a deal, alongside your own team.
-                                </p>
-                                <span class="service-item-cta">Read More</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <a href="guest-faculty.html" class="service-item-link">
-                            <div class="service-item">
-                                <img src="img/icon-7.png" alt="Icon">
-                                <h3>Guest Faculty / Coaching</h3>
-                                <p>
-                                    Get real-world marketing practice brought into your classroom or program.
-                                </p>
-                                <span class="service-item-cta">Read More</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <a href="keynote-speaking.html" class="service-item-link">
+                        <a href="international-market-entry.html" class="service-item-link">
                             <div class="service-item">
                                 <img src="img/icon-8.png" alt="Icon">
-                                <h3>Keynote / Conference Speaking</h3>
-                                <p>
-                                    Get a talk your audience actually uses, not just enjoys.
-                                </p>
+                                <h3>International Market-Entry Advisory</h3>
+                                <p>For Indian companies expanding abroad, or global companies entering India &mdash; APAC, ANZ, and MEA scope.</p>
                                 <span class="service-item-cta">Read More</span>
                             </div>
                         </a>
@@ -172,81 +254,31 @@
                 </div>
             </div>
         </div>
-        <!-- Service Overview End -->
 
-        <!-- Contact / CTA Band Start -->
-        <div class="contact" id="get-in-touch">
+        <!-- Still not sure / Find Your Fit -->
+        <div class="fit-band">
             <div class="container">
-                <div class="section-header">
-                    <p>Get In Touch</p>
-                    <h2>Book a Free Discovery Call</h2>
-                </div>
-                <div class="row align-items-center">
-                    <div class="col-md-5">
-                        <div class="contact-info">
-                            <div class="contact-text">
-                                <h3>Thirty minutes, no pitch.</h3>
-                                <p>Pick a slot that works for you and I'll confirm it right away.</p>
-                            </div>
-                        </div>
-                        <div class="contact-info">
-                            <div class="contact-icon">
-                                <i class="fa fa-calendar-check"></i>
-                            </div>
-                            <div class="contact-text">
-                                <h3>Book a Free Discovery Call</h3>
-                                <a class="btn" href="#" id="bookCallBtn">Choose a Time</a>
-                            </div>
-                        </div>
-                        <div class="contact-info">
-                            <div class="contact-icon">
-                                <i class="fa fa-envelope"></i>
-                            </div>
-                            <div class="contact-text">
-                                <h3>Prefer to Write First?</h3>
-                                <p>higaurav@gauravbhattnagar.com</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="contact-form">
-                            <div id="success"></div>
-                            <form name="sentMessage" id="contactForm" novalidate="novalidate">
-                                <div class="control-group">
-                                    <input type="text" class="form-control" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div class="control-group">
-                                    <input type="email" class="form-control" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div class="control-group">
-                                    <select class="form-control" id="subject">
-                                        <option value="General Enquiry">General Enquiry</option>
-                                        <option value="Fractional / Interim Marketing Leadership">Fractional / Interim Marketing Leadership</option>
-                                        <option value="GTM / Marketing Consulting">GTM / Marketing Consulting</option>
-                                        <option value="Advisory Board Seats">Advisory Board Seats</option>
-                                        <option value="Independent Director / Board Seats">Independent Director / Board Seats</option>
-                                        <option value="Startup Mentorship">Startup Mentorship</option>
-                                        <option value="PE/VC Commercial Due-Diligence Advisory">PE/VC Commercial Due-Diligence Advisory</option>
-                                        <option value="Guest Faculty / Coaching">Guest Faculty / Coaching</option>
-                                        <option value="Keynote / Conference Speaking">Keynote / Conference Speaking</option>
-                                    </select>
-                                </div>
-                                <div class="control-group">
-                                    <textarea class="form-control" id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div>
-                                    <button class="btn" type="submit" id="sendMessageButton">Send Message</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                <h2>Still Not Sure?</h2>
+                <p>Answer a couple of quick questions and I'll point you to the right conversation to have.</p>
+                <a class="btn" href="qualify.html">Find Your Fit Yourself</a>
             </div>
         </div>
-        <!-- Contact / CTA Band End -->
+
+        <!-- What else I do (relationship track, deliberately not styled as a third sales tier) -->
+        <div class="also-band">
+            <div class="container">
+                <div class="eyebrow">What Else I Do</div>
+                <h2>Board Seats, Standing Retainers, and Speaking</h2>
+                <p>These happen through conversation, not a browse-and-book page. If one of these is what brought you here, <a class="inline-link" href="mailto:higaurav@gauravbhattnagar.com">reach out directly</a>.</p>
+                <div class="also-list">
+                    <span>Independent Director</span>
+                    <span>PE Portfolio Operating Partner</span>
+                    <span>Guest Faculty</span>
+                    <span>Keynote Speaking</span>
+                </div>
+                <a class="also-more" href="about.html">More about Gaurav &rarr;</a>
+            </div>
+        </div>
 
         <!-- Footer Start -->
         <div class="footer">
@@ -280,9 +312,7 @@
                     <div class="col-lg-5">
                         <div class="footer-newsletter">
                             <h2>The Silent Noise</h2>
-                            <p>
-                                A monthly look at what's actually changing in B2B marketing and GTM, straight to your inbox.
-                            </p>
+                            <p>A monthly look at what's actually changing in B2B marketing and GTM, straight to your inbox.</p>
                             <div class="form">
                                 <input class="form-control" placeholder="Email goes here">
                                 <button class="btn">Submit</button>
@@ -293,12 +323,8 @@
             </div>
             <div class="container copyright">
                 <div class="row">
-                    <div class="col-md-6">
-                        <p>&copy; <a href="#">Gaurav Bhatnagar</a>, All Right Reserved.</p>
-                    </div>
-                    <div class="col-md-6">
-                        <p>Designed By <a href="https://htmlcodex.com">HTML Codex</a></p>
-                    </div>
+                    <div class="col-md-6"><p>&copy; <a href="#">Gaurav Bhatnagar</a>, All Right Reserved.</p></div>
+                    <div class="col-md-6"><p>Designed By <a href="https://htmlcodex.com">HTML Codex</a></p></div>
                 </div>
             </div>
         </div>
@@ -314,48 +340,7 @@
         <script src="lib/waypoints/waypoints.min.js"></script>
         <script src="lib/counterup/counterup.min.js"></script>
 
-        <!-- Contact Javascript File -->
-        <script src="mail/jqBootstrapValidation.min.js"></script>
-        <script src="mail/contact.js"></script>
-
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
-
-        <!-- Fit Check hand-off: prefill the contact form from a completed quiz -->
-        <script>
-        (function () {
-            try {
-                var params = new URLSearchParams(window.location.search);
-                var summary = params.get('leadsummary');
-                var service = params.get('service');
-                var leadName = params.get('name');
-                var leadEmail = params.get('email');
-                if (!summary && !service && !leadName && !leadEmail) { return; }
-                var subjectSelect = document.getElementById('subject');
-                if (service && subjectSelect) {
-                    for (var i = 0; i < subjectSelect.options.length; i++) {
-                        if (subjectSelect.options[i].value === service) {
-                            subjectSelect.selectedIndex = i;
-                            break;
-                        }
-                    }
-                }
-                var nameBox = document.getElementById('name') || document.getElementById('genName');
-                if (leadName && nameBox && !nameBox.value) { nameBox.value = leadName; }
-                var emailBox = document.getElementById('email') || document.getElementById('genEmail');
-                if (leadEmail && emailBox && !emailBox.value) { emailBox.value = leadEmail; }
-                var messageBox = document.getElementById('message') || document.getElementById('genMessage');
-                if (summary && messageBox && !messageBox.value) {
-                    messageBox.value = summary;
-                }
-                if (messageBox) {
-                    setTimeout(function () {
-                        var band = document.getElementById('get-in-touch');
-                        if (band) { band.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-                    }, 350);
-                }
-            } catch (e) { /* fail silent, never block page load */ }
-        })();
-        </script>
     </body>
 </html>
