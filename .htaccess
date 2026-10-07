@@ -1,0 +1,12 @@
+# Permanent redirects for slug changes (Oct 2026)
+Redirect 301 /pe-vc-due-diligence.html /gtm-due-diligence.html
+Redirect 301 /fractional-leadership.html /fractional-cmo.html
+Redirect 301 /service.html /services.html
+Redirect 301 /blog.html /newsletter.html
+Redirect 301 /advisory-board-seats.html /independent-director.html
+
+# Removed template demo pages: gone for good
+Redirect gone /advisor.html
+Redirect gone /feature.html
+Redirect gone /review.html
+Redirect gone /single.html
