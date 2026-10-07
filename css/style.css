@@ -1806,3 +1806,17 @@ a:focus {
 .service .service-item-link { display: block; height: 100%; }
 .service .service-item { display: flex; flex-direction: column; align-items: center; height: calc(100% - 30px); }
 .service .service-item .service-item-cta { margin-top: auto; }
+
+
+/* hero-with-text: designed hero image with the H1 as live text on top */
+.hero-with-text { height: 380px; }
+.hero-with-text img { position: absolute; top: 0; left: 0; }
+.hero-with-text::before { content: ""; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 1; background: linear-gradient(90deg, rgba(9,42,73,.6) 0%, rgba(9,42,73,0) 70%); }
+.hero-overlay { position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 2; display: flex; align-items: center; }
+.hero-overlay .container { width: 100%; }
+.hero-copy { max-width: 700px; }
+.hero-kicker { color: #7cc4ff; text-transform: uppercase; letter-spacing: 2px; font-size: 13px; font-weight: 700; margin: 0 0 12px; }
+.hero-copy h1 { color: #fff; font-weight: 300; font-size: 54px; line-height: 1.1; margin: 0 0 16px; }
+.hero-sub { color: rgba(255,255,255,.88); font-size: 19px; line-height: 1.5; margin: 0; }
+@media (max-width: 991.98px) { .hero-with-text { height: 320px; } .hero-copy h1 { font-size: 40px; } }
+@media (max-width: 575.98px) { .hero-with-text { height: 300px; } .hero-copy h1 { font-size: 32px; } .hero-sub { font-size: 16px; } }
