@@ -505,6 +505,7 @@ a:focus {
     font-size: 16px;
 }
 
+.section-header h1,
 .section-header h2 {
     margin: 0 0 0 40px;
     position: relative;
@@ -512,6 +513,7 @@ a:focus {
     font-weight: 200;
 }
 
+.section-header h1::after,
 .section-header h2::after {
     content: "";
     position: absolute;
@@ -523,24 +525,28 @@ a:focus {
     border-image: repeating-linear-gradient( 60deg, rgba(0,0,0,.05), rgba(0,0,0,.05) 1.5%, rgba(0,0,0,.1) 1.5%, rgba(0,0,0,.1) 3%) 30;
 }
 
+.section-header h1:hover::after,
 .section-header h2:hover::after {
     border-image: repeating-linear-gradient( 60deg, rgba(0,0,0,.1), rgba(0,0,0,.1) 1.5%, rgba(0,0,0,.05) 1.5%, rgba(0,0,0,.05) 3%) 30;
 }
 
 @media (max-width: 991.98px) {
-    .section-header h2 {
+    .section-header h1,
+.section-header h2 {
         font-size: 45px;
     }
 }
 
 @media (max-width: 767.98px) {
-    .section-header h2 {
+    .section-header h1,
+.section-header h2 {
         font-size: 40px;
     }
 }
 
 @media (max-width: 575.98px) {
-    .section-header h2 {
+    .section-header h1,
+.section-header h2 {
         font-size: 35px;
     }
 }
