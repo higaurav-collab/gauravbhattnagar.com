@@ -10,3 +10,6 @@ Redirect gone /advisor.html
 Redirect gone /feature.html
 Redirect gone /review.html
 Redirect gone /single.html
+
+# Master templates stay in the repo but are not served to visitors
+RedirectMatch 403 ^/templates/
