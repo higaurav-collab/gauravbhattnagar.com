@@ -10,6 +10,7 @@ $(function () {
         },
         submitSuccess: function ($form, event) {
             event.preventDefault();
+            if ($("#hpField").val()) { return; }
             var name = $("input#name").val();
             var email = $("input#email").val();
             var subject = $("#subject").val();
@@ -80,6 +81,7 @@ $(function () {
         },
         submitSuccess: function ($form, event) {
             event.preventDefault();
+            if ($("#hpField").val()) { return; }
             var name = $("#genName").val();
             var email = $("#genEmail").val();
             var company = $("#genCompany").val();

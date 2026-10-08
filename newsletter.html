@@ -76,6 +76,7 @@
                         <div id="newsletterSignup" style="max-width: 480px;">
                             <form id="newsletterSignupForm" novalidate="novalidate">
                                 <input type="hidden" id="nlSubject" value="Newsletter signup from newsletter.html">
+                                <input type="text" id="nlGotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;">
                                 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                                     <input type="email" id="nlEmail" class="form-control" placeholder="Your email" required="required" style="flex: 1 1 220px; height: auto; padding: 12px 15px; border: 1px solid rgba(0,0,0,.15);">
                                     <button type="submit" id="nlSubmitBtn" class="btn" style="padding: 12px 26px; font-size: 14px;">Get New Issues</button>
@@ -186,6 +187,7 @@
                         <div class="contact-form">
                             <div id="success"></div>
                             <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                                <input type="text" id="hpField" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;">
                                 <div class="control-group">
                                     <input type="text" class="form-control" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
                                     <p class="help-block text-danger"></p>
@@ -301,6 +303,7 @@
             if (!form) { return; }
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
+                if (document.getElementById('nlGotcha').value) { return; }
                 var email = document.getElementById('nlEmail').value;
                 var subject = document.getElementById('nlSubject').value;
                 var btn = document.getElementById('nlSubmitBtn');
