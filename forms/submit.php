@@ -115,7 +115,7 @@ if ($isNewsletter) {
 /* ---- Email ---- */
 function b64line($s) { return '=?UTF-8?B?' . base64_encode($s) . '?='; }
 
-function smtp_send($cfg, $to, $subject, $body, $replyTo = null) {
+function smtp_send($cfg, $to, $subject, $body, $replyTo = null, $html = null) {
     $secure = $cfg['smtp_secure'] ?? 'ssl';
     $port = (int) ($cfg['smtp_port'] ?? 465);
     $remote = ($secure === 'ssl' ? 'ssl://' : 'tcp://') . $cfg['smtp_host'] . ':' . $port;
@@ -157,8 +157,16 @@ function smtp_send($cfg, $to, $subject, $body, $replyTo = null) {
         if ($replyTo) { $h .= 'Reply-To: <' . $replyTo . ">\r\n"; }
         $h .= 'Subject: ' . b64line($subject) . "\r\n";
         $h .= 'Message-ID: <' . bin2hex(random_bytes(8)) . '@gauravbhattnagar.com>' . "\r\n";
-        $h .= "MIME-Version: 1.0\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Transfer-Encoding: base64\r\n\r\n";
-        $h .= chunk_split(base64_encode($body), 76, "\r\n");
+        if ($html !== null) {
+            $bd = 'gb' . bin2hex(random_bytes(8));
+            $h .= "MIME-Version: 1.0\r\nContent-Type: multipart/alternative; boundary=\"" . $bd . "\"\r\n\r\n";
+            $h .= '--' . $bd . "\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Transfer-Encoding: base64\r\n\r\n" . chunk_split(base64_encode($body), 76, "\r\n");
+            $h .= '--' . $bd . "\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Transfer-Encoding: base64\r\n\r\n" . chunk_split(base64_encode($html), 76, "\r\n");
+            $h .= '--' . $bd . "--\r\n";
+        } else {
+            $h .= "MIME-Version: 1.0\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Transfer-Encoding: base64\r\n\r\n";
+            $h .= chunk_split(base64_encode($body), 76, "\r\n");
+        }
         fwrite($fp, $h . "\r\n.\r\n");
         $ok = strpos($read(), '250') === 0;
     }
@@ -191,20 +199,28 @@ if (!$notified) {
 if ($sendAck) {
     $first = $name !== '' ? preg_split('/\s+/', $name)[0] : '';
     $hi = $first !== '' ? 'Hi ' . $first . ',' : 'Hi,';
+    $hiH = htmlspecialchars($hi, ENT_QUOTES, 'UTF-8');
+    $nl = 'https://gauravbhattnagar.com/newsletter.html';
+    $nlLink = '<a href="' . $nl . '">The Silent Noise</a>';
     if ($isNewsletter) {
         $ackSubject = "You're subscribed";
-        $ackBody = $hi . "\n\nThanks for subscribing. You'll get the next issue in your inbox the day it comes out.\n\n"
-            . "While you wait, the earlier issues are here: https://gauravbhattnagar.com/newsletter.html\n\n"
+        $ackBody = $hi . "\n\nThanks for subscribing. You'll get the next issue of The Silent Noise in your inbox the day it comes out.\n\n"
+            . "Earlier issues are here: " . $nl . "\n\n"
             . "If you ever want to stop, just reply with the word unsubscribe and I'll remove you.\n\nGaurav";
+        $ackHtml = '<p>' . $hiH . '</p><p>Thanks for subscribing. You\'ll get the next issue of ' . $nlLink . ' in your inbox the day it comes out.</p>'
+            . '<p>If you ever want to stop, just reply with the word unsubscribe and I\'ll remove you.</p><p>Gaurav</p>';
     } else {
         $ackSubject = 'Thanks for writing to me';
         $ackBody = $hi . "\n\nThanks for taking the time to write to me. I've received your message and I'll come back to you personally.\n\n"
             . "If something needs attention sooner, just reply to this email with a landline or mobile number and a good time to call, and I'll ring you at the earliest.\n\n"
-            . "If you'd rather pick a time yourself, you can book a 30-minute call here: https://calendar.app.google/iNEcTzeAnPFheV6w7\n\n"
-            . "While you're here, my newsletter, The Silent Noise, is worth a look: https://gauravbhattnagar.com/newsletter.html\n\n"
+            . "While you're here, my newsletter, The Silent Noise, is worth a look: " . $nl . "\n\n"
             . "Gaurav Bhatnagar\ngauravbhattnagar.com";
+        $ackHtml = '<p>' . $hiH . '</p><p>Thanks for taking the time to write to me. I\'ve received your message and I\'ll come back to you personally.</p>'
+            . '<p>If something needs attention sooner, just reply to this email with a landline or mobile number and a good time to call, and I\'ll ring you at the earliest.</p>'
+            . '<p>While you\'re here, my newsletter, ' . $nlLink . ', is worth a look.</p>'
+            . '<p>Gaurav Bhatnagar<br><a href="https://gauravbhattnagar.com">gauravbhattnagar.com</a></p>';
     }
-    if (smtp_send($cfg, $email, $ackSubject, $ackBody, $cfg['smtp_user'])) { @touch($ackFile); }
+    if (smtp_send($cfg, $email, $ackSubject, $ackBody, $cfg['smtp_user'], $ackHtml)) { @touch($ackFile); }
 }
 
 out(200, true);
