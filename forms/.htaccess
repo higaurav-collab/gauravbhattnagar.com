@@ -1,4 +1,4 @@
-# Only the handler is reachable from the web
-<FilesMatch "^(?!submit\.php$).*$">
+# Only the form handler and the desk sync store are reachable from the web
+<FilesMatch "^(?!(submit|sync)\.php$).*$">
     Require all denied
 </FilesMatch>

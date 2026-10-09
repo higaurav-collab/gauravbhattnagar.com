@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0b2540">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Runway</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=Lato:wght@400;700&display=swap">
+<style>
+/* Layout: two countdowns on top, the four pipeline counters, then the dated journey phase by phase. */
+:root {
+  --bg: #f4f7fb;
+  --surface: #ffffff;
+  --ink: #0b2540;
+  --muted: #566a80;
+  --line: #d8e1ec;
+  --accent: #0796fe;
+  --accent-ink: #0565ad;
+  --good: #18985f;
+  --warn: #a85f00;
+  --track: #e3ebf4;
+  --font-body: Lato, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-num: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0a1420; --surface: #10202f; --ink: #e7eff8; --muted: #96a8bc; --line: #223850;
+    --accent: #2fa8ff; --accent-ink: #6cc4ff; --good: #3ccf8e; --warn: #e8a63a; --track: #1a2d42;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0a1420; --surface: #10202f; --ink: #e7eff8; --muted: #96a8bc; --line: #223850;
+  --accent: #2fa8ff; --accent-ink: #6cc4ff; --good: #3ccf8e; --warn: #e8a63a; --track: #1a2d42;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5;
+  padding-inline: 16px; padding-block: 28px 56px;
+}
+.wrap { max-width: 1040px; margin-inline: auto; display: flex; flex-direction: column; gap: 34px; }
+h1, h2, h3, p { margin: 0; }
+.kicker { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-ink); font-weight: 700; }
+header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; }
+h1 { font-size: 32px; line-height: 1.15; text-wrap: balance; }
+.today { text-align: right; color: var(--muted); font-size: 14px; }
+.today b { color: var(--ink); }
+h2 { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; font-weight: 700; }
+.note { font-size: 13px; color: var(--warn); }
+.note[hidden] { display: none; }
+
+.cds { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 16px; }
+.cd { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px; min-width: 0; }
+.cd.next { border-color: var(--accent); }
+.cd-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.cd-top h3 { font-size: 18px; }
+.cd-top .date { color: var(--muted); font-size: 14px; }
+.tag { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; color: var(--accent-ink); border: 1px solid var(--accent); border-radius: 4px; padding: 1px 6px; }
+.digits { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-block: 14px 12px; }
+.digits b { display: block; font: 600 54px/1 var(--font-num); font-variant-numeric: tabular-nums; }
+.digits i { font-style: normal; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.cd-note { color: var(--muted); font-size: 14px; }
+.due-now { font: 600 30px/1.2 var(--font-num); color: var(--good); margin-block: 14px 12px; }
+
+.bars { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 16px; margin-top: 16px; }
+.bar-row { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; margin-bottom: 6px; }
+.bar-row span:last-child { color: var(--muted); font-variant-numeric: tabular-nums; }
+.track { height: 8px; background: var(--track); border-radius: 4px; overflow: hidden; }
+.fill { height: 100%; width: 0; background: var(--accent); border-radius: 4px; }
+.fill.good { background: var(--good); }
+
+.counters { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 16px; }
+.counter { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.counter h3 { font-size: 15px; }
+.count-row { display: flex; align-items: center; gap: 14px; }
+.count { font: 600 56px/1 var(--font-num); min-width: 1.4ch; font-variant-numeric: tabular-nums; }
+.step { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font: 700 20px/1 var(--font-body); cursor: pointer; }
+.step:hover { border-color: var(--accent); }
+.step:focus-visible, .target:focus-visible, .item input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+.target { width: 56px; padding: 4px 6px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); font: 700 14px var(--font-body); }
+.hint { font-size: 13px; color: var(--muted); margin-top: 10px; }
+
+.phases { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.phase { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; min-width: 0; }
+.phase-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin-bottom: 8px; }
+.phase-head h3 { font-size: 17px; }
+.phase-head .due { color: var(--muted); font-size: 14px; }
+.chip { margin-left: auto; font-size: 12px; font-weight: 700; letter-spacing: .04em; border-radius: 999px; padding: 2px 10px; border: 1px solid var(--line); color: var(--muted); }
+.chip.done { color: var(--good); border-color: var(--good); }
+.chip.now { color: var(--accent-ink); border-color: var(--accent); }
+.chip.late { color: var(--warn); border-color: var(--warn); }
+.items { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.item label { display: flex; align-items: flex-start; gap: 10px; padding: 6px 0; cursor: pointer; }
+.item input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); flex: none; }
+.item input:checked + span { color: var(--muted); text-decoration: line-through; }
+footer { color: var(--muted); font-size: 13px; }
+@media (max-width: 480px) {
+  h1 { font-size: 27px; }
+  .today { text-align: left; }
+  .digits b { font-size: 44px; }
+}
+
+.hdr-r{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.floatbtn{font:inherit;font-size:13px;font-weight:700;border:1.5px solid var(--accent);background:transparent;color:var(--accent);border-radius:999px;padding:6px 14px;cursor:pointer}
+.floatbtn:hover{background:var(--accent);color:#fff}
+.floatbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.syncrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0 0;font-size:13px;color:var(--muted)}
+.floatbtn.small{font-size:12px;padding:3px 10px}
+.codeform{display:flex;gap:8px;margin:8px 0 0}
+.codeform[hidden]{display:none}
+.codeform input{font:inherit;font-size:14px;padding:6px 10px;border:1.5px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);min-width:240px}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <p class="kicker">The road to first money</p>
+      <h1>Runway</h1>
+    </div>
+    <div class="hdr-r"><p class="today" id="today"></p><button type="button" class="floatbtn" id="floatBtn" hidden>Float over other apps</button></div>
+  </header>
+  <p class="note" id="note" hidden></p>
+  <div class="syncrow"><span id="syncTxt">Starting…</span><button type="button" class="floatbtn small" id="codeBtn">Sync code</button></div>
+  <form class="codeform" id="codeForm" hidden><input type="password" id="codeInp" autocomplete="off" placeholder="Paste your sync code" aria-label="Sync code"><button type="submit" class="floatbtn small">Save</button></form>
+
+  <section aria-labelledby="h-cd">
+    <h2 id="h-cd">Countdown</h2>
+    <div class="cds" id="cds"></div>
+    <div class="bars">
+      <div>
+        <div class="bar-row"><span>Time used up to the checkpoint</span><span id="timeTxt"></span></div>
+        <div class="track"><div class="fill" id="timeBar"></div></div>
+      </div>
+      <div>
+        <div class="bar-row"><span>Journey steps ticked off</span><span id="stepTxt"></span></div>
+        <div class="track"><div class="fill good" id="stepBar"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-ct">
+    <h2 id="h-ct">Pipeline counters</h2>
+    <div class="counters" id="counters"></div>
+    <p class="hint">Starting targets are suggestions. Change a target and it saves. Count a call once it has happened, a scope once you have discussed it, commercials once a number has been shared.</p>
+  </section>
+
+  <section aria-labelledby="h-jr">
+    <h2 id="h-jr">The journey</h2>
+    <ol class="phases" id="phases"></ol>
+  </section>
+
+  <footer>1 December (checkpoint) and 31 January (decision) are agreed. Phase dates and counter targets are starting suggestions. Times are India Time.</footer>
+</div>
+
+<script>
+(function () {
+  var TZ = '+05:30';
+  var START = new Date('2026-10-09T00:00:00' + TZ);
+  var MILES = [
+    { id: 'checkpoint', name: 'Checkpoint', date: new Date('2026-12-01T00:00:00' + TZ), note: 'Activity review: discovery calls, scopes and commercials. Judged on effort and pipeline, not on money.' },
+    { id: 'decision', name: 'Decision', date: new Date('2027-01-31T00:00:00' + TZ), note: 'Apply the rule you set: first paid engagement or offer. Many Indian budgets are approved January to March.' }
+  ];
+  var COUNTERS = [
+    { key: 'discovery', label: 'Discovery calls held', target: 8, by: '1 Dec' },
+    { key: 'scope', label: 'Scopes discussed', target: 4, by: '1 Dec' },
+    { key: 'commercials', label: 'Commercials shared', target: 2, by: '1 Dec' },
+    { key: 'money', label: 'First money: paid engagement or offer', target: 1, by: '31 Jan' }
+  ];
+  var PHASES = [
+    { id: 'p1', name: 'Foundation', due: '2026-10-16', items: [
+      ['spam', 'Spam trap live on every form'],
+      ['gsc', 'Google Search Console verified and sitemap submitted'],
+      ['bing', 'Bing Webmaster verified and sitemap submitted'],
+      ['rich', 'Rich Results test run on home, a service page and a newsletter issue'],
+      ['click', 'Booking button and footer LinkedIn icon click-checked on the live site'] ] },
+    { id: 'p2', name: 'Visibility', due: '2026-10-31', items: [
+      ['forms', 'Form and newsletter signup handling settled'],
+      ['li', 'Site link added to LinkedIn contact info and Featured'],
+      ['sig', 'Site link added to email signature'],
+      ['reach', 'First outreach to people who know your work'] ] },
+    { id: 'p3', name: 'Outreach', due: '2026-11-15', items: [
+      ['promo', 'Promotion running on LinkedIn'],
+      ['calls', 'First discovery calls booked'],
+      ['links', 'First backlinks live'] ] },
+    { id: 'p4', name: 'Checkpoint', due: '2026-12-01', items: [
+      ['review', 'Review the counters and write down what is working'],
+      ['double', 'Decide what to double down on for the next 60 days'] ] },
+    { id: 'p5', name: 'Decision', due: '2027-01-31', items: [
+      ['rule', 'Apply the decision rule to the result'],
+      ['next', 'Set the next review date'] ] }
+  ];
+  var TOTAL_ITEMS = 0;
+  PHASES.forEach(function (p) { p.end = new Date(p.due + 'T23:59:59' + TZ); TOTAL_ITEMS += p.items.length; });
+
+  var done = {};       // item id -> true
+  var counts = {};     // key -> {count, target}
+  var $ = function (id) { return document.getElementById(id); };
+  var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+  var fmt = new Intl.DateTimeFormat('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Asia/Kolkata' });
+
+  function note(msg) { var n = $('note'); n.textContent = msg; n.hidden = !msg; }
+  function cstate(c) {
+    var s = counts[c.key] || {};
+    return { count: typeof s.count === 'number' ? s.count : 0, target: typeof s.target === 'number' && s.target > 0 ? s.target : c.target };
+  }
+
+  /* ---------- build ---------- */
+  var cds = $('cds');
+  MILES.forEach(function (m) {
+    var el = document.createElement('article');
+    el.className = 'cd'; el.id = 'cd-' + m.id;
+    el.innerHTML = '<div class="cd-top"><span class="tag" hidden>Next</span><h3>' + m.name + '</h3><span class="date">' + fmt.format(m.date) + '</span></div>' +
+      '<div class="digits"><div><b data-u="d">00</b><i>days</i></div><div><b data-u="h">00</b><i>hours</i></div><div><b data-u="m">00</b><i>minutes</i></div><div><b data-u="s">00</b><i>seconds</i></div></div>' +
+      '<p class="due-now" hidden>Review day. Open the counters and decide.</p>' +
+      '<p class="cd-note">' + m.note + '</p>';
+    cds.appendChild(el);
+  });
+
+  var cbox = $('counters');
+  COUNTERS.forEach(function (c) {
+    var el = document.createElement('div');
+    el.className = 'counter'; el.id = 'ct-' + c.key;
+    el.innerHTML = '<h3>' + c.label + '</h3>' +
+      '<div class="count-row"><button class="step" type="button" aria-label="One fewer, ' + c.label + '" data-k="' + c.key + '" data-d="-1">&minus;</button>' +
+      '<span class="count" id="n-' + c.key + '">0</span>' +
+      '<button class="step" type="button" aria-label="One more, ' + c.label + '" data-k="' + c.key + '" data-d="1">+</button></div>' +
+      '<div class="track"><div class="fill" id="f-' + c.key + '"></div></div>' +
+      '<div class="meta"><label for="t-' + c.key + '">Target by ' + c.by + '</label><input class="target" id="t-' + c.key + '" type="number" min="1" max="999" inputmode="numeric" data-k="' + c.key + '"><span id="s-' + c.key + '"></span></div>';
+    cbox.appendChild(el);
+  });
+
+  var pbox = $('phases');
+  PHASES.forEach(function (p) {
+    var li = document.createElement('li');
+    li.className = 'phase'; li.id = p.id;
+    var rows = p.items.map(function (it) {
+      return '<li class="item"><label for="i-' + it[0] + '"><input type="checkbox" id="i-' + it[0] + '" data-id="' + it[0] + '"><span>' + it[1] + '</span></label></li>';
+    }).join('');
+    li.innerHTML = '<div class="phase-head"><h3>' + p.name + '</h3><span class="due">by ' + fmt.format(new Date(p.due + 'T12:00:00' + TZ)) + '</span><span class="chip" id="c-' + p.id + '"></span></div><ul class="items">' + rows + '</ul>';
+    pbox.appendChild(li);
+  });
+
+  /* ---------- update (never rebuilds, so typing and focus are safe) ---------- */
+  function updateCounters() {
+    COUNTERS.forEach(function (c) {
+      var s = cstate(c);
+      $('n-' + c.key).textContent = s.count;
+      var inp = $('t-' + c.key);
+      if (document.activeElement !== inp) { inp.value = s.target; }
+      var pct = Math.min(100, Math.round(s.count / s.target * 100));
+      var f = $('f-' + c.key);
+      f.style.width = pct + '%';
+      f.className = 'fill' + (s.count >= s.target ? ' good' : '');
+      $('s-' + c.key).textContent = s.count >= s.target ? 'Target reached' : (s.target - s.count) + ' to go';
+    });
+  }
+  function updateJourney() {
+    var ticked = 0, now = Date.now(), current = null;
+    PHASES.forEach(function (p) {
+      var n = 0;
+      p.items.forEach(function (it) {
+        var box = $('i-' + it[0]);
+        var on = !!done[it[0]];
+        if (box.checked !== on) { box.checked = on; }
+        if (on) { n++; }
+      });
+      ticked += n;
+      p.complete = n === p.items.length;
+      if (!p.complete && !current) { current = p; }
+    });
+    PHASES.forEach(function (p) {
+      var chip = $('c-' + p.id), cls = 'chip', txt;
+      if (p.complete) { cls += ' done'; txt = 'Done'; }
+      else if (now > p.end.getTime()) { cls += ' late'; txt = 'Overdue'; }
+      else if (p === current) { cls += ' now'; txt = 'In progress'; }
+      else { txt = 'Upcoming'; }
+      chip.className = cls; chip.textContent = txt;
+    });
+    $('stepTxt').textContent = ticked + ' of ' + TOTAL_ITEMS;
+    $('stepBar').style.width = Math.round(ticked / TOTAL_ITEMS * 100) + '%';
+  }
+
+  /* ---------- clock ---------- */
+  function tick() {
+    var now = Date.now(), nextSet = false;
+    MILES.forEach(function (m) {
+      var el = $('cd-' + m.id), ms = m.date.getTime() - now;
+      var isNext = ms > 0 && !nextSet;
+      if (isNext) { nextSet = true; }
+      el.classList.toggle('next', isNext);
+      el.querySelector('.tag').hidden = !isNext;
+      var digits = el.querySelector('.digits'), dueNow = el.querySelector('.due-now');
+      if (ms <= 0) { digits.hidden = true; dueNow.hidden = false; return; }
+      digits.hidden = false; dueNow.hidden = true;
+      var s = Math.floor(ms / 1000);
+      var vals = { d: Math.floor(s / 86400), h: Math.floor(s % 86400 / 3600), m: Math.floor(s % 3600 / 60), s: s % 60 };
+      Object.keys(vals).forEach(function (u) {
+        el.querySelector('[data-u="' + u + '"]').textContent = u === 'd' ? String(vals[u]) : pad(vals[u]);
+      });
+    });
+    var span = MILES[0].date.getTime() - START.getTime();
+    var used = Math.max(0, Math.min(1, (now - START.getTime()) / span));
+    var day = Math.min(Math.ceil(span / 864e5), Math.max(1, Math.floor((now - START.getTime()) / 864e5) + 1));
+    $('timeBar').style.width = Math.round(used * 100) + '%';
+    $('timeTxt').textContent = 'Day ' + day + ' of ' + Math.round(span / 864e5);
+    $('today').innerHTML = '<b>' + fmt.format(new Date()) + '</b><br>India Time';
+  }
+
+  /* ---------- saving: this device first, then sync when online ---------- */
+  var SYNC_URL = '/forms/sync.php', LS = 'runway-v2', CODE_KEY = 'runway-sync-code';
+  var SEED = { m: { spam: { d: true, t: 1 } }, c: { discovery: { n: 1, g: 8, t: 1 } } };   // where the online tracker stood on 9 Oct
+  var stamps = {}, syncing = false, again = false, syncTimer = null;
+  function snapshot() {
+    var o = { m: {}, c: {} };
+    PHASES.forEach(function (p) { p.items.forEach(function (it) { var k = 'm:' + it[0]; if (stamps[k] !== undefined) { o.m[it[0]] = { d: !!done[it[0]], t: stamps[k] }; } }); });
+    COUNTERS.forEach(function (c) { var k = 'c:' + c.key; if (stamps[k] !== undefined) { var st = cstate(c); o.c[c.key] = { n: st.count, g: st.target, t: stamps[k] }; } });
+    return o;
+  }
+  function applyState(o) {
+    var changed = false;
+    Object.keys(o.m || {}).forEach(function (id) {
+      var r = o.m[id], k = 'm:' + id;
+      if (stamps[k] === undefined || r.t > stamps[k]) { stamps[k] = r.t; if (r.d) { done[id] = true; } else { delete done[id]; } changed = true; }
+    });
+    Object.keys(o.c || {}).forEach(function (key) {
+      var r = o.c[key], k = 'c:' + key;
+      if (stamps[k] === undefined || r.t > stamps[k]) { stamps[k] = r.t; counts[key] = { count: r.n, target: r.g }; changed = true; }
+    });
+    return changed;
+  }
+  function saveLocal() { try { localStorage.setItem(LS, JSON.stringify(snapshot())); } catch (e) {} }
+  function loadLocal() { try { var raw = localStorage.getItem(LS); if (raw) { applyState(JSON.parse(raw)); } } catch (e) {} }
+  function getCode() { try { return localStorage.getItem(CODE_KEY) || ''; } catch (e) { return ''; } }
+  function status(t) { $('syncTxt').textContent = t; }
+  function clock() { return new Intl.DateTimeFormat('en-IN', { hour: 'numeric', minute: '2-digit', timeZone: 'Asia/Kolkata' }).format(new Date()); }
+  function sync() {
+    var code = getCode();
+    if (!code) { status('Saved on this Mac only. Add your sync code to keep other devices in step.'); return; }
+    if (!navigator.onLine) { status('Offline. Saved on this Mac, will sync when you are online.'); return; }
+    if (syncing) { again = true; return; }
+    syncing = true;
+    fetch(SYNC_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Sync-Code': code }, body: JSON.stringify({ state: snapshot() }) })
+      .then(function (r) { if (r.status === 403) { throw new Error('code'); } if (r.status === 503) { throw new Error('setup'); } if (!r.ok) { throw new Error('net'); } return r.json(); })
+      .then(function (j) {
+        if (j && j.state && applyState(j.state)) { updateCounters(); updateJourney(); saveLocal(); }
+        status('Synced at ' + clock() + ' IST');
+      })
+      .catch(function (e) {
+        status(e.message === 'code' ? 'The sync code was not accepted. Check it and save again.' : e.message === 'setup' ? 'Sync is not switched on at the server yet. Saved on this Mac.' : 'Could not reach the server. Saved on this Mac.');
+      })
+      .then(function () { syncing = false; if (again) { again = false; queueSync(); } });
+  }
+  function queueSync() { clearTimeout(syncTimer); syncTimer = setTimeout(sync, 800); }
+  function touch(k) { stamps[k] = Date.now(); saveLocal(); queueSync(); }
+
+  /* ---------- events ---------- */
+  cbox.addEventListener('click', function (e) {
+    var b = e.target.closest('.step'); if (!b) { return; }
+    var c = COUNTERS.filter(function (x) { return x.key === b.dataset.k; })[0];
+    var s = cstate(c), next = Math.max(0, s.count + Number(b.dataset.d));
+    counts[c.key] = { count: next, target: s.target };
+    updateCounters(); touch('c:' + c.key);
+  });
+  cbox.addEventListener('change', function (e) {
+    var inp = e.target.closest('.target'); if (!inp) { return; }
+    var c = COUNTERS.filter(function (x) { return x.key === inp.dataset.k; })[0];
+    var v = Math.max(1, Math.min(999, parseInt(inp.value, 10) || c.target));
+    counts[c.key] = { count: cstate(c).count, target: v };
+    updateCounters(); touch('c:' + c.key);
+  });
+  pbox.addEventListener('change', function (e) {
+    var box = e.target.closest('input[type="checkbox"]'); if (!box) { return; }
+    var id = box.dataset.id;
+    if (box.checked) { done[id] = true; } else { delete done[id]; }
+    updateJourney(); touch('m:' + id);
+  });
+  $('codeBtn').addEventListener('click', function () { var f = $('codeForm'); f.hidden = !f.hidden; if (!f.hidden) { $('codeInp').focus(); } });
+  $('codeForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = $('codeInp').value.trim();
+    try { if (v) { localStorage.setItem(CODE_KEY, v); } } catch (x) {}
+    $('codeInp').value = ''; $('codeForm').hidden = true; sync();
+  });
+  window.addEventListener('online', sync);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) { sync(); } });
+  setInterval(sync, 300000);
+
+  /* ---------- float over other apps (Picture-in-Picture) ---------- */
+  var fCanvas = null, fVideo = null, fTimer = null, fWorker = null;
+  function stepsTicked() { var n = 0; PHASES.forEach(function (p) { p.items.forEach(function (it) { if (done[it[0]]) { n++; } }); }); return n; }
+  function drawFloat() {
+    if (!fCanvas) { return; }
+    var g = fCanvas.getContext('2d'), W = fCanvas.width, H = fCanvas.height, now = Date.now();
+    g.fillStyle = '#0b2540'; g.fillRect(0, 0, W, H);
+    g.textBaseline = 'alphabetic';
+    g.fillStyle = '#7fc3ff'; g.font = '700 22px Lato, Arial, sans-serif'; g.fillText('PLAN B RUNWAY', 28, 44);
+    var nxt = null; MILES.forEach(function (m) { if (!nxt && m.date.getTime() > now) { nxt = m; } });
+    if (nxt) {
+      var s = Math.floor((nxt.date.getTime() - now) / 1000);
+      var d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), mi = Math.floor(s % 3600 / 60), se = s % 60;
+      g.fillStyle = '#9db4cc'; g.font = '700 24px Lato, Arial, sans-serif'; g.fillText('Next: ' + nxt.name + ' (' + fmt.format(nxt.date) + ')', 28, 86);
+      g.fillStyle = '#ffffff'; g.font = '700 84px "Barlow Condensed", Lato, Arial, sans-serif';
+      g.fillText(d + 'd ' + pad(h) + ':' + pad(mi) + ':' + pad(se), 28, 172);
+    } else {
+      g.fillStyle = '#ffffff'; g.font = '700 44px Lato, Arial, sans-serif'; g.fillText('Decision day has passed', 28, 130);
+    }
+    var later = null; MILES.forEach(function (m) { if (m !== nxt && m.date.getTime() > now) { later = m; } });
+    if (later) {
+      g.fillStyle = '#9db4cc'; g.font = '600 22px Lato, Arial, sans-serif';
+      g.fillText(later.name + ' in ' + Math.ceil((later.date.getTime() - now) / 864e5) + ' days', 28, 208);
+    }
+    g.strokeStyle = '#27496b'; g.lineWidth = 2; g.beginPath(); g.moveTo(28, 228); g.lineTo(W - 28, 228); g.stroke();
+    COUNTERS.forEach(function (c, i) {
+      var st = cstate(c), x = 28 + (i % 2) * 300, y = 272 + Math.floor(i / 2) * 44;
+      g.fillStyle = st.count >= st.target ? '#6fe0a0' : '#ffffff'; g.font = '700 28px Lato, Arial, sans-serif';
+      g.fillText(st.count + '/' + st.target, x, y);
+      g.fillStyle = '#9db4cc'; g.font = '600 20px Lato, Arial, sans-serif';
+      g.fillText(c.key === 'money' ? 'first money' : c.key === 'scope' ? 'scopes' : c.key === 'discovery' ? 'discovery calls' : 'commercials', x + 78, y);
+    });
+    g.fillStyle = '#9db4cc'; g.font = '600 20px Lato, Arial, sans-serif'; g.fillText(stepsTicked() + ' of ' + TOTAL_ITEMS + ' steps done', 28, 372);
+  }
+  function stopFloat() {
+    if (fWorker) { fWorker.terminate(); fWorker = null; }
+    if (fTimer) { clearInterval(fTimer); fTimer = null; }
+    if (fVideo) { try { fVideo.srcObject = null; } catch (e) {} fVideo = null; }
+    fCanvas = null;
+    var b = $('floatBtn'); b.textContent = 'Float over other apps';
+  }
+  function startFloat() {
+    var b = $('floatBtn');
+    if (document.pictureInPictureElement) { document.exitPictureInPicture().catch(function () {}); return; }
+    b.textContent = 'Opening…';
+    fCanvas = document.createElement('canvas'); fCanvas.width = 640; fCanvas.height = 400;
+    drawFloat();
+    fVideo = document.createElement('video'); fVideo.muted = true; fVideo.playsInline = true;
+    var warm = setInterval(drawFloat, 150);   // keeps frames flowing until the window is open
+    fVideo.srcObject = fCanvas.captureStream();
+    fVideo.addEventListener('leavepictureinpicture', function () { clearInterval(warm); stopFloat(); });
+    var ready = new Promise(function (res, rej) {
+      if (fVideo.readyState >= 1) { return res(); }
+      fVideo.addEventListener('loadedmetadata', function () { res(); }, { once: true });
+      setTimeout(function () { rej(new Error('no video frames')); }, 4000);
+    });
+    fVideo.play().catch(function () {});
+    ready.then(function () { return fVideo.requestPictureInPicture(); }).then(function () {
+      clearInterval(warm);
+      b.textContent = 'Close floating window';
+      try {
+        fWorker = new Worker(URL.createObjectURL(new Blob(['setInterval(function(){postMessage(1)},1000)'], { type: 'text/javascript' })));
+        fWorker.onmessage = drawFloat;
+      } catch (e) { fTimer = setInterval(drawFloat, 1000); }
+    }).catch(function (e) {
+      clearInterval(warm); stopFloat();
+      note('The floating window was blocked here (' + ((e && (e.name || e.message)) || 'blocked') + '). Try opening this page in Chrome, then press the button again.');
+    });
+  }
+  if (document.pictureInPictureEnabled && HTMLCanvasElement.prototype.captureStream) {
+    $('floatBtn').hidden = false;
+    $('floatBtn').addEventListener('click', startFloat);
+  }
+
+  /* ---------- start ---------- */
+  applyState(SEED); loadLocal();
+  updateCounters(); updateJourney(); tick();
+  setInterval(tick, 1000);
+  sync();
+  if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js').catch(function () {}); }
+})();
+</script>
+
+</body>
+</html>
