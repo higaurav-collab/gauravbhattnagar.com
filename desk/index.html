@@ -403,7 +403,7 @@ footer { color: var(--muted); font-size: 13px; }
     var g = fCanvas.getContext('2d'), W = fCanvas.width, H = fCanvas.height, now = Date.now();
     g.fillStyle = '#0b2540'; g.fillRect(0, 0, W, H);
     g.textBaseline = 'alphabetic';
-    g.fillStyle = '#7fc3ff'; g.font = '700 22px Lato, Arial, sans-serif'; g.fillText('PLAN B RUNWAY', 28, 44);
+    g.fillStyle = '#7fc3ff'; g.font = '700 22px Lato, Arial, sans-serif'; g.fillText('RUNWAY', 28, 44);
     var nxt = null; MILES.forEach(function (m) { if (!nxt && m.date.getTime() > now) { nxt = m; } });
     if (nxt) {
       var s = Math.floor((nxt.date.getTime() - now) / 1000);

@@ -1,5 +1,5 @@
 /* Keeps the page working with no internet. Sync calls are never cached. */
-var V = 'runway-v1';
+var V = 'runway-v2';
 var FILES = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
 self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(V).then(function (c) { return c.addAll(FILES); }).then(function () { return self.skipWaiting(); }));
