@@ -120,7 +120,7 @@ function smtp_send($cfg, $to, $subject, $body, $replyTo = null) {
     $port = (int) ($cfg['smtp_port'] ?? 465);
     $remote = ($secure === 'ssl' ? 'ssl://' : 'tcp://') . $cfg['smtp_host'] . ':' . $port;
     $fp = @stream_socket_client($remote, $en, $es, 12);
-    if (!$fp) { return false; }
+    if (!$fp) { $GLOBALS['gb_err'] = 'connect: ' . trim((string) $es) . ' (' . $en . ')'; return false; }
     stream_set_timeout($fp, 12);
     $read = function () use ($fp) {
         $all = '';
@@ -133,7 +133,9 @@ function smtp_send($cfg, $to, $subject, $body, $replyTo = null) {
     $cmd = function ($c, $expect) use ($fp, $read) {
         if ($c !== null) { fwrite($fp, $c . "\r\n"); }
         $r = $read();
-        return strpos($r, (string) $expect) === 0;
+        $good = strpos($r, (string) $expect) === 0;
+        if (!$good) { $GLOBALS['gb_err'] = 'expected ' . $expect . ' got: ' . substr(trim(preg_replace('/\s+/', ' ', $r)), 0, 140); }
+        return $good;
     };
     $ok = $cmd(null, '220') && $cmd('EHLO gauravbhattnagar.com', '250');
     if ($ok && $secure === 'none') { /* local testing only */ }
@@ -177,7 +179,7 @@ $lines[] = 'Reply to this email to answer them directly.';
 $notified = smtp_send($cfg, $notifyTo, '[Website] ' . $subject . ($name ? ' - ' . $name : ''), implode("\n", $lines), $email);
 if (!$notified) {
     /* Stored, but Gaurav was not told: let the page fall back so the lead also reaches the backup inbox */
-    out(502, false, array('error' => 'notify'));
+    out(502, false, array('error' => 'notify', 'detail' => $GLOBALS['gb_err'] ?? 'unknown'));
 }
 
 /* Confirmation to the visitor (best effort) */
