@@ -455,16 +455,12 @@
                         btn.style.opacity = '0.6';
                     }
                 });
-                fetch(FORM_ENDPOINT, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: JSON.stringify({
-                        name: qcState.name,
-                        email: qcState.email,
-                        _replyto: qcState.email,
-                        subject: 'Fit Check: ' + svc.name,
-                        message: text
-                    })
+                gbPost({
+                    name: qcState.name,
+                    email: qcState.email,
+                    _replyto: qcState.email,
+                    subject: 'Fit Check: ' + svc.name,
+                    message: text
                 }).then(function (res) {
                     renderResult(!!res.ok);
                 }).catch(function () {

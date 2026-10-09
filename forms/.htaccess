@@ -1,0 +1,4 @@
+# Only the handler is reachable from the web
+<FilesMatch "^(?!submit\.php$).*$">
+    Require all denied
+</FilesMatch>

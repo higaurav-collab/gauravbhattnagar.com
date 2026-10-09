@@ -1,6 +1,32 @@
-// Formspree endpoint, notifications go to higaurav@gauravbhattnagar.com
-// (same endpoint used in the "Find My Fit" quiz's own send step on qualify.html).
+// Form handling: submissions go to our own handler on this site first (/forms/submit.php).
+// If that is unavailable, they go to the Formspree backup so no enquiry is lost.
 var GAURAV_FORM_ENDPOINT = "https://formspree.io/f/mdekwrzq";
+
+window.gbPost = function (payload) {
+    payload.page = location.pathname;
+    var body = JSON.stringify(payload);
+    function backup() {
+        return fetch(GAURAV_FORM_ENDPOINT, { method: "POST", headers: { "Accept": "application/json", "Content-Type": "application/json" }, body: body });
+    }
+    return fetch("/forms/submit.php", { method: "POST", headers: { "Content-Type": "application/json" }, body: body })
+        .then(function (res) { return res.status >= 500 ? backup() : res; })
+        .catch(function () { return backup(); });
+};
+
+function gbAjax(o) {
+    var payload = o.data;
+    payload.page = location.pathname;
+    $.ajax({
+        url: "/forms/submit.php", type: "POST", contentType: "application/json", dataType: "json",
+        data: JSON.stringify(payload), cache: false,
+        success: o.success, complete: o.complete,
+        error: function (xhr) {
+            if (xhr.status === 0 || xhr.status >= 500) {
+                $.ajax({ url: GAURAV_FORM_ENDPOINT, type: "POST", dataType: "json", headers: { "Accept": "application/json" }, data: payload, cache: false, success: o.success, error: o.error });
+            } else if (o.error) { o.error(xhr); }
+        }
+    });
+}
 
 $(function () {
 
@@ -19,11 +45,7 @@ $(function () {
             $this = $("#sendMessageButton");
             $this.prop("disabled", true);
 
-            $.ajax({
-                url: GAURAV_FORM_ENDPOINT,
-                type: "POST",
-                dataType: "json",
-                headers: { "Accept": "application/json" },
+            gbAjax({
                 data: {
                     name: name,
                     email: email,
@@ -91,11 +113,7 @@ $(function () {
             var $btn = $("#genSendButton");
             $btn.prop("disabled", true);
 
-            $.ajax({
-                url: GAURAV_FORM_ENDPOINT,
-                type: "POST",
-                dataType: "json",
-                headers: { "Accept": "application/json" },
+            gbAjax({
                 data: {
                     name: name,
                     email: email,
