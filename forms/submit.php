@@ -197,9 +197,11 @@ if ($sendAck) {
             . "While you wait, the earlier issues are here: https://gauravbhattnagar.com/newsletter.html\n\n"
             . "If you ever want to stop, just reply with the word unsubscribe and I'll remove you.\n\nGaurav";
     } else {
-        $ackSubject = 'Got your message';
-        $ackBody = $hi . "\n\nThanks for writing. I've received your message and I'll reply personally within two working days.\n\n"
-            . "If you'd rather talk it through, you can pick a time for a 30-minute call here: https://calendar.app.google/iNEcTzeAnPFheV6w7\n\n"
+        $ackSubject = 'Thanks for writing to me';
+        $ackBody = $hi . "\n\nThanks for taking the time to write to me. I've received your message and I'll come back to you personally.\n\n"
+            . "If something needs attention sooner, just reply to this email with a landline or mobile number and a good time to call, and I'll ring you at the earliest.\n\n"
+            . "If you'd rather pick a time yourself, you can book a 30-minute call here: https://calendar.app.google/iNEcTzeAnPFheV6w7\n\n"
+            . "While you're here, my newsletter, The Silent Noise, is worth a look: https://gauravbhattnagar.com/newsletter.html\n\n"
             . "Gaurav Bhatnagar\ngauravbhattnagar.com";
     }
     if (smtp_send($cfg, $email, $ackSubject, $ackBody, $cfg['smtp_user'])) { @touch($ackFile); }
