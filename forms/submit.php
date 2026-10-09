@@ -35,7 +35,7 @@ $base = rtrim(getenv('GB_BASE') ?: dirname($_SERVER['DOCUMENT_ROOT']), '/');
 $cfgFile = $base . '/form-config/mail.php';
 $dataDir = $base . '/form-data';
 $cfg = is_file($cfgFile) ? include $cfgFile : null;
-if (!is_array($cfg) || empty($cfg['smtp_host']) || empty($cfg['smtp_user']) || empty($cfg['smtp_pass'])) {
+if (!is_array($cfg) || empty($cfg['smtp_host']) || empty($cfg['smtp_user'])) {
     /* Not set up yet: tell the page to use its backup route */
     out(503, false, array('error' => 'not_configured'));
 }
@@ -138,8 +138,13 @@ function smtp_send($cfg, $to, $subject, $body, $replyTo = null) {
         return $good;
     };
     $ok = $cmd(null, '220') && $cmd('EHLO gauravbhattnagar.com', '250');
-    if ($ok && $secure === 'none') { /* local testing only */ }
-    if ($ok && $secure !== 'none') {
+    if ($ok && $secure === 'starttls') {
+        $ok = $cmd('STARTTLS', '220') && stream_socket_enable_crypto($fp, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
+        if ($ok) { $ok = $cmd('EHLO gauravbhattnagar.com', '250'); }
+        else { $GLOBALS['gb_err'] = $GLOBALS['gb_err'] ?? 'starttls failed'; }
+    }
+    /* With a password: sign in. Without one: the server trusts our IP address (Google SMTP relay). */
+    if ($ok && !empty($cfg['smtp_pass'])) {
         $ok = $cmd('AUTH LOGIN', '334') && $cmd(base64_encode($cfg['smtp_user']), '334') && $cmd(base64_encode($cfg['smtp_pass']), '235');
     }
     $fromAddr = $cfg['smtp_user'];
