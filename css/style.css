@@ -14,7 +14,7 @@ h4,
 h5, 
 h6 {
     color: #092a49;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Manrope', sans-serif;
 }
 
 a {
@@ -1766,7 +1766,7 @@ a:focus {
     justify-content: space-between;
     padding: 20px 25px;
     cursor: pointer;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Manrope', sans-serif;
     font-size: 17px;
     font-weight: 400;
     color: #092a49;
@@ -1843,3 +1843,57 @@ a:focus {
 .legal-text ul{padding-left:22px;margin-bottom:18px}
 .legal-text li{margin-bottom:8px}
 .legal-text table th{color:#092a49}
+
+/* ===== Type refresh, Oct 2026 =====
+   Headings: Manrope 500 to 700. Body: Lato at 17px+ with 1.65 line height and a darker grey.
+   To undo, delete from this comment to the end of the file and restore the old Google Fonts link. */
+:root { --gb-body: #4a5663; --gb-head: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif; }
+
+body { color: var(--gb-body); font-size: 17px; line-height: 1.65; }
+@media (min-width: 992px) { body { font-size: 17.5px; } }
+
+h1, h2, h3, h4, h5, h6,
+.faq-preview .faq-question { font-family: var(--gb-head); font-weight: 700; letter-spacing: 0; line-height: 1.2; }
+
+/* Readable line length for running copy */
+.about .about-text p, .single p, .legal-text p, .faq p, .service-detail p { max-width: 66ch; }
+
+/* Paragraph sizes that were pinned at 16px */
+.about .about-text p,
+.service .service-item p,
+.contact .contact-text p { font-size: 17px; line-height: 1.65; }
+
+/* Section titles */
+.section-header h1, .section-header h2 { font-weight: 700; font-size: 40px; letter-spacing: -.01em; line-height: 1.15; }
+@media (max-width: 991.98px) { .section-header h1, .section-header h2 { font-size: 36px; } }
+@media (max-width: 767.98px) { .section-header h1, .section-header h2 { font-size: 32px; } }
+@media (max-width: 575.98px) { .section-header h1, .section-header h2 { font-size: 28px; } }
+
+/* Hero and carousel headings */
+.carousel .carousel-text h1 { font-weight: 700; font-size: 52px; }
+.hero-copy h1 { font-weight: 700; letter-spacing: -.01em; }
+@media (max-width: 991.98px) { .carousel .carousel-text h1 { font-size: 40px; } }
+@media (max-width: 575.98px) { .carousel .carousel-text h1 { font-size: 30px; } }
+
+/* Card and service titles: 20px, 600, tight line height, no tracking */
+.service .service-item h3,
+.blog .blog-content h2.blog-title,
+.fact .fact-item h2,
+.team .team-text h2,
+.testimonial .testimonial-item h2,
+.contact .contact-text h3 { font-size: 20px; font-weight: 600; line-height: 1.25; letter-spacing: 0; }
+.testimonial .testimonial-item h3 { font-weight: 500; letter-spacing: 0; }
+.feature .counters h2 { font-weight: 600; }
+.footer .footer-contact h2, .footer .footer-link h2, .footer .footer-newsletter h2 { font-size: 20px; font-weight: 600; letter-spacing: 0; }
+.top-bar .text h2 { font-weight: 600; letter-spacing: 0; }
+.legal-text h2 { font-weight: 600; }
+
+/* Kickers: small, semibold, uppercase, modest tracking, quieter than the heading */
+.section-header p,
+.hero-kicker,
+.eyebrow,
+.section-eyebrow {
+    font-size: 12.5px; font-weight: 600; line-height: 1.3; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px;
+}
+.section-header p { color: #0565ad; }
+.hero-kicker { color: #7cc4ff; }
