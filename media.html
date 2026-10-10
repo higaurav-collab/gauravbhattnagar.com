@@ -40,9 +40,9 @@
 
         <style>
             .media-photo img { width: 100%; height: auto; border-radius: 6px; display: block; }
-            .photo-credit { font-family: 'Lato', sans-serif; font-style: italic; font-size: 12px; line-height: 1.4; color: #6b7684; margin: 8px 0 0; }
-            .media-downloads { margin: 14px 0 28px; font-size: 15px; }
-            .media-downloads a { margin-right: 18px; }
+            .media-downloads { display: flex; gap: 16px; margin: 14px 0 28px; }
+            .media-downloads a { flex: 1 1 0; max-width: 140px; font-size: 13px; line-height: 1.35; }
+            .media-downloads img { width: 100%; height: auto; border-radius: 4px; display: block; margin-bottom: 6px; }
             .media-facts { list-style: none; padding: 0; margin: 18px 0 0; }
             .media-facts li { padding: 6px 0; border-top: 1px solid #e3e7eb; }
             .media-facts li:first-child { border-top: 0; }
@@ -84,18 +84,18 @@
         </div>
         <!-- Nav Bar End -->
 
+        <!-- Photo note: the portraits are AI-assisted, based on the owner's actual photographs. The same note is embedded in each image file's EXIF/XMP metadata. -->
         <!-- Media Hero Start -->
         <div class="about mt-125">
             <div class="container">
                 <div class="row align-items-start">
                     <div class="col-md-5">
                         <div class="media-photo">
-                            <img src="img/media/gaurav-bhatnagar-headshot-web.jpg" width="900" height="1205" alt="Portrait of Gaurav Bhatnagar, AI-assisted from his own photographs">
-                            <p class="photo-credit">My picture: AI-assisted, based on my actual photographs.</p>
+                            <img src="img/media/gaurav-bhatnagar-headshot-web.jpg" width="900" height="1205" alt="Portrait of Gaurav Bhatnagar">
                         </div>
                         <div class="media-downloads">
-                            <a href="img/media/gaurav-bhatnagar-headshot.jpg" download>Download photo (JPG, 1792 x 2400)</a>
-                            <a href="img/media/gaurav-bhatnagar-headshot-alt.jpg" download>Alternate photo (smiling)</a>
+                            <a href="img/media/gaurav-bhatnagar-headshot.jpg" download><img src="img/media/gaurav-bhatnagar-headshot-web.jpg" width="900" height="1205" alt="Portrait of Gaurav Bhatnagar, photo 1"><span>Download photo 1 (JPG)</span></a>
+                            <a href="img/media/gaurav-bhatnagar-headshot-alt.jpg" download><img src="img/media/gaurav-bhatnagar-headshot-alt-web.jpg" width="900" height="1205" alt="Portrait of Gaurav Bhatnagar, photo 2"><span>Download photo 2 (JPG)</span></a>
                         </div>
                     </div>
                     <div class="col-md-7">
@@ -124,7 +124,7 @@
             <div class="container">
                 <div class="section-header">
                     <p>Topics</p>
-                    <h2>What I Can Speak To</h2>
+                    <h2>Topics I Can Comment On</h2>
                 </div>
                 <div class="row">
                     <div class="col-md-10 offset-md-1">
